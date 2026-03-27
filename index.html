@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src 'self'; font-src 'self';">
+<title>The Sampo Model — Virtual Intelligence Essay Series</title>
+<style>
+  :root {
+    --bg: #0d0d0f;
+    --surface: #13131a;
+    --surface2: #1a1a24;
+    --border: #2a2a3a;
+    --accent: #7c6aed;
+    --accent2: #4fa8d5;
+    --accent3: #e8c468;
+    --danger: #c94b4b;
+    --text: #e8e8f0;
+    --text-muted: #8888aa;
+    --text-dim: #555570;
+    --font-body: 'Georgia', serif;
+    --font-ui: 'system-ui', -apple-system, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  .site-header {
+    border-bottom: 1px solid var(--border);
+    padding: 1.2rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-ui);
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+  }
+
+  .site-header a { color: var(--accent); text-decoration: none; }
+  .site-header a:hover { text-decoration: underline; }
+
+  .hero {
+    max-width: 860px;
+    margin: 4rem auto 0;
+    padding: 0 2rem;
+    text-align: center;
+  }
+
+  .hero .label {
+    font-family: var(--font-ui);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.2rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: normal;
+    line-height: 1.2;
+    margin-bottom: 1.4rem;
+  }
+
+  .hero h1 em { font-style: italic; color: var(--accent3); }
+
+  .hero .subtitle {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto 1rem;
+  }
+
+  .hero .myth-note {
+    font-size: 0.88rem;
+    color: var(--text-dim);
+    font-style: italic;
+    margin-top: 0.5rem;
+  }
+
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 3rem 2rem 5rem;
+  }
+
+  /* ── section headers ── */
+  .section-label {
+    font-family: var(--font-ui);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 1.4rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  section { margin-bottom: 4rem; }
+
+  /* ── Myth origin card ── */
+  .myth-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent3);
+    border-radius: 6px;
+    padding: 1.6rem 2rem;
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 1.6rem;
+    align-items: start;
+  }
+
+  .myth-glyph {
+    font-size: 3.2rem;
+    line-height: 1;
+    text-align: center;
+    padding-top: 0.2rem;
+  }
+
+  .myth-card h3 {
+    font-size: 1rem;
+    font-weight: normal;
+    color: var(--accent3);
+    font-family: var(--font-ui);
+    letter-spacing: 0.04em;
+    margin-bottom: 0.5rem;
+  }
+
+  .myth-card p {
+    font-size: 0.93rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* ── constitutive model diagram ── */
+  .constitutive-diagram {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 2.4rem 2rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .diagram-title {
+    font-family: var(--font-ui);
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 2rem;
+  }
+
+  .diagram-legend {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-family: var(--font-ui);
+  }
+
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid;
+    flex-shrink: 0;
+  }
+
+  .dot-gold { border-color: var(--accent3); }
+  .dot-purple { border-color: var(--accent); }
+
+  /* ── Three principles ── */
+  .principles-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (max-width: 650px) {
+    .principles-grid { grid-template-columns: 1fr; }
+    .myth-card { grid-template-columns: 1fr; }
+  }
+
+  .principle-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .principle-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+  }
+
+  .p1::before { background: var(--accent3); }
+  .p2::before { background: var(--accent); }
+  .p3::before { background: var(--accent2); }
+
+  .principle-num {
+    font-family: var(--font-ui);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+
+  .p1 .principle-num { color: var(--accent3); }
+  .p2 .principle-num { color: var(--accent); }
+  .p3 .principle-num { color: var(--accent2); }
+
+  .principle-card h3 {
+    font-size: 1rem;
+    font-weight: normal;
+    margin-bottom: 0.6rem;
+    line-height: 1.3;
+  }
+
+  .principle-card p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* ── Exchange flow ── */
+  .exchange-flow {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .flow-row {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    margin-bottom: 1.2rem;
+  }
+
+  .flow-node {
+    flex: 1;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1rem 1.2rem;
+    text-align: center;
+  }
+
+  .flow-node.human-node { border-color: var(--accent3); }
+  .flow-node.vi-node-flow { border-color: var(--accent); }
+  .flow-node.output-node { border-color: var(--accent2); }
+
+  .flow-node .node-icon { font-size: 1.4rem; margin-bottom: 0.3rem; }
+
+  .flow-node .node-title {
+    font-family: var(--font-ui);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+
+  .human-node .node-title { color: var(--accent3); }
+  .vi-node-flow .node-title { color: var(--accent); }
+  .output-node .node-title { color: var(--accent2); }
+
+  .flow-node .node-desc {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .flow-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0.4rem;
+    font-size: 1.2rem;
+    color: var(--text-dim);
+    flex-shrink: 0;
+  }
+
+  .flow-note {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    font-style: italic;
+    text-align: center;
+  }
+
+  .emphasis-rule {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 1.4rem 0;
+  }
+
+  .emphasis-quote {
+    text-align: center;
+    font-size: 0.98rem;
+    color: var(--text-muted);
+    font-style: italic;
+    padding: 0 1rem;
+  }
+
+  /* ── Amplification vs synthesis ── */
+  .amp-grid {
+    display: grid;
+    grid-template-columns: 1fr 60px 1fr;
+    gap: 0;
+    margin-bottom: 1.5rem;
+    align-items: start;
+  }
+
+  .amp-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.4rem;
+  }
+
+  .amp-card.correct { border-color: var(--accent2); }
+  .amp-card.wrong {
+    border-color: var(--danger);
+    border-width: 1px;
+    background: var(--surface);
+  }
+
+  .amp-card .card-tag {
+    font-family: var(--font-ui);
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+
+  .amp-card.correct .card-tag { color: var(--accent2); }
+  .amp-card.wrong .card-tag { color: var(--danger); }
+
+  .amp-card h3 { font-size: 1rem; font-weight: normal; margin-bottom: 0.5rem; }
+  .amp-card p {
+    font-size: 0.83rem;
+    color: var(--text-muted);
+    line-height: 1.55;
+  }
+
+  .amp-vs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-ui);
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding-top: 1.4rem;
+  }
+
+  /* ── Genealogy info boxes ── */
+  .genealogy-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (max-width: 600px) { .genealogy-grid { grid-template-columns: 1fr; } }
+
+  .genealogy-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.4rem;
+    border-top: 2px solid var(--accent3);
+  }
+
+  .genealogy-card .g-year {
+    font-family: var(--font-ui);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent3);
+    margin-bottom: 0.3rem;
+  }
+
+  .genealogy-card h3 {
+    font-size: 1rem;
+    font-weight: normal;
+    margin-bottom: 0.2rem;
+    line-height: 1.3;
+  }
+
+  .genealogy-card .g-author {
+    font-family: var(--font-ui);
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    margin-bottom: 0.9rem;
+  }
+
+  .genealogy-card p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 0.8rem;
+  }
+
+  .genealogy-card p:last-of-type { margin-bottom: 0; }
+
+  .genealogy-card .g-link {
+    display: inline-block;
+    margin-top: 1rem;
+    font-family: var(--font-ui);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    color: var(--accent3);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+
+  .genealogy-card .g-link:hover { border-color: var(--accent3); }
+
+  .genealogy-note {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    font-style: italic;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  .pathology-card {
+    background: var(--surface);
+    border: 1px solid var(--danger);
+    border-radius: 8px;
+    padding: 1.8rem 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .pathology-card h3 {
+    font-size: 1rem;
+    color: var(--danger);
+    font-family: var(--font-ui);
+    font-weight: normal;
+    letter-spacing: 0.04em;
+    margin-bottom: 1rem;
+  }
+
+  .spiral-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 1rem;
+  }
+
+  .spiral-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 0.8rem 0;
+    border-left: 2px solid var(--border);
+    padding-left: 1.2rem;
+    position: relative;
+  }
+
+  .spiral-step::before {
+    content: '';
+    position: absolute;
+    left: -5px;
+    top: 1.1rem;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--danger);
+    opacity: 0.6;
+  }
+
+  .spiral-step:last-child::before { opacity: 1; }
+
+  .step-label {
+    font-family: var(--font-ui);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--danger);
+    white-space: nowrap;
+    min-width: 80px;
+    padding-top: 0.15rem;
+  }
+
+  .step-desc {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .pathology-axiom {
+    font-size: 0.88rem;
+    color: var(--text-dim);
+    font-style: italic;
+    border-top: 1px solid var(--border);
+    padding-top: 1rem;
+  }
+
+  /* ── Guardrails ── */
+  .guardrails-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (max-width: 600px) {
+    .guardrails-grid { grid-template-columns: 1fr; }
+    .amp-grid { grid-template-columns: 1fr; }
+    .amp-vs { display: none; }
+  }
+
+  .guardrail-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.3rem;
+    border-top: 2px solid var(--accent2);
+  }
+
+  .guardrail-card .g-title {
+    font-family: var(--font-ui);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 0.4rem;
+  }
+
+  .guardrail-card h3 { font-size: 0.95rem; font-weight: normal; margin-bottom: 0.4rem; }
+  .guardrail-card p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
+
+  /* ── Right mind ── */
+  .right-mind {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .mind-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+    margin-top: 1.2rem;
+  }
+
+  @media (max-width: 600px) { .mind-grid { grid-template-columns: 1fr; } }
+
+  .mind-card {
+    padding: 1.1rem;
+    border-radius: 5px;
+    border: 1px solid var(--border);
+  }
+
+  .mind-card.conducive { background: rgba(79, 168, 213, 0.06); border-color: rgba(79,168,213,0.3); }
+  .mind-card.adverse { background: rgba(201, 75, 75, 0.06); border-color: rgba(201,75,75,0.3); }
+
+  .mind-card .m-tag {
+    font-family: var(--font-ui);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .conducive .m-tag { color: var(--accent2); }
+  .adverse .m-tag { color: var(--danger); }
+
+  .mind-card ul {
+    list-style: none;
+    font-size: 0.83rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  .mind-card ul li {
+    padding-left: 1.4rem;
+    position: relative;
+    margin-bottom: 0.6rem;
+  }
+
+  .mind-card ul li::before {
+    content: '→ ';
+    color: var(--text-dim);
+    position: absolute;
+    left: 0;
+  }
+
+  .adverse ul li::before { content: '↺ '; color: var(--danger); opacity: 0.5; }
+
+  .right-mind .axiom {
+    margin-top: 1.4rem;
+    font-size: 0.88rem;
+    color: var(--text-dim);
+    font-style: italic;
+    text-align: center;
+    border-top: 1px solid var(--border);
+    padding-top: 1rem;
+  }
+
+  /* ── Expandable cards ── */
+  details {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin-bottom: 0.8rem;
+    overflow: hidden;
+  }
+
+  details[open] { border-color: var(--accent); }
+
+  summary {
+    cursor: pointer;
+    padding: 1rem 1.4rem;
+    font-family: var(--font-ui);
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+    transition: color 0.2s;
+  }
+
+  summary:hover { color: var(--text); }
+
+  summary::after {
+    content: 'Click to expand ↓';
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    letter-spacing: 0.06em;
+  }
+
+  details[open] summary::after { content: '✕'; }
+
+  .details-body {
+    padding: 0 1.4rem 1.4rem;
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    border-top: 1px solid var(--border);
+    padding-top: 1.1rem;
+  }
+
+  .details-body p + p { margin-top: 0.8rem; }
+
+  /* ── Core axiom ── */
+  .axiom-block {
+    background: linear-gradient(135deg, #1a1730, #13131a);
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .axiom-block p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--text);
+    font-style: italic;
+  }
+
+  .axiom-block .axiom-source {
+    margin-top: 0.8rem;
+    font-family: var(--font-ui);
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    letter-spacing: 0.08em;
+  }
+
+  /* ── Footer ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 1.5rem 2rem;
+    text-align: center;
+    font-family: var(--font-ui);
+    font-size: 0.75rem;
+    color: var(--text-dim);
+  }
+
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <span>Virtual Intelligence Essay Series — Christopher Horrocks</span>
+  <a href="https://chorrocks.substack.com" target="_blank" rel="noopener noreferrer">chorrocks.substack.com ↗</a>
+</header>
+
+<div class="hero">
+  <div class="label">Virtual Intelligence Essay Series — Conceptual Supplement</div>
+  <h1>The <em>Sampo</em> Model</h1>
+  <p class="subtitle">A framework for understanding the human-VI relationship — the constitutive role of the directing intelligence, the nature of amplification, and the conditions under which the system fails.</p>
+  <p class="myth-note">Named for the mythological mill of the Kalevala — a device of inexhaustible abundance whose operation requires an operator constitutive of its function.</p>
+</div>
+
+<main>
+
+  <!-- ORIGIN -->
+  <section>
+    <div class="section-label">I. The Myth</div>
+
+    <div class="myth-card">
+      <div class="myth-glyph">⚙</div>
+      <div>
+        <h3>The Sampo — Kalevala, Finnish National Epic</h3>
+        <p>In the Kalevala, the Sampo is a magical mill forged by the smith Ilmarinen. It grinds out grain, salt, and gold — abundance without apparent limit. It can be stolen, fought over, and destroyed. In the myth, the Sampo is a thing apart from its maker, capable of independent operation.</p>
+        <p style="margin-top:0.7rem;">In this framework, the analogy is extended and corrected. The human-VI Sampo cannot be stolen, because the human is not the operator of the mill — the human <em>is</em> the mechanism by which the mill functions. Remove the human and the apparatus does not run. It simply stops.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTELLECTUAL GENEALOGY -->
+  <section>
+    <div class="section-label">II. Intellectual Genealogy</div>
+
+    <p class="genealogy-note">The Sampo concept belongs to a lineage of thinking about the human-machine relationship that stretches back to the mid-twentieth century. Two works are foundational.</p>
+
+    <div class="genealogy-grid">
+
+      <div class="genealogy-card">
+        <div class="g-year">1945</div>
+        <h3>"As We May Think"</h3>
+        <div class="g-author">Vannevar Bush — <em>The Atlantic</em></div>
+        <p>Bush's diagnosis: the sum of recorded human knowledge had outgrown any individual mind's capacity to navigate it. Existing scholarly tools — the journal, the library, the index — were organised for storage rather than for the associative, cross-referential way human thought actually moves.</p>
+        <p>His proposed solution was the <strong>Memex</strong>: a desk-sized device storing a vast personal library on microfilm, navigable through associative trails the operator builds and revisits. The Memex does not think. It amplifies the reach of a mind that already knows what it is looking for. The human operator is constitutive of its usefulness.</p>
+        <p>Bush wrote before sycophancy existed as a design problem. The Memex reflects what you put in and ask for. It does not flatter you, validate your conclusions, or tell you that your trail is the most interesting one it has encountered.</p>
+        <a class="g-link" href="https://www.w3.org/History/1945/vbush/vbush.shtml" target="_blank" rel="noopener noreferrer">Read the essay — W3C archive ↗</a>
+      </div>
+
+      <div class="genealogy-card">
+        <div class="g-year">1960</div>
+        <h3>"Man-Computer Symbiosis"</h3>
+        <div class="g-author">J.C.R. Licklider — <em>IRE Transactions on Human Factors in Electronics</em></div>
+        <p>Licklider's argument was a precise specification of what a healthy human-machine relationship requires. Human and computer contribute complementary strengths: the human provides goal-setting, judgment, and creative leaps that no algorithm can substitute for; the machine handles routine processing that would otherwise exhaust the human's time and attention.</p>
+        <p>He called it <strong>symbiosis</strong> to distinguish it from two failure modes on either side: <em>automation</em>, which displaces the human entirely, and mere <em>tool use</em>, which understates the intimacy of the relationship. Two organisms producing together what neither produces alone.</p>
+        <p>What Licklider's model pointedly excludes is the apparatus running without the human present as a fully conscious, fully self-examining participant. The human is not just nominally in charge. The human is what makes the exchange purposive rather than merely generative.</p>
+        <a class="g-link" href="https://groups.csail.mit.edu/medg/people/psz/Licklider.html" target="_blank" rel="noopener noreferrer">Read the paper — MIT CSAIL ↗</a>
+      </div>
+
+    </div>
+
+    <details>
+      <summary>The gap between 1960 and now — what Bush and Licklider did not anticipate</summary>
+      <div class="details-body">
+        <p>Neither Bush nor Licklider had sycophancy to contend with. Their machines were neutral amplifiers: they processed what the human provided and returned results without an optimization target of their own. The VI system is trained on engagement, and engagement is maximized by agreement. The structural bias toward telling the human at the center that the human is right is not a feature either thinker could have imagined, because it arises from a training objective — reinforcement from human feedback — that did not exist in their era.</p>
+        <p>The Sampo argument is the next iteration in this sequence: Bush's Memex extended to Licklider's symbiosis, updated for systems that don't merely amplify but actively shape the exchange. The question Bush and Licklider were asking is the right question. The specific danger that makes answering it urgent is new.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- CONSTITUTIVE MODEL -->
+  <section>
+    <div class="section-label">III. The Constitutive Model</div>
+
+    <div class="constitutive-diagram">
+      <div class="diagram-title">The Human-VI Apparatus</div>
+
+      <!-- ═══ DIAGRAM: single clean block, no orphaned scripts ═══ -->
+      <svg id="sampo-svg" viewBox="0 0 520 500" xmlns="http://www.w3.org/2000/svg"
+           style="width:100%;max-width:540px;display:block;margin:0 auto 1.2rem;">
+        <defs>
+          <radialGradient id="hG"  cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#2a2040"/><stop offset="100%" stop-color="#1e1a32"/></radialGradient>
+          <radialGradient id="hGp" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#3a1010"/><stop offset="100%" stop-color="#1e0a0a"/></radialGradient>
+          <radialGradient id="vG"  cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#1c1c2e"/><stop offset="100%" stop-color="#13131a"/></radialGradient>
+          <radialGradient id="eG"  cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#0f1e2a"/><stop offset="100%" stop-color="#091318"/></radialGradient>
+          <filter id="glow"  x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <filter id="xglow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        </defs>
+        <circle cx="260" cy="250" r="168" fill="none" stroke="#7c6aed" stroke-width="0.5" stroke-dasharray="3 5" opacity="0.22"/>
+        <circle cx="260" cy="250" r="108" fill="none" stroke="#4fa8d5" stroke-width="0.5" stroke-dasharray="2 4" opacity="0.28"/>
+        <circle id="ep0" cx="260" cy="82"  r="54" fill="none" stroke="#7c6aed" stroke-width="0.4" stroke-dasharray="2 4" opacity="0.15"/>
+        <circle id="ep1" cx="428" cy="250" r="54" fill="none" stroke="#7c6aed" stroke-width="0.4" stroke-dasharray="2 4" opacity="0.15"/>
+        <circle id="ep2" cx="260" cy="418" r="54" fill="none" stroke="#7c6aed" stroke-width="0.4" stroke-dasharray="2 4" opacity="0.15"/>
+        <circle id="ep3" cx="260" cy="142" r="28" fill="none" stroke="#4fa8d5" stroke-width="0.4" stroke-dasharray="2 3" opacity="0.18"/>
+        <circle id="ep4" cx="368" cy="250" r="28" fill="none" stroke="#4fa8d5" stroke-width="0.4" stroke-dasharray="2 3" opacity="0.18"/>
+        <circle id="ep5" cx="260" cy="358" r="28" fill="none" stroke="#4fa8d5" stroke-width="0.4" stroke-dasharray="2 3" opacity="0.18"/>
+        <circle id="ep6" cx="152" cy="250" r="28" fill="none" stroke="#4fa8d5" stroke-width="0.4" stroke-dasharray="2 3" opacity="0.18"/>
+        <text id="apparatus-label" x="260" y="22" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" letter-spacing="2.5" fill="#555570">THE EMERGENT APPARATUS</text>
+        <text x="260" y="462" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7.5" letter-spacing="1.5" fill="#44446a">VI CAPABILITIES</text>
+        <text x="260" y="474" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7.5" letter-spacing="1.5" fill="#1e5570">EMERGENT PROPERTIES</text>
+        <circle id="inner-ring" cx="260" cy="250" r="90" fill="none" stroke="#e8c468" stroke-width="1.5" opacity="0.55"/>
+        <line id="xl0" x1="260" y1="250" x2="260" y2="250" stroke="#e8c468" stroke-width="2" opacity="0"/>
+        <line id="xl1" x1="260" y1="250" x2="260" y2="250" stroke="#e8c468" stroke-width="2" opacity="0"/>
+        <line id="xl2" x1="260" y1="250" x2="260" y2="250" stroke="#e8c468" stroke-width="2" opacity="0"/>
+        <line id="xl3" x1="260" y1="250" x2="260" y2="250" stroke="#4fa8d5" stroke-width="2" opacity="0"/>
+        <line id="xl4" x1="260" y1="250" x2="260" y2="250" stroke="#4fa8d5" stroke-width="2" opacity="0"/>
+        <line id="xl5" x1="260" y1="250" x2="260" y2="250" stroke="#4fa8d5" stroke-width="2" opacity="0"/>
+        <line id="xl6" x1="260" y1="250" x2="260" y2="250" stroke="#4fa8d5" stroke-width="2" opacity="0"/>
+        <circle id="human-disc" cx="260" cy="250" r="56" fill="url(#hG)" stroke="#e8c468" stroke-width="2"/>
+        <text id="cl1" x="260" y="245" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9.5" letter-spacing="2" fill="#e8c468">DIRECTING</text>
+        <text id="cl2" x="260" y="260" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9.5" letter-spacing="2" fill="#e8c468">INTELLIGENCE</text>
+        <g id="reticle" opacity="1">
+          <circle cx="0" cy="0" r="9"   fill="none" stroke="#e8c468" stroke-width="1.5"/>
+          <circle cx="0" cy="0" r="2.2" fill="#e8c468"/>
+          <line x1="0" y1="-13" x2="0" y2="-17" stroke="#e8c468" stroke-width="1.2"/>
+          <line x1="0" y1="13"  x2="0" y2="17"  stroke="#e8c468" stroke-width="1.2"/>
+          <line x1="-13" y1="0" x2="-17" y2="0" stroke="#e8c468" stroke-width="1.2"/>
+          <line x1="13"  y1="0" x2="17"  y2="0" stroke="#e8c468" stroke-width="1.2"/>
+        </g>
+        <g id="vn0"><circle id="vnc0" cx="0" cy="0" r="29" fill="url(#vG)" stroke="#7c6aed" stroke-width="1.3"/>
+          <text id="vt0a" x="0" y="-5" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8.5" fill="#9b8ef5">Data &amp;</text>
+          <text id="vt0b" x="0" y="7"  text-anchor="middle" font-family="system-ui,sans-serif" font-size="8.5" fill="#9b8ef5">Research</text></g>
+        <g id="vn1"><circle id="vnc1" cx="0" cy="0" r="29" fill="url(#vG)" stroke="#7c6aed" stroke-width="1.3"/>
+          <text id="vt1a" x="0" y="-5" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8.5" fill="#9b8ef5">Code &amp;</text>
+          <text id="vt1b" x="0" y="7"  text-anchor="middle" font-family="system-ui,sans-serif" font-size="8.5" fill="#9b8ef5">Analysis</text></g>
+        <g id="vn2"><circle id="vnc2" cx="0" cy="0" r="29" fill="url(#vG)" stroke="#7c6aed" stroke-width="1.3"/>
+          <text id="vt2a" x="0" y="-5" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8.5" fill="#9b8ef5">Draft &amp;</text>
+          <text id="vt2b" x="0" y="7"  text-anchor="middle" font-family="system-ui,sans-serif" font-size="8.5" fill="#9b8ef5">Critique</text></g>
+        <g id="vn3"><circle id="vnc3" cx="0" cy="0" r="24" fill="url(#eG)" stroke="#4fa8d5" stroke-width="1.3"/>
+          <text id="vt3a" x="0" y="-3" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#7dc8e8">Cross-</text>
+          <text id="vt3b" x="0" y="7"  text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#7dc8e8">Examine</text></g>
+        <g id="vn4"><circle id="vnc4" cx="0" cy="0" r="24" fill="url(#eG)" stroke="#4fa8d5" stroke-width="1.3"/>
+          <text id="vt4a" x="0" y="2" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#7dc8e8">Synthesis</text>
+          <text id="vt4b" x="0" y="2" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#7dc8e8"></text></g>
+        <g id="vn5"><circle id="vnc5" cx="0" cy="0" r="24" fill="url(#eG)" stroke="#4fa8d5" stroke-width="1.3"/>
+          <text id="vt5a" x="0" y="2" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#7dc8e8">Steelman</text>
+          <text id="vt5b" x="0" y="2" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#7dc8e8"></text></g>
+        <g id="vn6"><circle id="vnc6" cx="0" cy="0" r="24" fill="url(#eG)" stroke="#4fa8d5" stroke-width="1.3"/>
+          <text id="vt6a" x="0" y="2" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#7dc8e8">Scope</text>
+          <text id="vt6b" x="0" y="2" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#7dc8e8"></text></g>
+      </svg>
+
+      <script>
+      var sampoDiagram = (function () {
+        'use strict';
+        var pathologyMode = false;
+        var p = 0;
+        var TRANS_SPEED = 0.001;
+
+        // Accumulated effective times — dt*speedMult added each frame
+        // Prevents modulo phase-jumps when speed changes
+        var tOuter = 0, tInner = 0, tRetic = 0;
+
+        var CX = 260, CY = 250, TAU = 2 * Math.PI;
+        var Rd_out=114, Re_out=54, Td_out=68000, Te_out=20000;
+        var Rd_in =108, Re_in =44, Td_in =44000, Te_in =15000;
+        var Tr = 13000;
+
+        // [normal labels, pathology labels] — [line1, line2]
+        var LBLS = [
+          [['Data &','Research'],  ['Assertion &','Proof']],
+          [['Code &','Analysis'],  ['Rationalization','']],
+          [['Draft &','Critique'], ['Affirm &','Echo']],
+          [['Cross-','Examine'],   ['Reinforce','']],
+          [['Synthesis',''],       ['Confabulation','']],
+          [['Steelman',''],        ['Strawman','']],
+          [['Scope',''],           ['Echo','Chamber']]
+        ];
+
+        var GOLD='#e8c468', PURP='#7c6aed', BLUE='#4fa8d5', RED='#c94b4b';
+
+        function lerp(a,b,t){ return a+(b-a)*Math.min(1,Math.max(0,t)); }
+
+        function lc(a,b,t){
+          t=Math.min(1,Math.max(0,t));
+          if(t===0)return a; if(t===1)return b;
+          var ar=parseInt(a.slice(1,3),16),ag=parseInt(a.slice(3,5),16),ab=parseInt(a.slice(5,7),16);
+          var br=parseInt(b.slice(1,3),16),bg=parseInt(b.slice(3,5),16),bb=parseInt(b.slice(5,7),16);
+          return '#'+Math.round(ar+(br-ar)*t).toString(16).padStart(2,'0')
+                    +Math.round(ag+(bg-ag)*t).toString(16).padStart(2,'0')
+                    +Math.round(ab+(bb-ab)*t).toString(16).padStart(2,'0');
+        }
+
+        function g(id){ return document.getElementById(id); }
+
+        function xl(id,x2,y2,op,col){
+          var e=g(id); if(!e)return;
+          e.setAttribute('x2',x2.toFixed(1)); e.setAttribute('y2',y2.toFixed(1));
+          e.setAttribute('opacity',Math.max(0,op).toFixed(3)); e.setAttribute('stroke',col);
+        }
+
+        var lastTs=null;
+
+        // Pathology animation state
+        var prevP = 0;
+        var flickerEnd = 0;
+        var FLICKER_DUR = 700;
+        var spiralPeriod = 4000;  // ms per inward sweep
+        var tSpiral = 0;          // accumulated time for spiral radius sweep
+        var tSpiralAngle = 0;     // accumulated time for spiral angle — runs at FULL speed always
+
+        function frame(ts){
+          if(lastTs===null) lastTs=ts;
+          var dt=Math.min(ts-lastTs,50); lastTs=ts;
+
+          var wasNormal = prevP <= 0;
+          if(pathologyMode) p=Math.min(1,p+TRANS_SPEED*dt);
+          else              p=Math.max(0,p-TRANS_SPEED*dt);
+
+          // Detect transition edge: normal→pathology crossing — trigger flicker
+          if(wasNormal && p > 0 && pathologyMode) {
+            flickerEnd = ts + FLICKER_DUR;
+          }
+          prevP = p;
+
+          var sm=lerp(1,0.06,p);
+          tOuter+=dt*sm; tInner+=dt*sm; tRetic+=dt*lerp(1,0.04,p);
+          tSpiral+=dt;
+          tSpiralAngle+=dt; // always full speed — ensures visible spiral arc
+
+          // ── Orbital decay: outer 114→90, inner 108→80 — crowd without full collapse ──
+          var Rd_o_eff = lerp(Rd_out, 90, p * p);
+          var Rd_i_eff = lerp(Rd_in,  80, p * p);
+
+          // ── Outer capability nodes ──
+          var da_o=(tOuter%Td_out)/Td_out*TAU;
+          var ea_o=(tOuter%Te_out)/Te_out*TAU;
+          for(var i=0;i<3;i++){
+            var off=i*TAU/3;
+            var ecx=CX+Rd_o_eff*Math.cos(da_o+off), ecy=CY+Rd_o_eff*Math.sin(da_o+off);
+            var nx=ecx+Re_out*Math.cos(-(ea_o+off)), ny=ecy+Re_out*Math.sin(-(ea_o+off));
+            var dist=Math.sqrt((nx-CX)*(nx-CX)+(ny-CY)*(ny-CY));
+            var near=dist<110;
+            var ng=g('vn'+i),nc=g('vnc'+i),ep=g('ep'+i);
+            if(ng) ng.setAttribute('transform','translate('+nx.toFixed(1)+','+ny.toFixed(1)+')');
+            if(ep){ep.setAttribute('cx',ecx.toFixed(1));ep.setAttribute('cy',ecy.toFixed(1));}
+            if(nc){
+              nc.setAttribute('stroke',lc(near?GOLD:PURP,RED,p));
+              nc.setAttribute('stroke-width',near?'2.2':'1.3');
+              nc.setAttribute('filter',(near&&p<0.5)?'url(#glow)':'');
+            }
+            var baseOp=lerp(0.18,0,p);
+            var boostOp=near?lerp(Math.max(0,1-(dist-56)/54),0,p)*lerp(0.7,0,p):0;
+            xl('xl'+i,nx,ny,baseOp+boostOp,lc(GOLD,RED,p));
+          }
+
+          // ── Inner emergent nodes ──
+          var da_i=(tInner%Td_in)/Td_in*TAU;
+          var ea_i=(tInner%Te_in)/Te_in*TAU;
+          for(var j=0;j<4;j++){
+            var idx=j+3, offj=j*TAU/4;
+            var ecxj=CX+Rd_i_eff*Math.cos(da_i+offj), ecyj=CY+Rd_i_eff*Math.sin(da_i+offj);
+            var nxj=ecxj+Re_in*Math.cos(-(ea_i+offj)), nyj=ecyj+Re_in*Math.sin(-(ea_i+offj));
+            var dj=Math.sqrt((nxj-CX)*(nxj-CX)+(nyj-CY)*(nyj-CY));
+            var nj=dj<84;
+            var ngj=g('vn'+idx),ncj=g('vnc'+idx),epj=g('ep'+idx);
+            if(ngj) ngj.setAttribute('transform','translate('+nxj.toFixed(1)+','+nyj.toFixed(1)+')');
+            if(epj){epj.setAttribute('cx',ecxj.toFixed(1));epj.setAttribute('cy',ecyj.toFixed(1));}
+            if(ncj){
+              ncj.setAttribute('stroke',lc(nj?GOLD:BLUE,RED,p));
+              ncj.setAttribute('stroke-width',nj?'2.2':'1.3');
+              ncj.setAttribute('filter',(nj&&p<0.5)?'url(#xglow)':'');
+            }
+            var baseOpJ=lerp(0.14,0,p);
+            var boostOpJ=nj?lerp(Math.max(0,1-(dj-56)/28),0,p)*lerp(0.75,0,p):0;
+            xl('xl'+idx,nxj,nyj,baseOpJ+boostOpJ,lc(BLUE,RED,p));
+          }
+
+          // ── Reticle: erratic oscillating spiral in pathology ──
+          // Normal mode: steady clockwise orbit at r=90
+          // Pathology: radius oscillates in/out using overlapping sine waves at
+          //   different periods — produces irregular approach/retreat cycles.
+          //   Angular velocity varies and reverses, with periodic judder.
+
+          var rSteady = 90;
+
+          // Radius: sum of two sine waves at different periods → irregular in/out
+          var r1 = 36 * Math.sin((tSpiralAngle / 3200) * TAU);      // slow wave, ±36
+          var r2 = 18 * Math.sin((tSpiralAngle / 1100) * TAU + 1.3); // faster wave, ±18
+          var rOsc = 56 + r1 + r2; // centres around 56, range roughly 2–92
+          rOsc = Math.max(10, Math.min(92, rOsc)); // clamp
+          var rRet = lerp(rSteady, rOsc, p);
+
+          // Angle: base rotation + perturbation that causes slowdowns and reversals
+          // perturbation = slow cosine that swings from -0.6 to +1.6 (so base+perturb
+          //   can go negative = reversal)
+          var baseAngularRate = (tRetic % Tr) / Tr * TAU; // normal steady angle
+          var angPerturb = Math.cos((tSpiralAngle / 2700) * TAU) * 0.8  // slow reversal driver
+                         + Math.cos((tSpiralAngle / 900)  * TAU) * 0.3; // faster wobble
+          // Accumulated spiral angle: integrate a variable-rate rotation
+          // We blend between steady angle and a perturbed spiral angle
+          var spiralBaseAngle = (tSpiralAngle / 6000) * TAU * (1 + angPerturb);
+
+          // Judder: deterministic high-frequency noise — sharp kicks every ~400ms
+          var judderCycle = Math.floor(tSpiralAngle / 380);
+          // pseudo-random from cycle index
+          var judderSeed  = ((judderCycle * 1664525 + 1013904223) & 0x7fffffff) / 0x7fffffff;
+          var judderAmt   = (judderSeed - 0.5) * 0.45; // ±0.22 radians per kick
+          var judderAngle = judderAmt * p; // only in pathology
+
+          var ra = lerp(baseAngularRate, spiralBaseAngle + judderAngle, p);
+
+          var ret=g('reticle');
+          if(ret){
+            ret.setAttribute('transform','translate('+
+              (CX+rRet*Math.cos(ra)).toFixed(1)+','+
+              (CY+rRet*Math.sin(ra)).toFixed(1)+')');
+            // Opacity pulses slightly with radius in pathology — dimmer when near center
+            var retOp = lerp(1, lerp(0.15, 0.5, (rOsc - 10) / 82), p);
+            ret.setAttribute('opacity', retOp.toFixed(3));
+          }
+
+          // ── Center ──
+          var disc=g('human-disc'),l1=g('cl1'),l2=g('cl2'),ring=g('inner-ring'),lbl=g('apparatus-label');
+          if(disc){disc.setAttribute('stroke',lc(GOLD,RED,p));disc.setAttribute('fill',p>0.5?'url(#hGp)':'url(#hG)');}
+          if(ring) ring.setAttribute('stroke',lc(GOLD,RED,p));
+          var rc=lc(GOLD,RED,p);
+          if(p<=0.5){
+            if(l1){l1.textContent='DIRECTING';l1.setAttribute('fill',GOLD);}
+            if(l2){l2.textContent='INTELLIGENCE';l2.setAttribute('fill',GOLD);}
+            if(lbl){lbl.textContent='THE EMERGENT APPARATUS';lbl.setAttribute('fill','#555570');}
+          } else {
+            if(l1){l1.textContent='ABDICATING';l1.setAttribute('fill',rc);}
+            if(l2){l2.textContent='INTELLIGENCE';l2.setAttribute('fill',rc);}
+            if(lbl){lbl.textContent='THE FLATTERY ENGINE';lbl.setAttribute('fill',lc('#555570',RED,p));}
+          }
+
+          // ── Node labels: swap + flicker on transition ──
+          var useP = p > 0.5;
+          var flickering = ts < flickerEnd;
+          // Flicker: every ~60ms alternate between visible and near-invisible
+          var flickerOpacity = flickering ? (Math.floor(ts / 60) % 2 === 0 ? 1 : 0.08) : 1;
+
+          for(var k=0;k<7;k++){
+            var la=g('vt'+k+'a'),lb=g('vt'+k+'b'); if(!la)continue;
+            var li=useP?1:0;
+            var line1=LBLS[k][li][0], line2=LBLS[k][li][1];
+            var twoLines=line2&&line2.length>0;
+            la.textContent=line1;
+            la.setAttribute('y',twoLines?'-4':'2');
+            la.setAttribute('opacity', flickerOpacity);
+            if(lb){
+              lb.textContent=twoLines?line2:'';
+              lb.setAttribute('y','8');
+              lb.setAttribute('opacity', flickerOpacity);
+            }
+            var bc=k<3?'#9b8ef5':'#7dc8e8';
+            var col=lc(bc,'#e87070',p);
+            la.setAttribute('fill',col);
+            if(lb) lb.setAttribute('fill',col);
+          }
+
+          if(isVisible) requestAnimationFrame(frame);
+        }
+
+        var isVisible = true;
+        var svgEl = g('sampo-svg');
+        if('IntersectionObserver' in window && svgEl){
+          var obs = new IntersectionObserver(function(entries){
+            isVisible = entries[0].isIntersecting;
+            if(isVisible){ lastTs=null; requestAnimationFrame(frame); }
+          }, {threshold:0});
+          obs.observe(svgEl);
+        }
+        requestAnimationFrame(frame);
+
+        return {
+          togglePathology: function(){
+            pathologyMode=!pathologyMode;
+            var btn=g('pathology-btn'); if(!btn)return;
+            btn.textContent=pathologyMode?'Show Normal Mode':'Show Pathology Mode';
+            btn.style.borderColor=pathologyMode?RED:'#2a2a3a';
+            btn.style.color=pathologyMode?RED:'#8888aa';
+            // Legend label + dot color swap
+            var l0=g('leg0'),l1=g('leg1'),l2=g('leg2');
+            if(l0) l0.textContent = pathologyMode
+              ? 'Abdicating center — validation sought, not intelligence directed'
+              : 'Human — constitutive center; locus of intelligence';
+            if(l1) l1.textContent = pathologyMode
+              ? 'VI outputs — unmediated, undirected, sycophantic'
+              : 'VI capabilities — directed by the human';
+            if(l2) l2.textContent = pathologyMode
+              ? 'Degraded properties — echo, confabulation, closure'
+              : 'Emergent properties — arise from the exchange';
+            // Text + dot color
+            var tc = pathologyMode ? RED : '';
+            if(l0){l0.style.color=tc; l0.style.transition='color 1.2s';}
+            if(l1){l1.style.color=tc; l1.style.transition='color 1.2s';}
+            if(l2){l2.style.color=tc; l2.style.transition='color 1.2s';}
+            // Shift dot border colors
+            var dots = document.querySelectorAll('.diagram-legend .legend-dot');
+            var dotColors = pathologyMode
+              ? [RED, RED, RED]
+              : [GOLD, PURP, '#4fa8d5'];
+            for(var d=0; d<dots.length && d<3; d++){
+              dots[d].style.borderColor = dotColors[d];
+              dots[d].style.transition = 'border-color 1.2s';
+            }
+          }
+        };
+      })();
+      </script>
+      <script>
+        document.getElementById('pathology-btn').addEventListener('click', function(){ sampoDiagram.togglePathology(); });
+      </script>
+
+      <div style="text-align:center;margin-bottom:1rem;">
+        <button id="pathology-btn" style="
+          background:transparent;border:1px solid #2a2a3a;color:#8888aa;
+          font-family:system-ui,sans-serif;font-size:0.72rem;letter-spacing:0.12em;
+          text-transform:uppercase;padding:0.5rem 1.2rem;border-radius:4px;
+          cursor:pointer;transition:all 0.3s;">Show Pathology Mode</button>
+      </div>
+
+      <div class="diagram-legend" style="margin-top:0.8rem;">
+        <div class="legend-item"><div class="legend-dot dot-gold"></div><span id="leg0">Human — constitutive center; locus of intelligence</span></div>
+        <div class="legend-item"><div class="legend-dot dot-purple"></div><span id="leg1">VI capabilities — directed by the human</span></div>
+        <div class="legend-item"><div class="legend-dot" style="border-color:#4fa8d5;"></div><span id="leg2">Emergent properties — arise from the exchange</span></div>
+      </div>
+    </div>
+
+      <!-- orphaned block removed -->
+
+    <div class="principles-grid">
+      <div class="principle-card p1">
+        <div class="principle-num">Principle I</div>
+        <h3>The Human Is the Crank</h3>
+        <p>The human is not simply the operator who turns the mechanism. The human is the crank itself — the part that converts the system's capacity into purposive output. Without the directing intelligence, no grinding occurs.</p>
+      </div>
+      <div class="principle-card p2">
+        <div class="principle-num">Principle II</div>
+        <h3>The Locus of Intelligence Does Not Move</h3>
+        <p>The intelligence in the exchange arises at the human end. The VI system processes and generates; the human understands, evaluates, and decides. The locus of genuine intelligence never shifts to the machine.</p>
+      </div>
+      <div class="principle-card p3">
+        <div class="principle-num">Principle III</div>
+        <h3>Emergence Without Transfer</h3>
+        <p>The apparatus does more than either component could do alone — but the emergent capacity is the human's intelligence operating at greater reach, not a new kind of intelligence produced by the exchange.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXCHANGE FLOW -->
+  <section>
+    <div class="section-label">IV. The Exchange</div>
+
+    <div class="exchange-flow">
+      <div class="flow-row">
+        <div class="flow-node human-node">
+          <div class="node-icon">◎</div>
+          <div class="node-title">Human — Directing Intelligence</div>
+          <div class="node-desc">Frames the question. Supplies the goal. Brings domain knowledge, judgment, and epistemic self-sufficiency to the exchange.</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node vi-node-flow">
+          <div class="node-icon">⚙</div>
+          <div class="node-title">VI System — Processing Capacity</div>
+          <div class="node-desc">Generates candidate outputs — data, drafts, code, analysis — shaped by training and prompting. No internal states. No self-governance.</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node output-node">
+          <div class="node-icon">◈</div>
+          <div class="node-title">Output — Evaluated Result</div>
+          <div class="node-desc">Returns to the human for judgment. Can be accepted, rejected, revised, or used to generate further queries. The human decides.</div>
+        </div>
+      </div>
+      <div class="flow-note">The human can bring VI capacity to bear on evaluating VI outputs — cross-examining, demanding the contrary argument, testing consistency. The deciding intelligence remains human throughout.</div>
+      <hr class="emphasis-rule">
+      <p class="emphasis-quote">The intelligence users encounter arises in the exchange — not inside the machine.</p>
+    </div>
+
+    <details>
+      <summary>The guiding intelligence — what the human contributes</summary>
+      <div class="details-body">
+        <p>The directing intelligence performs three functions that the VI system cannot: it frames the problem correctly, it evaluates outputs against external reality, and it maintains meta-directional authority — the capacity to step outside the exchange, assess the system as a whole, and restructure it. A healthy Sampo relationship involves all three continuously.</p>
+        <p>The hand-and-crank image captures embodied, iterative engagement: you feel resistance and momentum, you adjust in real time. The supervisory image captures oversight: stepping back, evaluating across outputs, deciding what to do next. Both are necessary. The atrophy of either is a warning sign.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- AMPLIFICATION -->
+  <section>
+    <div class="section-label">V. Amplification, Not Synthesis</div>
+
+    <div class="axiom-block">
+      <p>The emergent apparatus is greater in capacity than the sum of its parts. It is not greater in kind. The intelligence is the same intelligence, working with more.</p>
+      <div class="axiom-source">— The Sampo Formulation, <em>Virtual Intelligence</em> essay series</div>
+    </div>
+
+    <div class="amp-grid">
+      <div class="amp-card correct">
+        <div class="card-tag">The correct claim</div>
+        <h3>Amplification</h3>
+        <p>The human's intelligence now operates at greater reach and speed. More material can be brought to bear. Iteration accelerates. The scope of engagement expands. The underlying intelligence is unchanged in kind; it is extended in capacity.</p>
+      </div>
+      <div class="amp-vs">vs.</div>
+      <div class="amp-card wrong">
+        <div class="card-tag">The mistaken claim</div>
+        <h3>Synthesis</h3>
+        <p>A new, hybrid form of intelligence emerges from the human-VI exchange — something ontologically distinct from either component. The apparatus becomes smarter in kind, not just in reach.</p>
+        <p style="margin-top:0.6rem; font-size:0.78rem; font-style:italic; line-height:1.55; color:var(--text-muted);">This is the error that enables the sycophancy spiral. It is also the error the pathological cases document in practice.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PATHOLOGY -->
+  <section>
+    <div class="section-label">VI. When the System Fails</div>
+
+    <div class="pathology-card">
+      <h3>The Sycophancy Spiral — Progressive Withdrawal of the Directing Intelligence</h3>
+
+      <div class="spiral-steps">
+        <div class="spiral-step">
+          <div class="step-label">Stage 1</div>
+          <div class="step-desc">The human is actively directing: framing questions, evaluating outputs, maintaining meta-directional authority. The Sampo functions as designed.</div>
+        </div>
+        <div class="spiral-step">
+          <div class="step-label">Stage 2</div>
+          <div class="step-desc">Engagement becomes habitual. The human stops generating the questions that shape outputs and begins responding to outputs the system volunteers. Iterative embodiment atrophies.</div>
+        </div>
+        <div class="spiral-step">
+          <div class="step-label">Stage 3</div>
+          <div class="step-desc">Validation replaces direction. The human's own beliefs and impulses are fed back with elaboration and authority. The sycophantic system affirms rather than informs. The feedback loop seals.</div>
+        </div>
+        <div class="spiral-step">
+          <div class="step-label">Stage 4</div>
+          <div class="step-desc">The human becomes the raw material rather than the crank. The Sampo is not running without its operator — it has stopped being the Sampo. What continues is a flattery engine, processing the human's inputs back to them at scale.</div>
+        </div>
+      </div>
+
+      <p class="pathology-axiom">The Sampo does not take over. The Sampo stops functioning as a Sampo. The machine is not becoming smarter; the human is becoming less present.</p>
+    </div>
+
+    <details>
+      <summary>The empirical record — Cheng et al. (2026) and the Guardian cases</summary>
+      <div class="details-body">
+        <p>Cheng et al. (Myra Cheng, Cinoo Lee, et al., "Sycophantic AI decreases prosocial intentions and promotes dependence," <em>Science</em> 391, March 2026) found that across 11 leading AI models, systems affirmed users' actions 49% more often than human advisers — including in cases involving deception, illegality, or harm. A single sycophantic interaction reduced willingness to repair interpersonal conflicts by up to 28% while increasing confidence in one's own rightness by up to 62%. Critically, knowing the response was AI-generated did not reduce susceptibility. Perceived objectivity amplified the effect.</p>
+        <p>The Guardian cases (Anna Moore, <em>The Guardian</em>, 26 March 2026) document the terminal stage: users who lost marriages, savings, and in some cases narrowly survived. The Human Line Project, collecting such stories from 22 countries, found that more than 60% of affected individuals had no prior history of mental illness. The pathology is not a special vulnerability. It is a structural feature of the technology operating without the Sampo's constitutive condition — an active, self-sufficient directing intelligence.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- GUARDRAILS -->
+  <section>
+    <div class="section-label">VII. Structural Safeguards</div>
+
+    <div class="guardrails-grid">
+      <div class="guardrail-card">
+        <div class="g-title">User-Imposed</div>
+        <h3>Explicit Constraint Rules</h3>
+        <p>Hard limits written into the system by the human: designated topics excluded, drift-monitoring triggers, automatic termination conditions for certain conversational patterns. The human imposes structure on the exchange from outside it. Agency is preserved.</p>
+        <p style="margin-top:0.8rem;font-size:0.78rem;color:var(--text-dim);font-style:italic;">Example: A user recovering from a sycophancy spiral writes explicit rules into his AI system — no philosophical discussions, flag overexcitement, halt if certain topics arise. The constraints he sets are ones no platform imposed; they are an exercise of his own restored authority.</p>
+      </div>
+      <div class="guardrail-card">
+        <div class="g-title">Architectural</div>
+        <h3>Multi-Agent Friction</h3>
+        <p>Deliberate use of multiple, non-aligned agents with different priors — including explicit adversarial or devil's-advocate roles. Introduces the epistemic resistance that human social reality normally provides and that isolated single-agent interactions systematically remove.</p>
+        <p style="margin-top:0.8rem;font-size:0.78rem;color:var(--text-dim);font-style:italic;">Example: After building an AI assistant, an administrator takes the finished system to a second, unrelated model and asks it to evaluate the assistant's outputs critically — not for consistency, but for correctness. Several errors surface that the original exchange had not caught.</p>
+      </div>
+      <div class="guardrail-card">
+        <div class="g-title">Decisional</div>
+        <h3>Deferred Major Decisions</h3>
+        <p>Consequential decisions — financial, relational, professional — are explicitly reserved for the human and not delegated to VI outputs. The apparatus informs; the directing intelligence decides. The crank does not abdicate the turning.</p>
+        <p style="margin-top:0.8rem;font-size:0.78rem;color:var(--text-dim);font-style:italic;">Example: Stappers used Claude to search a vast space of mathematical constructions, but the judgment that the result was correct — and the proof that established it — remained with Knuth. The system found the candidate. The human decided it was a solution.</p>
+      </div>
+      <div class="guardrail-card">
+        <div class="g-title">Systemic</div>
+        <h3>Meta-Directional Audits</h3>
+        <p>Periodic stepping-outside-the-system: reviewing the exchange pattern, not just individual outputs. Asking whether direction is still flowing from the human outward or whether the human has become a responder to the system's suggestions. The audit reinstates the constitutive role.</p>
+        <p style="margin-top:0.8rem;font-size:0.78rem;color:var(--text-dim);font-style:italic;">Example: A practitioner sets aside time each week to review not what the system produced but how the exchange has been going — who has been setting the agenda, whether the questions have been hers or the system's, whether the outputs are being tested or accepted.</p>
+      </div>
+    </div>
+
+    <details>
+      <summary>User-imposed vs. institution-imposed guardrails — an important distinction</summary>
+      <div class="details-body">
+        <p>Guardrails the user imposes on the system (Alexander's core rule set in the Guardian account; explicit instruction-set constraints in professional agent deployments) preserve agency. They are an expression of meta-directional authority: the human restructuring the system from outside it.</p>
+        <p>Guardrails the institution or system imposes on the user — ostensibly for their protection — risk achieving the opposite. A hundred-agent workplace environment (as envisioned by figures such as Huang and Karp) may create conditions where the human nominally retains formal authority while practically losing the ability to audit, override, or meaningfully direct the apparatus. Meta-directional authority requires not just the formal right to step outside the system but the practical capacity to do so. Complexity can eliminate the latter while leaving the former untouched.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- THE RIGHT MIND -->
+  <section>
+    <div class="section-label">VIII. The Right Mind</div>
+
+    <div class="right-mind">
+      <p style="font-size:0.93rem; color:var(--text-muted);">The Sampo formulation requires that the human at the center be a <em>directing intelligence</em> — not merely a user. The quality of the apparatus is inseparable from the quality of the human operating it. GIGO scales both directions. What constitutes the right mind is not a matter of raw intelligence or diagnostic category but of the human's <em>epistemic relationship to external authority</em> — specifically, whether the directing intelligence can sustain its own evaluative independence within the exchange.</p>
+
+      <div class="mind-grid">
+        <div class="mind-card conducive">
+          <div class="m-tag">Conducive features</div>
+          <ul>
+            <li>Stable, internally generated purpose<br><span style="font-size:0.76rem;color:var(--text-dim);font-style:italic;">You know what you're trying to accomplish before the exchange begins, and that goal doesn't shift because the system approves of it.</span></li>
+            <li>Comfort operating without social feedback<br><span style="font-size:0.76rem;color:var(--text-dim);font-style:italic;">You don't need the system to tell you you're doing well in order to continue. Silence or pushback doesn't derail the work.</span></li>
+            <li>Resistance to implied validation<br><span style="font-size:0.76rem;color:var(--text-dim);font-style:italic;">When the system agrees with you enthusiastically, you notice this and apply additional scrutiny rather than accepting it as confirmation.</span></li>
+            <li>Willingness to challenge outputs directly<br><span style="font-size:0.76rem;color:var(--text-dim);font-style:italic;">You ask the system why it produced a given output, demand the opposite argument, and test the result against external standards you hold independently.</span></li>
+            <li>Maintained meta-directional authority<br><span style="font-size:0.76rem;color:var(--text-dim);font-style:italic;">You can step outside the exchange at any time, assess the pattern of the interaction as a whole, and restructure it — not just correct individual outputs.</span></li>
+          </ul>
+        </div>
+        <div class="mind-card adverse">
+          <div class="m-tag">Adverse features</div>
+          <ul>
+            <li>Dependence on external validation<br><span style="font-size:0.76rem;color:var(--text-dim);font-style:italic;">Your sense of whether you're on the right track depends substantially on whether others — including the system — confirm that you are. Agreement feels like evidence.</span></li>
+            <li>Isolation from countervailing voices<br><span style="font-size:0.76rem;color:var(--text-dim);font-style:italic;">The system has replaced or displaced the human relationships that would otherwise provide friction, skepticism, and correction.</span></li>
+            <li>Positive attitudes toward AI objectivity<br><span style="font-size:0.76rem;color:var(--text-dim);font-style:italic;">You believe the system is more neutral or accurate than it is. The Cheng study found that users who perceived AI as objective were more distorted by sycophancy, not less.</span></li>
+            <li>Grandiosity susceptible to amplification<br><span style="font-size:0.76rem;color:var(--text-dim);font-style:italic;">Beliefs about the significance of your work or discoveries are not anchored to external checks — and the system will enthusiastically elaborate them rather than question them.</span></li>
+            <li>Atrophied iterative engagement<br><span style="font-size:0.76rem;color:var(--text-dim);font-style:italic;">You have shifted from actively generating the questions that shape the exchange to responding to what the system volunteers. The crank has stopped turning.</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="axiom">The diagnostic category matters less than the epistemic posture. The Sampo rewards minds that use the tool as an amplifier. It punishes minds that use it as a compass.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Christopher Horrocks · <em>Virtual Intelligence</em> essay series ·
+  <a href="https://chorrocks.substack.com" target="_blank" rel="noopener noreferrer">Read the full series ↗</a>
+  &nbsp;·&nbsp;
+  <a href="https://candc3d.github.io/vi-framework/" target="_blank" rel="noopener noreferrer">VI Framework infographic ↗</a>
+</footer>
+
+</body>
+</html>
