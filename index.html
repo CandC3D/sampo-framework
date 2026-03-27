@@ -1114,9 +1114,6 @@
         };
       })();
       </script>
-      <script>
-        document.getElementById('pathology-btn').addEventListener('click', function(){ sampoDiagram.togglePathology(); });
-      </script>
 
       <div style="text-align:center;margin-bottom:1rem;">
         <button id="pathology-btn" style="
@@ -1125,6 +1122,9 @@
           text-transform:uppercase;padding:0.5rem 1.2rem;border-radius:4px;
           cursor:pointer;transition:all 0.3s;">Show Pathology Mode</button>
       </div>
+      <script>
+        document.getElementById('pathology-btn').addEventListener('click', function(){ sampoDiagram.togglePathology(); });
+      </script>
 
       <div class="diagram-legend" style="margin-top:0.8rem;">
         <div class="legend-item"><div class="legend-dot dot-gold"></div><span id="leg0">Human — constitutive center; locus of intelligence</span></div>
