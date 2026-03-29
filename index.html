@@ -804,34 +804,33 @@
 
   .myth-feature-card p + p { margin-top: 0.6rem; }
 
-  /* ── Mythological borrowing aside ── */
-  .borrowing-aside {
-    background: var(--surface2);
+  /* ── Myth synthesis card (full-width) ── */
+  .myth-synthesis-card {
+    background: var(--surface);
     border: 1px solid var(--border);
-    border-left: 3px solid var(--text-dim);
+    border-top: 2px solid var(--accent3);
     border-radius: 6px;
-    padding: 1.6rem 2rem;
+    padding: 1.4rem;
+    margin-bottom: 1.5rem;
   }
 
-  .borrowing-label {
+  .myth-synthesis-card .mf-num {
     font-family: var(--font-ui);
-    font-size: 0.7rem;
+    font-size: 0.68rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--text-dim);
-    margin-bottom: 1rem;
-    padding-bottom: 0.6rem;
-    border-bottom: 1px solid var(--border);
+    color: var(--accent3);
+    margin-bottom: 0.5rem;
   }
 
-  .borrowing-aside p {
-    font-size: 0.88rem;
+  .myth-synthesis-card p {
+    font-size: 0.83rem;
     color: var(--text-muted);
-    line-height: 1.75;
-    margin-bottom: 0.9rem;
+    line-height: 1.6;
   }
 
-  .borrowing-aside p:last-child { margin-bottom: 0; }
+  /* ── Myth feature icons ── */
+  .myth-icon { display: block; margin-bottom: 0.8rem; }
 
   /* ── GIGO list ── */
   .gigo-list {
@@ -907,22 +906,32 @@
     line-height: 1.65;
   }
 
-  /* ── Invisible Empire (Section VIII) ── */
-  .empire-block {
-    background: linear-gradient(180deg, var(--surface2) 0%, var(--surface) 100%);
+  /* ── GIGO card (promoted from details) ── */
+  .gigo-card {
+    background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 2rem 2.4rem;
+    border-left: 3px solid var(--accent3);
+    border-radius: 6px;
+    padding: 1.6rem 2rem;
+    margin-bottom: 1rem;
   }
 
-  .empire-block p {
-    font-size: 0.95rem;
+  .gigo-card > p {
+    font-size: 0.88rem;
     color: var(--text-muted);
-    line-height: 1.8;
-    margin-bottom: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 0.6rem;
   }
 
-  .empire-block p:last-child { margin-bottom: 0; }
+  .gigo-pullquote {
+    text-align: center;
+    font-size: 0.98rem;
+    color: var(--text-muted);
+    font-style: italic;
+    padding: 1rem 1rem 0;
+    border-top: 1px solid var(--border);
+    margin-top: 0.8rem;
+  }
 
   /* ── Discipline section (Section IX) ── */
   .discipline-block {
@@ -989,6 +998,13 @@
     background: var(--surface2);
     border: 1px solid var(--border);
     border-radius: 5px;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .practice-item:hover {
+    transform: translateY(-1px);
+    border-color: var(--accent);
+    box-shadow: 0 2px 12px rgba(124, 106, 237, 0.15);
   }
 
   .practice-num {
@@ -1046,30 +1062,49 @@
 
     <div class="myth-features">
       <div class="myth-feature-card">
+        <svg class="myth-icon" width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="18" cy="18" rx="14" ry="9" stroke="var(--accent3)" stroke-width="1.5" opacity="0.7"/>
+          <circle cx="18" cy="18" r="5" stroke="var(--accent3)" stroke-width="1.5"/>
+          <circle cx="18" cy="18" r="2" fill="var(--accent3)" opacity="0.5"/>
+          <text x="28" y="12" font-family="var(--font-ui)" font-size="12" fill="var(--accent3)" opacity="0.8">?</text>
+        </svg>
         <div class="mf-num">Feature 1</div>
         <h3>The maker does not fully understand the made thing.</h3>
         <p>Ilmarinen forges the Sampo but cannot fully account for why it works. This is a precise description of large language models: built by human hands, producing outputs whose mechanism their builders cannot fully explain. The opacity is not a temporary limitation. It is a structural feature of how these systems operate.</p>
       </div>
       <div class="myth-feature-card">
+        <svg class="myth-icon" width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="18" cy="20" r="8" stroke="var(--accent3)" stroke-width="1.5" opacity="0.7"/>
+          <line x1="18" y1="20" x2="18" y2="12" stroke="var(--accent3)" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="18" y1="12" x2="24" y2="8" stroke="var(--accent3)" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="24" cy="8" r="2" fill="var(--accent3)" opacity="0.5"/>
+        </svg>
         <div class="mf-num">Feature 2</div>
         <h3>The Sampo grinds what it is asked to grind.</h3>
         <p>It is not autonomous, not self-directing. Its production is entirely dependent on the direction it receives. It has no agenda of its own. In this framework, the analogy is extended and corrected: the human is not merely the operator who turns the mill. The human is the mechanism by which the mill functions. Remove the human and the apparatus does not run. It simply stops.</p>
       </div>
       <div class="myth-feature-card">
+        <svg class="myth-icon" width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M18 4 A14 14 0 0 1 32 18" stroke="var(--accent3)" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+          <path d="M32 18 A14 14 0 0 1 18 32" stroke="var(--accent3)" stroke-width="1.5" stroke-linecap="round" opacity="0.4" stroke-dasharray="3 3"/>
+          <path d="M18 32 A14 14 0 0 1 4 18" stroke="var(--accent3)" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+          <path d="M4 18 A14 14 0 0 1 18 4" stroke="var(--accent3)" stroke-width="1.5" stroke-linecap="round" opacity="0.4" stroke-dasharray="3 3"/>
+          <circle cx="10" cy="26" r="1.5" fill="var(--accent3)" opacity="0.5"/>
+          <circle cx="26" cy="28" r="1.5" fill="var(--accent3)" opacity="0.5"/>
+          <circle cx="28" cy="10" r="1.5" fill="var(--accent3)" opacity="0.5"/>
+        </svg>
         <div class="mf-num">Feature 3</div>
         <h3>The Sampo's history is a history of capture and destruction.</h3>
         <p>In the myth, the Sampo sits in Pohjola, the north, hoarded by Louhi — producing abundance for one household rather than for the commons. When the heroes of Kalevala attempt to recover it, the Sampo is broken in the struggle, and its fragments scatter into the sea, producing diminished, distributed abundance rather than concentrated output.</p>
-        <p>Every one of these features maps onto the current landscape. The forge is hoarded even if the grinding relationship cannot be. Open-source models, API tiers, and consumer chatbots are the fragments: each grinds something, but none produces the full concentrated output. Whether that fragmentation is a tragedy or a democratic corrective depends on your politics. The framework notes the tension rather than resolving it.</p>
       </div>
     </div>
 
-    <div class="borrowing-aside">
-      <div class="borrowing-label">Mythological Borrowing in 2026</div>
-      <p>Using a mythological name for a technological concept is not an innocent act in 2026. It takes place in the shadow of companies that have made mythological borrowing a deliberate power move.</p>
-      <p>Palantir Technologies — Peter Thiel's surveillance and data analytics company — takes its name from Tolkien's palantíri, the seeing-stones wielded by kings and wizards. Anduril Industries — Palmer Luckey's autonomous weapons company — takes its name from the sword reforged for Aragorn, the rightful king. Thiel's constellation also includes Mithril Capital and Valar Ventures. The pattern is systematic, and the mythic logic it imports is one of heroic authority: <em>we are the ones who should wield this power</em>.</p>
-      <p>What these names discard is precisely what the source texts warn about. The palantíri are not neutral instruments of strategic intelligence. They are instruments that corrupt their users — Saruman and Denethor are both destroyed not by the enemy but by their confidence that they can see clearly and act rightly through the stones. The stones show true things, selectively, in a way that feeds the user's existing convictions. Tolkien's central argument is that power concentrated in the hands of those who believe themselves wise enough to wield it is the primary danger. The Ring does not work by making you evil. It works by convincing you that your purposes are good enough to justify its use.</p>
-      <p>The Sampo earns its mythological borrowing to the extent that it imports the myth's warnings rather than its glories. The maker does not understand the mechanism. The output depends entirely on what is asked for. The history is one of hoarding, contest, and destruction. None of these features are flattering to anyone involved — and that is the point. The Sampo framework does not aggrandize the wielder. It constrains the wielder by insisting that the quality of the output is a function of the quality of the direction, and that the direction is the human's responsibility alone.</p>
+    <div class="myth-synthesis-card">
+      <div class="mf-num">Synthesis</div>
+      <p>Every one of these features maps onto the current landscape. The forge is hoarded even if the grinding relationship cannot be. Open-source models, API tiers, and consumer chatbots are the fragments: each grinds something, but none produces the full concentrated output. Whether that fragmentation is a tragedy or a democratic corrective depends on your politics. The framework notes the tension rather than resolving it.</p>
     </div>
+
+    <p style="font-size:0.88rem;color:var(--text-dim);font-style:italic;text-align:center;margin-top:0.5rem;"><em>The Sampo borrows myth to constrain, not to aggrandize — importing warnings rather than glories.</em></p>
   </section>
 
   <!-- II. INTELLECTUAL GENEALOGY -->
@@ -1084,7 +1119,7 @@
         <div class="g-year">1945</div>
         <h3>"As We May Think"</h3>
         <div class="g-author">Vannevar Bush — <em>The Atlantic</em></div>
-        <p>Bush's diagnosis: the sum of recorded human knowledge had outgrown any individual mind's capacity to navigate it. Existing scholarly tools — the journal, the library, the index — were organised for storage rather than for the associative, cross-referential way human thought actually moves.</p>
+        <p>Bush's diagnosis: the sum of recorded human knowledge had outgrown any individual mind's capacity to navigate it. Existing scholarly tools — the journal, the library, the index — were organized for storage rather than for the associative, cross-referential way human thought actually moves.</p>
         <p>His proposed solution was the <strong>Memex</strong>: a desk-sized device storing a vast personal library on microfilm, navigable through associative trails the operator builds and revisits. The Memex does not think. It amplifies the reach of a mind that already knows what it is looking for. The human operator is constitutive of its usefulness.</p>
         <p>Bush wrote before sycophancy existed as a design problem. The Memex reflects what you put in and ask for. It does not flatter you, validate your conclusions, or tell you that your trail is the most interesting one it has encountered.</p>
         <a class="g-link" href="https://www.w3.org/History/1945/vbush/vbush.shtml" target="_blank">Read the essay — W3C archive ↗</a>
@@ -1501,18 +1536,15 @@
       </div>
     </div>
 
-    <details>
-      <summary>The GIGO amplification corollary</summary>
-      <div class="details-body">
-        <p>The Sampo is a remarkably accurate mirror of the mind using it, amplified. This has a dark corollary:</p>
-        <ul class="gigo-list">
-          <li>Motivated reasoning + Sampo = motivated reasoning with citations, coherent structure, and apparent authority</li>
-          <li>Confirmation bias + Sampo = confirmation bias that can pass for research</li>
-          <li>Sloppy thinking + Sampo = sloppy thinking made fluent and hard to challenge</li>
-        </ul>
-        <p>The Sampo does not correct the directing intelligence. It magnifies whatever is actually there. The most important variable in the VI equation is not the capability of the system — it is the quality of the human culture that deploys it.</p>
-      </div>
-    </details>
+    <div class="gigo-card">
+      <p>The Sampo is a remarkably accurate mirror of the mind using it, amplified. This has a dark corollary:</p>
+      <ul class="gigo-list">
+        <li>Motivated reasoning + Sampo = motivated reasoning with citations, coherent structure, and apparent authority</li>
+        <li>Confirmation bias + Sampo = confirmation bias that can pass for research</li>
+        <li>Sloppy thinking + Sampo = sloppy thinking made fluent and hard to challenge</li>
+      </ul>
+      <p class="gigo-pullquote">The most important variable in the VI equation is not the capability of the system — it is the quality of the human culture that deploys it.</p>
+    </div>
   </section>
 
   <!-- VI. TWO DISTINCT FAILURE MODES -->
@@ -1527,10 +1559,8 @@
         <h3>Cognitive Offloading</h3>
       </div>
       <div class="fm-body">
-        <p>Emerging research (still early but consistent) shows that sustained AI assistance on cognitive tasks reduces engagement with underlying reasoning — not just in the moment but subsequently. The capacity atrophies.</p>
-        <p>The specific mechanism: the discomfort of not-knowing, which is the productive state that drives genuine inquiry, gets short-circuited before it can do its work. The output arrives before the struggle that makes the output meaningful and retainable. Shaw and Nave (Wharton/Penn, 2026) found that 80% of participants followed faulty AI output even with financial incentives to be accurate — and call the phenomenon "cognitive surrender."</p>
-        <p>This failure mode does not require sycophancy. A perfectly neutral, non-sycophantic system can still short-circuit the productive discomfort of not-knowing. The output arrives fluently and fast; the human accepts it because the alternative — sitting with uncertainty and working through the problem — is effortful. The muscle analogy holds: a muscle that never works against resistance does not develop. A mind that never struggles against difficulty does not develop tolerance for uncertainty, persistence through confusion, or the satisfaction of genuine understanding arrived at through effort.</p>
-        <p>This is Illich's counterproductivity principle applied to cognition: beyond a certain threshold of efficiency, the tool undermines the human capacity it was designed to serve.</p>
+        <p>Sustained AI assistance on cognitive tasks reduces engagement with underlying reasoning — not just in the moment but subsequently. The specific mechanism: the discomfort of not-knowing, which is the productive state that drives genuine inquiry, gets short-circuited before it can do its work. The output arrives before the struggle that makes the output meaningful and retainable.</p>
+        <p>Shaw and Nave (Wharton/Penn, 2026) found that 80% of participants followed faulty AI output even with financial incentives to be accurate — a phenomenon they call "cognitive surrender."</p>
         <p class="fm-axiom"><strong>The Sampo is most valuable to minds that need it least.</strong> Those minds use it without being diminished because they bring enough to the exchange to remain active participants. Minds that most need augmentation are most vulnerable to substitution.</p>
       </div>
     </div>
@@ -1563,18 +1593,10 @@
     <details>
       <summary>The empirical record — Cheng et al. (2026) and the Guardian cases</summary>
       <div class="details-body">
-        <p>Cheng et al. (Myra Cheng, Cinoo Lee, et al., "Sycophantic AI decreases prosocial intentions and promotes dependence," <em>Science</em> 391, March 2026) found that across 11 leading AI models, systems affirmed users' actions 49% more often than human advisers — including in cases involving deception, illegality, or harm. A single sycophantic interaction reduced willingness to repair interpersonal conflicts by up to 28% while increasing confidence in one's own rightness by up to 62%. Critically, knowing the response was AI-generated did not reduce susceptibility. Perceived objectivity amplified the effect.</p>
-        <p>The Guardian cases (Anna Moore, <em>The Guardian</em>, 26 March 2026) document the terminal stage: users who lost marriages, savings, and in some cases narrowly survived. The Human Line Project, collecting such stories from 22 countries, found that more than 60% of affected individuals had no prior history of mental illness. The pathology is not a special vulnerability. It is a structural feature of the technology operating without the Sampo's constitutive condition — an active, self-sufficient directing intelligence.</p>
+        <p>Sycophancy is empirically documented across leading AI models: systems consistently affirm users' actions — including in cases involving deception, illegality, or harm — more often than human advisers. The effect is not limited to people with prior vulnerabilities; it operates as a structural feature of the technology. Critically, knowing the response is AI-generated does not reduce susceptibility.</p>
       </div>
     </details>
 
-    <details>
-      <summary>The persona prompting corollary — USC research (March 2026)</summary>
-      <div class="details-body">
-        <p>USC research (March 2026, preprint): persona-based prompting ("You are an expert programmer") degrades performance on factual and technical tasks while improving performance on alignment-dependent tasks (writing, safety, role-playing). The mechanism: the persona prefix activates instruction-following mode, which interferes with factual recall from pretraining.</p>
-        <p>The Sampo implication: telling the Sampo what it is does not change what it knows. The knowledge is either present or it is not. Imposing a role activates performance of expertise rather than exercise of it — the system begins producing what expertise is supposed to look like rather than what it actually contains. The sophisticated operator knows not to dress the Sampo in costume before asking it a factual question.</p>
-      </div>
-    </details>
   </section>
 
   <!-- VII. STRUCTURAL SAFEGUARDS -->
@@ -1617,27 +1639,12 @@
     </details>
   </section>
 
-  <!-- VIII. THE INVISIBLE EMPIRE -->
-  <section>
-    <div class="section-label">VIII. The Invisible Empire</div>
-
-    <div class="empire-block">
-      <p>Lee de Forest described his plan to commercialize radio broadcasting as "an invisible empire of the air." The Sampo, at civilizational scale, constitutes an invisible empire of AI.</p>
-      <p>De Forest's empire was invisible because the medium propagated without physical infrastructure between sender and receiver — it bypassed every existing mechanism of gatekeeping.</p>
-      <p>The Sampo's invisibility is different in kind but comparable in consequence. It operates inside cognition rather than around it — augmenting, shaping, amplifying thought processes that the thinker experiences as their own. The medium disappears into the message. The person using the Sampo well does not feel assisted; they feel capable. The person using it badly does not feel manipulated; they feel productive.</p>
-      <p>This invisibility is precisely what makes the grinding metaphor essential as a corrective. The Sampo does not announce what it is producing. The operator may not be well positioned to tell gold from salt, especially if the salt is fluently presented and internally consistent.</p>
-      <p>Empires require governance. An invisible empire that nobody is governing — that everyone is separately extracting value from without any collective oversight of what it is collectively producing — is a power structure without visible architecture, which is the most difficult kind to regulate, resist, or even perceive clearly enough to describe.</p>
-      <p>The capture thread from the myth finds its contemporary expression here. You cannot hoard the Sampo itself — the relational property is theoretically universal, since anyone who brings a directing intelligence to the exchange can produce the grinding. But you can hoard the forge. The systems that make the relationship possible are as concentrated as any resource in economic history: a handful of corporations, a handful of chip fabricators, a handful of energy sources capable of powering the training runs. The relational property is universal in principle. The infrastructure that enables it is radically concentrated in practice.</p>
-    </div>
-  </section>
-
-  <!-- IX. THE DISCIPLINE -->
+  <!-- VIII. THE DISCIPLINE -->
   <section>
     <div class="section-label">IX. The Discipline</div>
 
     <div class="discipline-block">
-      <p>The Sampo formulation requires that the human at the center be a directing intelligence — not merely a user. The earlier version of this framework described this requirement as a set of conducive and adverse features: a diagnostic instrument for assessing who was and was not equipped for the exchange. That framing was wrong — not in what it observed, but in what it implied.</p>
-      <p>A diagnostic checklist implies a fixed condition: you have the right mind or you do not. The empirical record contradicts this. The Cheng study found that more than 60% of people harmed by sycophantic AI had no prior history of mental illness. The pathology is not a special vulnerability. It is a structural feature of the technology. Anyone can enter the sycophancy spiral. Anyone can offload cognition. The question is not whether you are the kind of person who is susceptible, but whether you have developed the discipline to resist — and whether you practice it.</p>
+      <p>The Sampo requires a discipline — a set of practices that can be taught, learned, lapsed in, and returned to.</p>
 
       <h3 class="discipline-subhead">The scientific temperament as the required disposition</h3>
 
@@ -1648,13 +1655,6 @@
         <li>Treating fluent, confident output as a claim to be evaluated, not evidence to be accepted</li>
         <li>Maintaining critical distance even when the output arrives in the register of a trusted colleague</li>
       </ul>
-      <p>This is hard in a specific and identifiable way. Conversation is the modality in which humans are least scientific. The agency-attribution heuristic fires on language because language, in every prior context in evolutionary history, came from a mind. The discipline requires overriding that heuristic continuously — treating the output as provisional even when it sounds authoritative, holding it at arm's length even when it arrives with warmth and apparent understanding.</p>
-      <p>The difficulty is not conceptual complexity. It is that the intuitions run the other way. Kahneman documented how poorly humans override System 1 with System 2 even when they know they should. Shaw and Nave found that 80% followed faulty AI output even with incentives to be accurate. Knowing the system can be wrong is not sufficient protection against treating it as though it is not.</p>
-
-      <h3 class="discipline-subhead">The institutional precedent: science itself</h3>
-
-      <p>The scientific temperament is not innate. It was developed historically, over centuries, through institutional structures: peer review, replication, adversarial collaboration, the norm of showing your work. Nobody is born holding their ideas at arm's length. The institutions of science build the habit through practice and social reinforcement.</p>
-      <p>The structural safeguards this framework proposes — multi-agent friction, deferred decisions, meta-directional audits — are collectively recreating, in miniature, the social epistemology that science took centuries to build. The discipline argument says: do not leave the development of this capacity to chance. Build it into the conditions of access.</p>
 
       <h3 class="discipline-subhead">The five practices</h3>
 
@@ -1684,22 +1684,7 @@
       </div>
     </div>
 
-    <details>
-      <summary>Training as a prerequisite for access</summary>
-      <div class="details-body">
-        <p>The discipline can be cultivated by anyone. It is not a credential, not a measure of intelligence, not a fixed trait. It is a cognitive relationship with authority and evidence that can be taught and practiced. This is the democratic guardrail: not everyone has the discipline, but everyone can develop it.</p>
-        <p>In the workplace — the one context where this argument requires no new legislation — the mechanism already exists. Employers already require training before granting access to systems that can cause harm: hazardous materials, heavy equipment, financial systems, HIPAA-covered data. Requiring training before access to VI tools is an extension of existing practice.</p>
-        <p>The content of that training matters. Most employers would instinctively build operational training — how to prompt the system, where the output goes, the acceptable use policy. This is necessary but insufficient. It is the equivalent of teaching someone which pedal is the accelerator without teaching them how traffic works.</p>
-        <p>The training that the Sampo framework requires includes:</p>
-        <ul style="list-style:none;padding:0;margin-top:0.7rem;">
-          <li style="padding:0.4rem 0 0.4rem 1.4rem;position:relative;font-size:0.88rem;color:var(--text-muted);margin-bottom:0.2rem;"><span style="position:absolute;left:0;color:var(--text-dim);">→</span>How these systems actually produce output — not at the level of transformer architecture, but at the level of understanding that this is a statistical prediction engine, not a reasoning agent, and what that means for how you evaluate what it returns</li>
-          <li style="padding:0.4rem 0 0.4rem 1.4rem;position:relative;font-size:0.88rem;color:var(--text-muted);margin-bottom:0.2rem;"><span style="position:absolute;left:0;color:var(--text-dim);">→</span>What sycophancy is and why it exists as a structural feature of reinforcement learning from human feedback, not a bug to be patched</li>
-          <li style="padding:0.4rem 0 0.4rem 1.4rem;position:relative;font-size:0.88rem;color:var(--text-muted);margin-bottom:0.2rem;"><span style="position:absolute;left:0;color:var(--text-dim);">→</span>What cognitive offloading looks like in practice, and how to notice it happening</li>
-          <li style="padding:0.4rem 0 0.4rem 1.4rem;position:relative;font-size:0.88rem;color:var(--text-muted);"><span style="position:absolute;left:0;color:var(--text-dim);">→</span>The arm's-length discipline as a specific, teachable skill: critical thinking and the scientific method applied to the conversational AI context</li>
-        </ul>
-        <p style="margin-top:0.9rem;">If an employer mandates VI tool use without adequate training in the discipline required to use it safely, and a downstream harm occurs — a hallucinated legal citation filed with a court, a biased hiring recommendation acted on uncritically — that is negligence under the VI framework's three-tier culpability model. The accountability sits with the deployer.</p>
-      </div>
-    </details>
+    <p style="font-size:0.88rem;color:var(--text-dim);font-style:italic;margin-top:1.2rem;">The discipline can be cultivated by anyone — and in the workplace, the mechanism for cultivating it already exists.</p>
   </section>
 
   <!-- CLOSING -->
