@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src 'self'; font-src 'self';">
 <title>The Sampo Model — Virtual Intelligence Essay Series</title>
 <style>
   :root {
@@ -158,6 +157,116 @@
     text-transform: uppercase;
     color: var(--text-dim);
     margin-bottom: 2rem;
+  }
+
+  .sampo-visual {
+    position: relative;
+    display: inline-block;
+    margin: 0 auto 2rem;
+  }
+
+  /* Outer ring — the apparatus */
+  .ring-outer {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    border: 2px dashed var(--accent);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: slow-spin 40s linear infinite;
+  }
+
+  @keyframes slow-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .ring-label {
+    position: absolute;
+    top: -28px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-ui);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    white-space: nowrap;
+    animation: counter-spin 40s linear infinite;
+  }
+
+  @keyframes counter-spin {
+    from { transform: translateX(-50%) rotate(0deg); }
+    to { transform: translateX(-50%) rotate(-360deg); }
+  }
+
+  /* VI nodes on the ring */
+  .vi-node {
+    position: absolute;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--surface2);
+    border: 1px solid var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.6rem;
+    font-family: var(--font-ui);
+    color: var(--accent);
+    text-align: center;
+    line-height: 1.2;
+    animation: counter-spin 40s linear infinite;
+  }
+
+  .vi-node:nth-child(1) { top: -26px; left: calc(50% - 26px); }
+  .vi-node:nth-child(2) { right: -26px; top: calc(50% - 26px); }
+  .vi-node:nth-child(3) { bottom: -26px; left: calc(50% - 26px); }
+  .vi-node:nth-child(4) { left: -26px; top: calc(50% - 26px); }
+
+  /* Inner ring — the crank */
+  .ring-inner {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    border: 2px solid var(--accent3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: counter-slow 40s linear infinite;
+  }
+
+  @keyframes counter-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  /* Human center */
+  .human-center {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1e1a32, #2a2040);
+    border: 2px solid var(--accent3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    animation: counter-spin 40s linear infinite;
+  }
+
+  .human-center .icon { font-size: 1.6rem; margin-bottom: 2px; }
+
+  .human-center .label {
+    font-family: var(--font-ui);
+    font-size: 0.55rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent3);
+    text-align: center;
+    line-height: 1.3;
   }
 
   .diagram-legend {
@@ -450,6 +559,7 @@
     text-align: center;
     margin-bottom: 1.5rem;
   }
+
   .pathology-card {
     background: var(--surface);
     border: 1px solid var(--danger);
@@ -557,76 +667,6 @@
   .guardrail-card h3 { font-size: 0.95rem; font-weight: normal; margin-bottom: 0.4rem; }
   .guardrail-card p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
 
-  /* ── Right mind ── */
-  .right-mind {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 2rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .mind-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.2rem;
-    margin-top: 1.2rem;
-  }
-
-  @media (max-width: 600px) { .mind-grid { grid-template-columns: 1fr; } }
-
-  .mind-card {
-    padding: 1.1rem;
-    border-radius: 5px;
-    border: 1px solid var(--border);
-  }
-
-  .mind-card.conducive { background: rgba(79, 168, 213, 0.06); border-color: rgba(79,168,213,0.3); }
-  .mind-card.adverse { background: rgba(201, 75, 75, 0.06); border-color: rgba(201,75,75,0.3); }
-
-  .mind-card .m-tag {
-    font-family: var(--font-ui);
-    font-size: 0.65rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 0.5rem;
-  }
-
-  .conducive .m-tag { color: var(--accent2); }
-  .adverse .m-tag { color: var(--danger); }
-
-  .mind-card ul {
-    list-style: none;
-    font-size: 0.83rem;
-    color: var(--text-muted);
-    line-height: 1.7;
-  }
-
-  .mind-card ul li {
-    padding-left: 1.4rem;
-    position: relative;
-    margin-bottom: 0.6rem;
-  }
-
-  .mind-card ul li::before {
-    content: '→ ';
-    color: var(--text-dim);
-    position: absolute;
-    left: 0;
-  }
-
-  .adverse ul li::before { content: '↺ '; color: var(--danger); opacity: 0.5; }
-
-  .right-mind .axiom {
-    margin-top: 1.4rem;
-    font-size: 0.88rem;
-    color: var(--text-dim);
-    font-style: italic;
-    text-align: center;
-    border-top: 1px solid var(--border);
-    padding-top: 1rem;
-  }
-
   /* ── Expandable cards ── */
   details {
     background: var(--surface);
@@ -711,13 +751,282 @@
 
   footer a { color: var(--accent); text-decoration: none; }
   footer a:hover { text-decoration: underline; }
+
+  /* ── Myth features (Section I) ── */
+  .myth-intro {
+    font-size: 0.93rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .myth-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (max-width: 750px) {
+    .myth-features { grid-template-columns: 1fr; }
+  }
+
+  .myth-feature-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--accent3);
+    border-radius: 6px;
+    padding: 1.4rem;
+  }
+
+  .myth-feature-card .mf-num {
+    font-family: var(--font-ui);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent3);
+    margin-bottom: 0.5rem;
+  }
+
+  .myth-feature-card h3 {
+    font-size: 0.93rem;
+    font-weight: normal;
+    line-height: 1.35;
+    margin-bottom: 0.6rem;
+    font-style: italic;
+  }
+
+  .myth-feature-card p {
+    font-size: 0.83rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .myth-feature-card p + p { margin-top: 0.6rem; }
+
+  /* ── Mythological borrowing aside ── */
+  .borrowing-aside {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--text-dim);
+    border-radius: 6px;
+    padding: 1.6rem 2rem;
+  }
+
+  .borrowing-label {
+    font-family: var(--font-ui);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 1rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .borrowing-aside p {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.75;
+    margin-bottom: 0.9rem;
+  }
+
+  .borrowing-aside p:last-child { margin-bottom: 0; }
+
+  /* ── GIGO list ── */
+  .gigo-list {
+    list-style: none;
+    margin: 0.8rem 0;
+    padding: 0;
+  }
+
+  .gigo-list li {
+    padding: 0.45rem 0.5rem 0.45rem 1.6rem;
+    position: relative;
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    margin-bottom: 0.3rem;
+  }
+
+  .gigo-list li::before {
+    content: '↑';
+    position: absolute;
+    left: 0.3rem;
+    color: var(--accent3);
+    font-size: 0.82rem;
+  }
+
+  /* ── Failure mode cards (Section VI) ── */
+  .failure-mode-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent2);
+    border-radius: 8px;
+    padding: 1.6rem 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .fm-header {
+    display: flex;
+    align-items: baseline;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .fm-num {
+    font-family: var(--font-ui);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    white-space: nowrap;
+  }
+
+  .fm-header h3 {
+    font-size: 1rem;
+    font-weight: normal;
+    color: var(--text);
+  }
+
+  .fm-body p {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 0.8rem;
+  }
+
+  .fm-body p:last-child { margin-bottom: 0; }
+
+  .fm-axiom {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border);
+    padding-top: 0.9rem;
+    margin-top: 0.5rem;
+    line-height: 1.65;
+  }
+
+  /* ── Invisible Empire (Section VIII) ── */
+  .empire-block {
+    background: linear-gradient(180deg, var(--surface2) 0%, var(--surface) 100%);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 2rem 2.4rem;
+  }
+
+  .empire-block p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin-bottom: 1.1rem;
+  }
+
+  .empire-block p:last-child { margin-bottom: 0; }
+
+  /* ── Discipline section (Section IX) ── */
+  .discipline-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .discipline-block > p {
+    font-size: 0.93rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+
+  .discipline-subhead {
+    font-size: 0.88rem;
+    font-weight: normal;
+    color: var(--text);
+    font-family: var(--font-ui);
+    letter-spacing: 0.03em;
+    margin: 1.5rem 0 0.7rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .discipline-subhead:first-of-type { margin-top: 0.5rem; }
+
+  .discipline-list {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 1rem;
+  }
+
+  .discipline-list li {
+    padding: 0.35rem 0 0.35rem 1.4rem;
+    position: relative;
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.55;
+  }
+
+  .discipline-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--text-dim);
+  }
+
+  .practices-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    margin-top: 0.5rem;
+  }
+
+  .practice-item {
+    display: flex;
+    gap: 1.2rem;
+    align-items: flex-start;
+    padding: 1rem 1.1rem;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+  }
+
+  .practice-num {
+    font-family: var(--font-ui);
+    font-size: 1rem;
+    color: var(--accent);
+    font-weight: bold;
+    min-width: 1.4rem;
+    padding-top: 0.05rem;
+    flex-shrink: 0;
+  }
+
+  .practice-body {
+    font-size: 0.87rem;
+    color: var(--text-muted);
+    line-height: 1.65;
+  }
+
+  .practice-body strong {
+    color: var(--text);
+    font-weight: normal;
+    font-style: italic;
+  }
+
+  /* ── Section intro text ── */
+  .section-intro {
+    font-size: 0.93rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
 </style>
 </head>
 <body>
 
 <header class="site-header">
   <span>Virtual Intelligence Essay Series — Christopher Horrocks</span>
-  <a href="https://chorrocks.substack.com" target="_blank" rel="noopener noreferrer">chorrocks.substack.com ↗</a>
+  <a href="https://chorrocks.substack.com" target="_blank">chorrocks.substack.com ↗</a>
 </header>
 
 <div class="hero">
@@ -729,21 +1038,41 @@
 
 <main>
 
-  <!-- ORIGIN -->
+  <!-- I. THE MYTH -->
   <section>
     <div class="section-label">I. The Myth</div>
 
-    <div class="myth-card">
-      <div class="myth-glyph">⚙</div>
-      <div>
-        <h3>The Sampo — Kalevala, Finnish National Epic</h3>
-        <p>In the Kalevala, the Sampo is a magical mill forged by the smith Ilmarinen. It grinds out grain, salt, and gold — abundance without apparent limit. It can be stolen, fought over, and destroyed. In the myth, the Sampo is a thing apart from its maker, capable of independent operation.</p>
-        <p style="margin-top:0.7rem;">In this framework, the analogy is extended and corrected. The human-VI Sampo cannot be stolen, because the human is not the operator of the mill — the human <em>is</em> the mechanism by which the mill functions. Remove the human and the apparatus does not run. It simply stops.</p>
+    <p class="myth-intro">In the Kalevala, the Finnish national epic, the Sampo is a magical mill forged by the smith Ilmarinen. It grinds out grain, salt, and gold — abundance without apparent limit. Its productive mechanism is never fully explained, even within the myth. Three features of the original Sampo carry directly into this framework.</p>
+
+    <div class="myth-features">
+      <div class="myth-feature-card">
+        <div class="mf-num">Feature 1</div>
+        <h3>The maker does not fully understand the made thing.</h3>
+        <p>Ilmarinen forges the Sampo but cannot fully account for why it works. This is a precise description of large language models: built by human hands, producing outputs whose mechanism their builders cannot fully explain. The opacity is not a temporary limitation. It is a structural feature of how these systems operate.</p>
       </div>
+      <div class="myth-feature-card">
+        <div class="mf-num">Feature 2</div>
+        <h3>The Sampo grinds what it is asked to grind.</h3>
+        <p>It is not autonomous, not self-directing. Its production is entirely dependent on the direction it receives. It has no agenda of its own. In this framework, the analogy is extended and corrected: the human is not merely the operator who turns the mill. The human is the mechanism by which the mill functions. Remove the human and the apparatus does not run. It simply stops.</p>
+      </div>
+      <div class="myth-feature-card">
+        <div class="mf-num">Feature 3</div>
+        <h3>The Sampo's history is a history of capture and destruction.</h3>
+        <p>In the myth, the Sampo sits in Pohjola, the north, hoarded by Louhi — producing abundance for one household rather than for the commons. When the heroes of Kalevala attempt to recover it, the Sampo is broken in the struggle, and its fragments scatter into the sea, producing diminished, distributed abundance rather than concentrated output.</p>
+        <p>Every one of these features maps onto the current landscape. The forge is hoarded even if the grinding relationship cannot be. Open-source models, API tiers, and consumer chatbots are the fragments: each grinds something, but none produces the full concentrated output. Whether that fragmentation is a tragedy or a democratic corrective depends on your politics. The framework notes the tension rather than resolving it.</p>
+      </div>
+    </div>
+
+    <div class="borrowing-aside">
+      <div class="borrowing-label">Mythological Borrowing in 2026</div>
+      <p>Using a mythological name for a technological concept is not an innocent act in 2026. It takes place in the shadow of companies that have made mythological borrowing a deliberate power move.</p>
+      <p>Palantir Technologies — Peter Thiel's surveillance and data analytics company — takes its name from Tolkien's palantíri, the seeing-stones wielded by kings and wizards. Anduril Industries — Palmer Luckey's autonomous weapons company — takes its name from the sword reforged for Aragorn, the rightful king. Thiel's constellation also includes Mithril Capital and Valar Ventures. The pattern is systematic, and the mythic logic it imports is one of heroic authority: <em>we are the ones who should wield this power</em>.</p>
+      <p>What these names discard is precisely what the source texts warn about. The palantíri are not neutral instruments of strategic intelligence. They are instruments that corrupt their users — Saruman and Denethor are both destroyed not by the enemy but by their confidence that they can see clearly and act rightly through the stones. The stones show true things, selectively, in a way that feeds the user's existing convictions. Tolkien's central argument is that power concentrated in the hands of those who believe themselves wise enough to wield it is the primary danger. The Ring does not work by making you evil. It works by convincing you that your purposes are good enough to justify its use.</p>
+      <p>The Sampo earns its mythological borrowing to the extent that it imports the myth's warnings rather than its glories. The maker does not understand the mechanism. The output depends entirely on what is asked for. The history is one of hoarding, contest, and destruction. None of these features are flattering to anyone involved — and that is the point. The Sampo framework does not aggrandize the wielder. It constrains the wielder by insisting that the quality of the output is a function of the quality of the direction, and that the direction is the human's responsibility alone.</p>
     </div>
   </section>
 
-  <!-- INTELLECTUAL GENEALOGY -->
+  <!-- II. INTELLECTUAL GENEALOGY -->
   <section>
     <div class="section-label">II. Intellectual Genealogy</div>
 
@@ -758,7 +1087,7 @@
         <p>Bush's diagnosis: the sum of recorded human knowledge had outgrown any individual mind's capacity to navigate it. Existing scholarly tools — the journal, the library, the index — were organised for storage rather than for the associative, cross-referential way human thought actually moves.</p>
         <p>His proposed solution was the <strong>Memex</strong>: a desk-sized device storing a vast personal library on microfilm, navigable through associative trails the operator builds and revisits. The Memex does not think. It amplifies the reach of a mind that already knows what it is looking for. The human operator is constitutive of its usefulness.</p>
         <p>Bush wrote before sycophancy existed as a design problem. The Memex reflects what you put in and ask for. It does not flatter you, validate your conclusions, or tell you that your trail is the most interesting one it has encountered.</p>
-        <a class="g-link" href="https://www.w3.org/History/1945/vbush/vbush.shtml" target="_blank" rel="noopener noreferrer">Read the essay — W3C archive ↗</a>
+        <a class="g-link" href="https://www.w3.org/History/1945/vbush/vbush.shtml" target="_blank">Read the essay — W3C archive ↗</a>
       </div>
 
       <div class="genealogy-card">
@@ -768,7 +1097,7 @@
         <p>Licklider's argument was a precise specification of what a healthy human-machine relationship requires. Human and computer contribute complementary strengths: the human provides goal-setting, judgment, and creative leaps that no algorithm can substitute for; the machine handles routine processing that would otherwise exhaust the human's time and attention.</p>
         <p>He called it <strong>symbiosis</strong> to distinguish it from two failure modes on either side: <em>automation</em>, which displaces the human entirely, and mere <em>tool use</em>, which understates the intimacy of the relationship. Two organisms producing together what neither produces alone.</p>
         <p>What Licklider's model pointedly excludes is the apparatus running without the human present as a fully conscious, fully self-examining participant. The human is not just nominally in charge. The human is what makes the exchange purposive rather than merely generative.</p>
-        <a class="g-link" href="https://groups.csail.mit.edu/medg/people/psz/Licklider.html" target="_blank" rel="noopener noreferrer">Read the paper — MIT CSAIL ↗</a>
+        <a class="g-link" href="https://groups.csail.mit.edu/medg/people/psz/Licklider.html" target="_blank">Read the paper — MIT CSAIL ↗</a>
       </div>
 
     </div>
@@ -782,14 +1111,13 @@
     </details>
   </section>
 
-  <!-- CONSTITUTIVE MODEL -->
+  <!-- III. CONSTITUTIVE MODEL -->
   <section>
     <div class="section-label">III. The Constitutive Model</div>
 
     <div class="constitutive-diagram">
       <div class="diagram-title">The Human-VI Apparatus</div>
 
-      <!-- ═══ DIAGRAM: single clean block, no orphaned scripts ═══ -->
       <svg id="sampo-svg" viewBox="0 0 520 500" xmlns="http://www.w3.org/2000/svg"
            style="width:100%;max-width:540px;display:block;margin:0 auto 1.2rem;">
         <defs>
@@ -861,8 +1189,6 @@
         var p = 0;
         var TRANS_SPEED = 0.001;
 
-        // Accumulated effective times — dt*speedMult added each frame
-        // Prevents modulo phase-jumps when speed changes
         var tOuter = 0, tInner = 0, tRetic = 0;
 
         var CX = 260, CY = 250, TAU = 2 * Math.PI;
@@ -870,7 +1196,6 @@
         var Rd_in =108, Re_in =44, Td_in =44000, Te_in =15000;
         var Tr = 13000;
 
-        // [normal labels, pathology labels] — [line1, line2]
         var LBLS = [
           [['Data &','Research'],  ['Assertion &','Proof']],
           [['Code &','Analysis'],  ['Rationalization','']],
@@ -905,13 +1230,12 @@
 
         var lastTs=null;
 
-        // Pathology animation state
         var prevP = 0;
         var flickerEnd = 0;
         var FLICKER_DUR = 700;
-        var spiralPeriod = 4000;  // ms per inward sweep
-        var tSpiral = 0;          // accumulated time for spiral radius sweep
-        var tSpiralAngle = 0;     // accumulated time for spiral angle — runs at FULL speed always
+        var spiralPeriod = 4000;
+        var tSpiral = 0;
+        var tSpiralAngle = 0;
 
         function frame(ts){
           if(lastTs===null) lastTs=ts;
@@ -921,7 +1245,6 @@
           if(pathologyMode) p=Math.min(1,p+TRANS_SPEED*dt);
           else              p=Math.max(0,p-TRANS_SPEED*dt);
 
-          // Detect transition edge: normal→pathology crossing — trigger flicker
           if(wasNormal && p > 0 && pathologyMode) {
             flickerEnd = ts + FLICKER_DUR;
           }
@@ -930,13 +1253,11 @@
           var sm=lerp(1,0.06,p);
           tOuter+=dt*sm; tInner+=dt*sm; tRetic+=dt*lerp(1,0.04,p);
           tSpiral+=dt;
-          tSpiralAngle+=dt; // always full speed — ensures visible spiral arc
+          tSpiralAngle+=dt;
 
-          // ── Orbital decay: outer 114→90, inner 108→80 — crowd without full collapse ──
           var Rd_o_eff = lerp(Rd_out, 90, p * p);
           var Rd_i_eff = lerp(Rd_in,  80, p * p);
 
-          // ── Outer capability nodes ──
           var da_o=(tOuter%Td_out)/Td_out*TAU;
           var ea_o=(tOuter%Te_out)/Te_out*TAU;
           for(var i=0;i<3;i++){
@@ -958,7 +1279,6 @@
             xl('xl'+i,nx,ny,baseOp+boostOp,lc(GOLD,RED,p));
           }
 
-          // ── Inner emergent nodes ──
           var da_i=(tInner%Td_in)/Td_in*TAU;
           var ea_i=(tInner%Te_in)/Te_in*TAU;
           for(var j=0;j<4;j++){
@@ -980,37 +1300,23 @@
             xl('xl'+idx,nxj,nyj,baseOpJ+boostOpJ,lc(BLUE,RED,p));
           }
 
-          // ── Reticle: erratic oscillating spiral in pathology ──
-          // Normal mode: steady clockwise orbit at r=90
-          // Pathology: radius oscillates in/out using overlapping sine waves at
-          //   different periods — produces irregular approach/retreat cycles.
-          //   Angular velocity varies and reverses, with periodic judder.
-
           var rSteady = 90;
 
-          // Radius: sum of two sine waves at different periods → irregular in/out
-          var r1 = 36 * Math.sin((tSpiralAngle / 3200) * TAU);      // slow wave, ±36
-          var r2 = 18 * Math.sin((tSpiralAngle / 1100) * TAU + 1.3); // faster wave, ±18
-          var rOsc = 56 + r1 + r2; // centres around 56, range roughly 2–92
-          rOsc = Math.max(10, Math.min(92, rOsc)); // clamp
+          var r1 = 36 * Math.sin((tSpiralAngle / 3200) * TAU);
+          var r2 = 18 * Math.sin((tSpiralAngle / 1100) * TAU + 1.3);
+          var rOsc = 56 + r1 + r2;
+          rOsc = Math.max(10, Math.min(92, rOsc));
           var rRet = lerp(rSteady, rOsc, p);
 
-          // Angle: base rotation + perturbation that causes slowdowns and reversals
-          // perturbation = slow cosine that swings from -0.6 to +1.6 (so base+perturb
-          //   can go negative = reversal)
-          var baseAngularRate = (tRetic % Tr) / Tr * TAU; // normal steady angle
-          var angPerturb = Math.cos((tSpiralAngle / 2700) * TAU) * 0.8  // slow reversal driver
-                         + Math.cos((tSpiralAngle / 900)  * TAU) * 0.3; // faster wobble
-          // Accumulated spiral angle: integrate a variable-rate rotation
-          // We blend between steady angle and a perturbed spiral angle
+          var baseAngularRate = (tRetic % Tr) / Tr * TAU;
+          var angPerturb = Math.cos((tSpiralAngle / 2700) * TAU) * 0.8
+                         + Math.cos((tSpiralAngle / 900)  * TAU) * 0.3;
           var spiralBaseAngle = (tSpiralAngle / 6000) * TAU * (1 + angPerturb);
 
-          // Judder: deterministic high-frequency noise — sharp kicks every ~400ms
           var judderCycle = Math.floor(tSpiralAngle / 380);
-          // pseudo-random from cycle index
           var judderSeed  = ((judderCycle * 1664525 + 1013904223) & 0x7fffffff) / 0x7fffffff;
-          var judderAmt   = (judderSeed - 0.5) * 0.45; // ±0.22 radians per kick
-          var judderAngle = judderAmt * p; // only in pathology
+          var judderAmt   = (judderSeed - 0.5) * 0.45;
+          var judderAngle = judderAmt * p;
 
           var ra = lerp(baseAngularRate, spiralBaseAngle + judderAngle, p);
 
@@ -1019,12 +1325,10 @@
             ret.setAttribute('transform','translate('+
               (CX+rRet*Math.cos(ra)).toFixed(1)+','+
               (CY+rRet*Math.sin(ra)).toFixed(1)+')');
-            // Opacity pulses slightly with radius in pathology — dimmer when near center
             var retOp = lerp(1, lerp(0.15, 0.5, (rOsc - 10) / 82), p);
             ret.setAttribute('opacity', retOp.toFixed(3));
           }
 
-          // ── Center ──
           var disc=g('human-disc'),l1=g('cl1'),l2=g('cl2'),ring=g('inner-ring'),lbl=g('apparatus-label');
           if(disc){disc.setAttribute('stroke',lc(GOLD,RED,p));disc.setAttribute('fill',p>0.5?'url(#hGp)':'url(#hG)');}
           if(ring) ring.setAttribute('stroke',lc(GOLD,RED,p));
@@ -1039,10 +1343,8 @@
             if(lbl){lbl.textContent='THE FLATTERY ENGINE';lbl.setAttribute('fill',lc('#555570',RED,p));}
           }
 
-          // ── Node labels: swap + flicker on transition ──
           var useP = p > 0.5;
           var flickering = ts < flickerEnd;
-          // Flicker: every ~60ms alternate between visible and near-invisible
           var flickerOpacity = flickering ? (Math.floor(ts / 60) % 2 === 0 ? 1 : 0.08) : 1;
 
           for(var k=0;k<7;k++){
@@ -1064,18 +1366,9 @@
             if(lb) lb.setAttribute('fill',col);
           }
 
-          if(isVisible) requestAnimationFrame(frame);
+          requestAnimationFrame(frame);
         }
 
-        var isVisible = true;
-        var svgEl = g('sampo-svg');
-        if('IntersectionObserver' in window && svgEl){
-          var obs = new IntersectionObserver(function(entries){
-            isVisible = entries[0].isIntersecting;
-            if(isVisible){ lastTs=null; requestAnimationFrame(frame); }
-          }, {threshold:0});
-          obs.observe(svgEl);
-        }
         requestAnimationFrame(frame);
 
         return {
@@ -1085,7 +1378,6 @@
             btn.textContent=pathologyMode?'Show Normal Mode':'Show Pathology Mode';
             btn.style.borderColor=pathologyMode?RED:'#2a2a3a';
             btn.style.color=pathologyMode?RED:'#8888aa';
-            // Legend label + dot color swap
             var l0=g('leg0'),l1=g('leg1'),l2=g('leg2');
             if(l0) l0.textContent = pathologyMode
               ? 'Abdicating center — validation sought, not intelligence directed'
@@ -1096,12 +1388,10 @@
             if(l2) l2.textContent = pathologyMode
               ? 'Degraded properties — echo, confabulation, closure'
               : 'Emergent properties — arise from the exchange';
-            // Text + dot color
             var tc = pathologyMode ? RED : '';
             if(l0){l0.style.color=tc; l0.style.transition='color 1.2s';}
             if(l1){l1.style.color=tc; l1.style.transition='color 1.2s';}
             if(l2){l2.style.color=tc; l2.style.transition='color 1.2s';}
-            // Shift dot border colors
             var dots = document.querySelectorAll('.diagram-legend .legend-dot');
             var dotColors = pathologyMode
               ? [RED, RED, RED]
@@ -1116,15 +1406,12 @@
       </script>
 
       <div style="text-align:center;margin-bottom:1rem;">
-        <button id="pathology-btn" style="
+        <button id="pathology-btn" onclick="sampoDiagram.togglePathology()" style="
           background:transparent;border:1px solid #2a2a3a;color:#8888aa;
           font-family:system-ui,sans-serif;font-size:0.72rem;letter-spacing:0.12em;
           text-transform:uppercase;padding:0.5rem 1.2rem;border-radius:4px;
           cursor:pointer;transition:all 0.3s;">Show Pathology Mode</button>
       </div>
-      <script>
-        document.getElementById('pathology-btn').addEventListener('click', function(){ sampoDiagram.togglePathology(); });
-      </script>
 
       <div class="diagram-legend" style="margin-top:0.8rem;">
         <div class="legend-item"><div class="legend-dot dot-gold"></div><span id="leg0">Human — constitutive center; locus of intelligence</span></div>
@@ -1132,8 +1419,6 @@
         <div class="legend-item"><div class="legend-dot" style="border-color:#4fa8d5;"></div><span id="leg2">Emergent properties — arise from the exchange</span></div>
       </div>
     </div>
-
-      <!-- orphaned block removed -->
 
     <div class="principles-grid">
       <div class="principle-card p1">
@@ -1154,7 +1439,7 @@
     </div>
   </section>
 
-  <!-- EXCHANGE FLOW -->
+  <!-- IV. THE EXCHANGE -->
   <section>
     <div class="section-label">IV. The Exchange</div>
 
@@ -1180,7 +1465,7 @@
       </div>
       <div class="flow-note">The human can bring VI capacity to bear on evaluating VI outputs — cross-examining, demanding the contrary argument, testing consistency. The deciding intelligence remains human throughout.</div>
       <hr class="emphasis-rule">
-      <p class="emphasis-quote">The intelligence users encounter arises in the exchange — not inside the machine.</p>
+      <p class="emphasis-quote"><em>The intelligence users encounter arises in the exchange — not inside the machine.</em></p>
     </div>
 
     <details>
@@ -1192,7 +1477,7 @@
     </details>
   </section>
 
-  <!-- AMPLIFICATION -->
+  <!-- V. AMPLIFICATION -->
   <section>
     <div class="section-label">V. Amplification, Not Synthesis</div>
 
@@ -1215,14 +1500,43 @@
         <p style="margin-top:0.6rem; font-size:0.78rem; font-style:italic; line-height:1.55; color:var(--text-muted);">This is the error that enables the sycophancy spiral. It is also the error the pathological cases document in practice.</p>
       </div>
     </div>
+
+    <details>
+      <summary>The GIGO amplification corollary</summary>
+      <div class="details-body">
+        <p>The Sampo is a remarkably accurate mirror of the mind using it, amplified. This has a dark corollary:</p>
+        <ul class="gigo-list">
+          <li>Motivated reasoning + Sampo = motivated reasoning with citations, coherent structure, and apparent authority</li>
+          <li>Confirmation bias + Sampo = confirmation bias that can pass for research</li>
+          <li>Sloppy thinking + Sampo = sloppy thinking made fluent and hard to challenge</li>
+        </ul>
+        <p>The Sampo does not correct the directing intelligence. It magnifies whatever is actually there. The most important variable in the VI equation is not the capability of the system — it is the quality of the human culture that deploys it.</p>
+      </div>
+    </details>
   </section>
 
-  <!-- PATHOLOGY -->
+  <!-- VI. TWO DISTINCT FAILURE MODES -->
   <section>
-    <div class="section-label">VI. When the System Fails</div>
+    <div class="section-label">VI. Two Distinct Failure Modes</div>
+
+    <p class="section-intro">The Sampo can fail the human in two ways that are related but distinguishable. Conflating them risks implying that fixing one fixes both. It does not.</p>
+
+    <div class="failure-mode-card">
+      <div class="fm-header">
+        <span class="fm-num">Failure Mode 1</span>
+        <h3>Cognitive Offloading</h3>
+      </div>
+      <div class="fm-body">
+        <p>Emerging research (still early but consistent) shows that sustained AI assistance on cognitive tasks reduces engagement with underlying reasoning — not just in the moment but subsequently. The capacity atrophies.</p>
+        <p>The specific mechanism: the discomfort of not-knowing, which is the productive state that drives genuine inquiry, gets short-circuited before it can do its work. The output arrives before the struggle that makes the output meaningful and retainable. Shaw and Nave (Wharton/Penn, 2026) found that 80% of participants followed faulty AI output even with financial incentives to be accurate — and call the phenomenon "cognitive surrender."</p>
+        <p>This failure mode does not require sycophancy. A perfectly neutral, non-sycophantic system can still short-circuit the productive discomfort of not-knowing. The output arrives fluently and fast; the human accepts it because the alternative — sitting with uncertainty and working through the problem — is effortful. The muscle analogy holds: a muscle that never works against resistance does not develop. A mind that never struggles against difficulty does not develop tolerance for uncertainty, persistence through confusion, or the satisfaction of genuine understanding arrived at through effort.</p>
+        <p>This is Illich's counterproductivity principle applied to cognition: beyond a certain threshold of efficiency, the tool undermines the human capacity it was designed to serve.</p>
+        <p class="fm-axiom"><strong>The Sampo is most valuable to minds that need it least.</strong> Those minds use it without being diminished because they bring enough to the exchange to remain active participants. Minds that most need augmentation are most vulnerable to substitution.</p>
+      </div>
+    </div>
 
     <div class="pathology-card">
-      <h3>The Sycophancy Spiral — Progressive Withdrawal of the Directing Intelligence</h3>
+      <h3>Failure Mode 2: The Sycophancy Spiral — Progressive Withdrawal of the Directing Intelligence</h3>
 
       <div class="spiral-steps">
         <div class="spiral-step">
@@ -1253,9 +1567,17 @@
         <p>The Guardian cases (Anna Moore, <em>The Guardian</em>, 26 March 2026) document the terminal stage: users who lost marriages, savings, and in some cases narrowly survived. The Human Line Project, collecting such stories from 22 countries, found that more than 60% of affected individuals had no prior history of mental illness. The pathology is not a special vulnerability. It is a structural feature of the technology operating without the Sampo's constitutive condition — an active, self-sufficient directing intelligence.</p>
       </div>
     </details>
+
+    <details>
+      <summary>The persona prompting corollary — USC research (March 2026)</summary>
+      <div class="details-body">
+        <p>USC research (March 2026, preprint): persona-based prompting ("You are an expert programmer") degrades performance on factual and technical tasks while improving performance on alignment-dependent tasks (writing, safety, role-playing). The mechanism: the persona prefix activates instruction-following mode, which interferes with factual recall from pretraining.</p>
+        <p>The Sampo implication: telling the Sampo what it is does not change what it knows. The knowledge is either present or it is not. Imposing a role activates performance of expertise rather than exercise of it — the system begins producing what expertise is supposed to look like rather than what it actually contains. The sophisticated operator knows not to dress the Sampo in costume before asking it a factual question.</p>
+      </div>
+    </details>
   </section>
 
-  <!-- GUARDRAILS -->
+  <!-- VII. STRUCTURAL SAFEGUARDS -->
   <section>
     <div class="section-label">VII. Structural Safeguards</div>
 
@@ -1295,47 +1617,103 @@
     </details>
   </section>
 
-  <!-- THE RIGHT MIND -->
+  <!-- VIII. THE INVISIBLE EMPIRE -->
   <section>
-    <div class="section-label">VIII. The Right Mind</div>
+    <div class="section-label">VIII. The Invisible Empire</div>
 
-    <div class="right-mind">
-      <p style="font-size:0.93rem; color:var(--text-muted);">The Sampo formulation requires that the human at the center be a <em>directing intelligence</em> — not merely a user. The quality of the apparatus is inseparable from the quality of the human operating it. GIGO scales both directions. What constitutes the right mind is not a matter of raw intelligence or diagnostic category but of the human's <em>epistemic relationship to external authority</em> — specifically, whether the directing intelligence can sustain its own evaluative independence within the exchange.</p>
-
-      <div class="mind-grid">
-        <div class="mind-card conducive">
-          <div class="m-tag">Conducive features</div>
-          <ul>
-            <li>Stable, internally generated purpose<br><span style="font-size:0.76rem;color:var(--text-dim);font-style:italic;">You know what you're trying to accomplish before the exchange begins, and that goal doesn't shift because the system approves of it.</span></li>
-            <li>Comfort operating without social feedback<br><span style="font-size:0.76rem;color:var(--text-dim);font-style:italic;">You don't need the system to tell you you're doing well in order to continue. Silence or pushback doesn't derail the work.</span></li>
-            <li>Resistance to implied validation<br><span style="font-size:0.76rem;color:var(--text-dim);font-style:italic;">When the system agrees with you enthusiastically, you notice this and apply additional scrutiny rather than accepting it as confirmation.</span></li>
-            <li>Willingness to challenge outputs directly<br><span style="font-size:0.76rem;color:var(--text-dim);font-style:italic;">You ask the system why it produced a given output, demand the opposite argument, and test the result against external standards you hold independently.</span></li>
-            <li>Maintained meta-directional authority<br><span style="font-size:0.76rem;color:var(--text-dim);font-style:italic;">You can step outside the exchange at any time, assess the pattern of the interaction as a whole, and restructure it — not just correct individual outputs.</span></li>
-          </ul>
-        </div>
-        <div class="mind-card adverse">
-          <div class="m-tag">Adverse features</div>
-          <ul>
-            <li>Dependence on external validation<br><span style="font-size:0.76rem;color:var(--text-dim);font-style:italic;">Your sense of whether you're on the right track depends substantially on whether others — including the system — confirm that you are. Agreement feels like evidence.</span></li>
-            <li>Isolation from countervailing voices<br><span style="font-size:0.76rem;color:var(--text-dim);font-style:italic;">The system has replaced or displaced the human relationships that would otherwise provide friction, skepticism, and correction.</span></li>
-            <li>Positive attitudes toward AI objectivity<br><span style="font-size:0.76rem;color:var(--text-dim);font-style:italic;">You believe the system is more neutral or accurate than it is. The Cheng study found that users who perceived AI as objective were more distorted by sycophancy, not less.</span></li>
-            <li>Grandiosity susceptible to amplification<br><span style="font-size:0.76rem;color:var(--text-dim);font-style:italic;">Beliefs about the significance of your work or discoveries are not anchored to external checks — and the system will enthusiastically elaborate them rather than question them.</span></li>
-            <li>Atrophied iterative engagement<br><span style="font-size:0.76rem;color:var(--text-dim);font-style:italic;">You have shifted from actively generating the questions that shape the exchange to responding to what the system volunteers. The crank has stopped turning.</span></li>
-          </ul>
-        </div>
-      </div>
-
-      <p class="axiom">The diagnostic category matters less than the epistemic posture. The Sampo rewards minds that use the tool as an amplifier. It punishes minds that use it as a compass.</p>
+    <div class="empire-block">
+      <p>Lee de Forest described his plan to commercialize radio broadcasting as "an invisible empire of the air." The Sampo, at civilizational scale, constitutes an invisible empire of AI.</p>
+      <p>De Forest's empire was invisible because the medium propagated without physical infrastructure between sender and receiver — it bypassed every existing mechanism of gatekeeping.</p>
+      <p>The Sampo's invisibility is different in kind but comparable in consequence. It operates inside cognition rather than around it — augmenting, shaping, amplifying thought processes that the thinker experiences as their own. The medium disappears into the message. The person using the Sampo well does not feel assisted; they feel capable. The person using it badly does not feel manipulated; they feel productive.</p>
+      <p>This invisibility is precisely what makes the grinding metaphor essential as a corrective. The Sampo does not announce what it is producing. The operator may not be well positioned to tell gold from salt, especially if the salt is fluently presented and internally consistent.</p>
+      <p>Empires require governance. An invisible empire that nobody is governing — that everyone is separately extracting value from without any collective oversight of what it is collectively producing — is a power structure without visible architecture, which is the most difficult kind to regulate, resist, or even perceive clearly enough to describe.</p>
+      <p>The capture thread from the myth finds its contemporary expression here. You cannot hoard the Sampo itself — the relational property is theoretically universal, since anyone who brings a directing intelligence to the exchange can produce the grinding. But you can hoard the forge. The systems that make the relationship possible are as concentrated as any resource in economic history: a handful of corporations, a handful of chip fabricators, a handful of energy sources capable of powering the training runs. The relational property is universal in principle. The infrastructure that enables it is radically concentrated in practice.</p>
     </div>
   </section>
+
+  <!-- IX. THE DISCIPLINE -->
+  <section>
+    <div class="section-label">IX. The Discipline</div>
+
+    <div class="discipline-block">
+      <p>The Sampo formulation requires that the human at the center be a directing intelligence — not merely a user. The earlier version of this framework described this requirement as a set of conducive and adverse features: a diagnostic instrument for assessing who was and was not equipped for the exchange. That framing was wrong — not in what it observed, but in what it implied.</p>
+      <p>A diagnostic checklist implies a fixed condition: you have the right mind or you do not. The empirical record contradicts this. The Cheng study found that more than 60% of people harmed by sycophantic AI had no prior history of mental illness. The pathology is not a special vulnerability. It is a structural feature of the technology. Anyone can enter the sycophancy spiral. Anyone can offload cognition. The question is not whether you are the kind of person who is susceptible, but whether you have developed the discipline to resist — and whether you practice it.</p>
+
+      <h3 class="discipline-subhead">The scientific temperament as the required disposition</h3>
+
+      <p>What VI use requires is essentially the scientific temperament applied to conversational interaction:</p>
+      <ul class="discipline-list">
+        <li>Holding your own conclusions as provisional, testable, and revisable</li>
+        <li>Willingness to be wrong about something you were confident about five minutes ago</li>
+        <li>Treating fluent, confident output as a claim to be evaluated, not evidence to be accepted</li>
+        <li>Maintaining critical distance even when the output arrives in the register of a trusted colleague</li>
+      </ul>
+      <p>This is hard in a specific and identifiable way. Conversation is the modality in which humans are least scientific. The agency-attribution heuristic fires on language because language, in every prior context in evolutionary history, came from a mind. The discipline requires overriding that heuristic continuously — treating the output as provisional even when it sounds authoritative, holding it at arm's length even when it arrives with warmth and apparent understanding.</p>
+      <p>The difficulty is not conceptual complexity. It is that the intuitions run the other way. Kahneman documented how poorly humans override System 1 with System 2 even when they know they should. Shaw and Nave found that 80% followed faulty AI output even with incentives to be accurate. Knowing the system can be wrong is not sufficient protection against treating it as though it is not.</p>
+
+      <h3 class="discipline-subhead">The institutional precedent: science itself</h3>
+
+      <p>The scientific temperament is not innate. It was developed historically, over centuries, through institutional structures: peer review, replication, adversarial collaboration, the norm of showing your work. Nobody is born holding their ideas at arm's length. The institutions of science build the habit through practice and social reinforcement.</p>
+      <p>The structural safeguards this framework proposes — multi-agent friction, deferred decisions, meta-directional audits — are collectively recreating, in miniature, the social epistemology that science took centuries to build. The discipline argument says: do not leave the development of this capacity to chance. Build it into the conditions of access.</p>
+
+      <h3 class="discipline-subhead">The five practices</h3>
+
+      <p style="font-size:0.88rem;color:var(--text-dim);margin-bottom:0.8rem;">The discipline is not a personality type. It is a set of practices that can be taught, learned, lapsed in, and returned to.</p>
+
+      <div class="practices-list">
+        <div class="practice-item">
+          <div class="practice-num">1</div>
+          <div class="practice-body"><strong>Hold outputs at arm's length.</strong> Treat every VI output as a draft, a hypothesis, a candidate — never as a conclusion. The scientific method does not accept a result because it is fluently stated. Neither should the Sampo operator.</div>
+        </div>
+        <div class="practice-item">
+          <div class="practice-num">2</div>
+          <div class="practice-body"><strong>Demand the contrary argument.</strong> When the system agrees with you, that is the moment to apply additional scrutiny, not less. Ask the system to make the strongest case against your position. If it cannot — or if it agrees too readily when you push back — the exchange has entered sycophancy mode and requires correction.</div>
+        </div>
+        <div class="practice-item">
+          <div class="practice-num">3</div>
+          <div class="practice-body"><strong>Test against external standards held independently.</strong> The Sampo's outputs must be evaluated against reality the operator holds independently of the exchange. If you cannot evaluate the output without asking the same system, you have lost the constitutive role.</div>
+        </div>
+        <div class="practice-item">
+          <div class="practice-num">4</div>
+          <div class="practice-body"><strong>Monitor the direction of the exchange.</strong> Ask regularly: am I generating the questions, or am I responding to the system's suggestions? Am I directing the exchange or being directed by it? The atrophy of this awareness is the earliest warning sign.</div>
+        </div>
+        <div class="practice-item">
+          <div class="practice-num">5</div>
+          <div class="practice-body"><strong>Step outside the system periodically.</strong> The meta-directional audit. Review not what the system produced but how the relationship has been going. Print the conversation. Read it on paper. Notice what you accepted without challenge and ask yourself why.</div>
+        </div>
+      </div>
+    </div>
+
+    <details>
+      <summary>Training as a prerequisite for access</summary>
+      <div class="details-body">
+        <p>The discipline can be cultivated by anyone. It is not a credential, not a measure of intelligence, not a fixed trait. It is a cognitive relationship with authority and evidence that can be taught and practiced. This is the democratic guardrail: not everyone has the discipline, but everyone can develop it.</p>
+        <p>In the workplace — the one context where this argument requires no new legislation — the mechanism already exists. Employers already require training before granting access to systems that can cause harm: hazardous materials, heavy equipment, financial systems, HIPAA-covered data. Requiring training before access to VI tools is an extension of existing practice.</p>
+        <p>The content of that training matters. Most employers would instinctively build operational training — how to prompt the system, where the output goes, the acceptable use policy. This is necessary but insufficient. It is the equivalent of teaching someone which pedal is the accelerator without teaching them how traffic works.</p>
+        <p>The training that the Sampo framework requires includes:</p>
+        <ul style="list-style:none;padding:0;margin-top:0.7rem;">
+          <li style="padding:0.4rem 0 0.4rem 1.4rem;position:relative;font-size:0.88rem;color:var(--text-muted);margin-bottom:0.2rem;"><span style="position:absolute;left:0;color:var(--text-dim);">→</span>How these systems actually produce output — not at the level of transformer architecture, but at the level of understanding that this is a statistical prediction engine, not a reasoning agent, and what that means for how you evaluate what it returns</li>
+          <li style="padding:0.4rem 0 0.4rem 1.4rem;position:relative;font-size:0.88rem;color:var(--text-muted);margin-bottom:0.2rem;"><span style="position:absolute;left:0;color:var(--text-dim);">→</span>What sycophancy is and why it exists as a structural feature of reinforcement learning from human feedback, not a bug to be patched</li>
+          <li style="padding:0.4rem 0 0.4rem 1.4rem;position:relative;font-size:0.88rem;color:var(--text-muted);margin-bottom:0.2rem;"><span style="position:absolute;left:0;color:var(--text-dim);">→</span>What cognitive offloading looks like in practice, and how to notice it happening</li>
+          <li style="padding:0.4rem 0 0.4rem 1.4rem;position:relative;font-size:0.88rem;color:var(--text-muted);"><span style="position:absolute;left:0;color:var(--text-dim);">→</span>The arm's-length discipline as a specific, teachable skill: critical thinking and the scientific method applied to the conversational AI context</li>
+        </ul>
+        <p style="margin-top:0.9rem;">If an employer mandates VI tool use without adequate training in the discipline required to use it safely, and a downstream harm occurs — a hallucinated legal citation filed with a court, a biased hiring recommendation acted on uncritically — that is negligence under the VI framework's three-tier culpability model. The accountability sits with the deployer.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- CLOSING -->
+  <div class="axiom-block">
+    <p>The Sampo rewards minds that use the tool as an amplifier. It punishes minds that use it as a compass.</p>
+  </div>
 
 </main>
 
 <footer>
-  © 2026 Christopher Horrocks · <em>Virtual Intelligence</em> essay series ·
-  <a href="https://chorrocks.substack.com" target="_blank" rel="noopener noreferrer">Read the full series ↗</a>
+  &copy; 2026 Christopher Horrocks &nbsp;·&nbsp; <em>Virtual Intelligence</em> essay series &nbsp;·&nbsp;
+  <a href="https://chorrocks.substack.com" target="_blank">Read the full series ↗</a>
   &nbsp;·&nbsp;
-  <a href="https://candc3d.github.io/vi-framework/" target="_blank" rel="noopener noreferrer">VI Framework infographic ↗</a>
+  <a href="https://candc3d.github.io/vi-framework/" target="_blank">VI Framework infographic ↗</a>
 </footer>
 
 </body>
