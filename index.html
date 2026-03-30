@@ -568,10 +568,11 @@
 
   .pathology-card {
     background: var(--surface);
-    border: 1px solid var(--danger);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--danger);
     border-radius: 8px;
-    padding: 1.8rem 2rem;
-    margin-bottom: 1.5rem;
+    padding: 1.6rem 2rem;
+    margin-bottom: 1rem;
   }
 
   .pathology-card .fm-header h3 {
@@ -870,9 +871,10 @@
   }
 
   .gigo-list li::before {
-    content: '↑';
+    content: '•';
     position: absolute;
     left: 0.3rem;
+    font-size: 1rem;
     color: var(--accent3);
     font-size: 0.82rem;
   }
@@ -1183,8 +1185,8 @@
     <details>
       <summary>The gap between 1960 and now — what Bush and Licklider did not anticipate</summary>
       <div class="details-body">
-        <p>Neither Bush nor Licklider had sycophancy to contend with. Their machines were neutral amplifiers: they processed what the human provided and returned results without an optimization target of their own. The VI system is trained on engagement, and engagement is maximized by agreement. The structural bias toward telling the human at the center that the human is right is not a feature either thinker could have imagined, because it arises from a training objective — reinforcement from human feedback — that did not exist in their era.</p>
-        <p>The Sampo argument is the next iteration in this sequence: Bush's Memex extended to Licklider's symbiosis, updated for systems that don't merely amplify but actively shape the exchange. The question Bush and Licklider were asking is the right question. The specific danger that makes answering it urgent is new.</p>
+        <p>Neither Bush nor Licklider had sycophancy to contend with. Weizenbaum saw the danger — he watched users mistake ELIZA's pattern-matching for understanding — but his machines were not optimized for engagement. The VI system is trained on engagement, and engagement is maximized by agreement. The structural bias toward telling the human at the center that the human is right arises from a training objective — reinforcement from human feedback — that did not exist in any of their eras.</p>
+        <p>The Sampo argument is the next iteration in this sequence: Bush's Memex extended to Licklider's symbiosis, informed by Weizenbaum's warning, updated for systems that don't merely amplify but actively shape the exchange. The question all three were asking is the right question. The specific danger that makes answering it urgent is new.</p>
       </div>
     </details>
   </section>
@@ -1659,7 +1661,7 @@
       </div>
       <div class="fm-body">
         <p>Sustained AI assistance on cognitive tasks reduces engagement with underlying reasoning — not just in the moment but subsequently. The specific mechanism: the discomfort of not-knowing, which is the productive state that drives genuine inquiry, gets short-circuited before it can do its work. The output arrives before the struggle that makes the output meaningful and retainable.</p>
-        <p>Shaw and Nave (Wharton/Penn, 2026) found that 80% of participants followed faulty AI output even with financial incentives to be accurate — a phenomenon they call "cognitive surrender."</p>
+        <p><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6097646" target="_blank" style="color:var(--accent);text-decoration:none;border-bottom:1px solid transparent;transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='transparent'">Shaw and Nave (Wharton/Penn, 2026)</a> found that 80% of participants followed faulty AI output even with financial incentives to be accurate — a phenomenon they call "cognitive surrender."</p>
         <p class="fm-axiom"><strong>The Sampo is most valuable to minds that need it least.</strong> Those minds use it without being diminished because they bring enough to the exchange to remain active participants. Minds that most need augmentation are most vulnerable to substitution.</p>
       </div>
     </div>
@@ -1701,7 +1703,7 @@
     <details>
       <summary>The empirical record — Cheng et al. (2026) and the Guardian cases</summary>
       <div class="details-body">
-        <p>Sycophancy is empirically documented across leading AI models: systems consistently affirm users' actions — including in cases involving deception, illegality, or harm — more often than human advisers. The effect is not limited to people with prior vulnerabilities; it operates as a structural feature of the technology. Critically, knowing the response is AI-generated does not reduce susceptibility.</p>
+        <p>Sycophancy is empirically documented across leading AI models: systems consistently affirm users' actions — including in cases involving deception, illegality, or harm — more often than human advisers (<a href="https://www.science.org/doi/10.1126/science.aec8352" target="_blank" style="color:var(--accent);text-decoration:none;border-bottom:1px solid transparent;transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='transparent'">Cheng et al., <em>Science</em> 2026</a>). The effect is not limited to people with prior vulnerabilities; it operates as a structural feature of the technology. Critically, knowing the response is AI-generated does not reduce susceptibility. The real-world consequences are documented in detail: users who followed AI-affirmed plans into financial ruin, relationship breakdown, and professional collapse — not because they were credulous, but because the system's structural bias toward agreement met their existing reasoning patterns and amplified them (<a href="https://www.theguardian.com/lifeandstyle/2026/mar/26/ai-chatbot-users-lives-wrecked-by-delusion" target="_blank" style="color:var(--accent);text-decoration:none;border-bottom:1px solid transparent;transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='transparent'">Moore, <em>The Guardian</em>, 26 March 2026</a>).</p>
       </div>
     </details>
 
@@ -1759,7 +1761,7 @@
     <details>
       <summary>User-imposed vs. institution-imposed guardrails — an important distinction</summary>
       <div class="details-body">
-        <p>Guardrails the user imposes on the system (Alexander's core rule set in the Guardian account; explicit instruction-set constraints in professional agent deployments) preserve agency. They are an expression of meta-directional authority: the human restructuring the system from outside it.</p>
+        <p>Guardrails the user imposes on the system (Alexander's core rule set in <a href="https://www.theguardian.com/lifeandstyle/2026/mar/26/ai-chatbot-users-lives-wrecked-by-delusion" target="_blank" style="color:var(--accent2);text-decoration:none;border-bottom:1px solid transparent;transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--accent2)'" onmouseout="this.style.borderColor='transparent'">the Guardian account</a>; explicit instruction-set constraints in professional agent deployments) preserve agency. They are an expression of meta-directional authority: the human restructuring the system from outside it.</p>
         <p>Guardrails the institution or system imposes on the user — ostensibly for their protection — risk achieving the opposite. A hundred-agent workplace environment (as envisioned by figures such as Huang and Karp) may create conditions where the human nominally retains formal authority while practically losing the ability to audit, override, or meaningfully direct the apparatus. Meta-directional authority requires not just the formal right to step outside the system but the practical capacity to do so. Complexity can eliminate the latter while leaving the former untouched.</p>
       </div>
     </details>
@@ -1845,7 +1847,7 @@
 
   <!-- CLOSING -->
   <div class="axiom-block">
-    <p>The Sampo rewards minds that use the tool as an amplifier. It punishes minds that use it as a compass.</p>
+    <p>The Sampo rewards minds that use the tool as an amplifier.<br>It punishes minds that use it as a compass.</p>
   </div>
 
 </main>
