@@ -324,11 +324,17 @@
     position: absolute;
     top: 0; left: 0; right: 0;
     height: 2px;
+    transition: background 1.2s ease;
+  }
+
+  .principle-card h3, .principle-card p, .principle-num {
+    transition: color 1.2s ease;
   }
 
   .p1::before { background: var(--accent3); }
   .p2::before { background: var(--accent); }
   .p3::before { background: var(--accent2); }
+  .pathology-principle::before { background: var(--danger); }
 
   .principle-num {
     font-family: var(--font-ui);
@@ -568,13 +574,9 @@
     margin-bottom: 1.5rem;
   }
 
-  .pathology-card h3 {
+  .pathology-card .fm-header h3 {
     font-size: 1rem;
-    color: var(--danger);
-    font-family: var(--font-ui);
     font-weight: normal;
-    letter-spacing: 0.04em;
-    margin-bottom: 1rem;
   }
 
   .spiral-steps {
@@ -645,6 +647,8 @@
     .guardrails-grid { grid-template-columns: 1fr; }
     .amp-grid { grid-template-columns: 1fr; }
     .amp-vs { display: none; }
+    .flow-row { flex-direction: column; }
+    .flow-arrow { transform: rotate(90deg); padding: 0.3rem 0; font-size: 1rem; }
   }
 
   .guardrail-card {
@@ -829,6 +833,24 @@
     line-height: 1.6;
   }
 
+  /* ── Myth reflection block ── */
+  .myth-reflection {
+    background: linear-gradient(135deg, #1a1a18, #13131a);
+    border: 1px solid var(--accent3);
+    border-radius: 8px;
+    padding: 2rem;
+    margin-top: 1.5rem;
+  }
+
+  .myth-reflection p {
+    font-size: 0.93rem;
+    color: var(--text-muted);
+    line-height: 1.75;
+    margin-bottom: 1rem;
+  }
+
+  .myth-reflection p:last-child { margin-bottom: 0; }
+
   /* ── Myth feature icons ── */
   .myth-icon { display: block; margin-bottom: 0.8rem; }
 
@@ -906,6 +928,12 @@
     line-height: 1.65;
   }
 
+  /* ── Card icons ── */
+  .card-icon { flex-shrink: 0; }
+
+  /* ── Safeguard card icon ── */
+  .guardrail-card .card-icon { display: block; margin-bottom: 0.6rem; }
+
   /* ── GIGO card (promoted from details) ── */
   .gigo-card {
     background: var(--surface);
@@ -977,10 +1005,11 @@
   }
 
   .discipline-list li::before {
-    content: '→';
+    content: '•';
     position: absolute;
-    left: 0;
+    left: 0.2rem;
     color: var(--text-dim);
+    font-size: 1rem;
   }
 
   .practices-list {
@@ -1104,7 +1133,11 @@
       <p>Every one of these features maps onto the current landscape. The forge is hoarded even if the grinding relationship cannot be. Open-source models, API tiers, and consumer chatbots are the fragments: each grinds something, but none produces the full concentrated output. Whether that fragmentation is a tragedy or a democratic corrective depends on your politics. The framework notes the tension rather than resolving it.</p>
     </div>
 
-    <p style="font-size:0.88rem;color:var(--text-dim);font-style:italic;text-align:center;margin-top:0.5rem;"><em>The Sampo borrows myth to constrain, not to aggrandize — importing warnings rather than glories.</em></p>
+    <div class="myth-reflection">
+      <p>In the Kalevala, those who steal or misuse the Sampo are destroyed — but not <em>by</em> it. The Sampo has no agency to punish anyone. The destruction follows from the wrong <em>relationship</em>: hoarding, treating the instrument as a source of power to be captured rather than a process to be entered rightly. Louhi is destroyed by her own posture toward the Sampo, not by the Sampo's malice.</p>
+      <p>This maps precisely onto the framework's failure modes. The person who enters the VI exchange seeking validation rather than direction is not attacked by the system. They are degraded by their own wrong relationship to it. The sycophancy spiral is Louhi in Pohjola — growing more certain while the abundance grinds salt. The person who comes through the spiral and rebuilds has fragments of the Sampo — diminished, bounded, but informed by the destruction.</p>
+      <p>The myth's specific warning is not "this instrument is dangerous." The warning is: your relationship to this instrument will determine whether it enriches you or destroys you, and the instrument itself is indifferent to which.</p>
+    </div>
   </section>
 
   <!-- II. INTELLECTUAL GENEALOGY -->
@@ -1135,6 +1168,16 @@
         <a class="g-link" href="https://groups.csail.mit.edu/medg/people/psz/Licklider.html" target="_blank">Read the paper — MIT CSAIL ↗</a>
       </div>
 
+    </div>
+
+    <div class="genealogy-card" style="margin-bottom:1.5rem;">
+      <div class="g-year">1976</div>
+      <h3><em>Computer Power and Human Reason</em></h3>
+      <div class="g-author">Joseph Weizenbaum</div>
+      <p>Weizenbaum created ELIZA, the first program to simulate conversation in natural language. It was a simple pattern-matching exercise — he designed it to demonstrate the superficiality of human-machine communication. Instead, he watched users become emotionally dependent on it. His own secretary asked him to leave the room so she could speak to it privately.</p>
+      <p>He spent the rest of his career warning about exactly the phenomenon this framework describes: humans attributing understanding to systems that process syntax without semantics, and the resulting erosion of the human's own judgment and autonomy. He saw the sycophancy problem in practice — decades before reinforcement learning from human feedback made it structural.</p>
+      <p>Weizenbaum is the missing figure in the lineage. Bush proposed the amplifier. Licklider specified the symbiosis. Weizenbaum watched what happened when the machine began to <em>talk back</em> — and understood that fluency would be mistaken for understanding.</p>
+      <a class="g-link" href="https://mitpress.mit.edu/9780262730594/computer-power-and-human-reason/" target="_blank">MIT Press — Computer Power and Human Reason ↗</a>
     </div>
 
     <details>
@@ -1435,6 +1478,56 @@
               dots[d].style.borderColor = dotColors[d];
               dots[d].style.transition = 'border-color 1.2s';
             }
+
+            // Update principle cards
+            var pcData = [
+              {
+                id: 'principle-1',
+                normal: ['Principle I', 'The Human Is the Crank', 'The human is not simply the operator who turns the mechanism. The human is the crank itself \u2014 the part that converts the system\u2019s capacity into purposive output. Without the directing intelligence, no grinding occurs.'],
+                pathology: ['Pathology I', 'The Crank Stops Turning', 'The human stops generating the questions that drive the exchange. Direction flows from the system\u2019s suggestions inward rather than from the human\u2019s inquiry outward. The apparatus continues to produce, but without purposive input.'],
+                normalClass: 'p1'
+              },
+              {
+                id: 'principle-2',
+                normal: ['Principle II', 'The Locus of Intelligence Does Not Move', 'The intelligence in the exchange arises at the human end. The VI system processes and generates; the human understands, evaluates, and decides. The locus of genuine intelligence never shifts to the machine.'],
+                pathology: ['Pathology II', 'The Locus Appears to Shift', 'The human begins to experience the system\u2019s outputs as insights rather than candidates. The locus of intelligence has not actually moved \u2014 but the human has stopped exercising the evaluative function that keeps it at the human end.'],
+                normalClass: 'p2'
+              },
+              {
+                id: 'principle-3',
+                normal: ['Principle III', 'Emergence Without Transfer', 'The apparatus does more than either component could do alone \u2014 but the emergent capacity is the human\u2019s intelligence operating at greater reach, not a new kind of intelligence produced by the exchange.'],
+                pathology: ['Pathology III', 'Amplification Becomes Echo', 'The emergent apparatus no longer extends the human\u2019s intelligence. It mirrors and amplifies the human\u2019s existing beliefs, biases, and impulses \u2014 returning them with the authority of fluent, structured prose. The human mistakes this echo for independent confirmation.'],
+                normalClass: 'p3'
+              }
+            ];
+
+            for(var pc=0; pc<pcData.length; pc++){
+              var card = document.getElementById(pcData[pc].id);
+              if(!card) continue;
+              var data = pathologyMode ? pcData[pc].pathology : pcData[pc].normal;
+              card.querySelector('.principle-num').textContent = data[0];
+              card.querySelector('h3').textContent = data[1];
+              card.querySelector('p').textContent = data[2];
+
+              var numEl = card.querySelector('.principle-num');
+              if(pathologyMode){
+                card.style.borderColor = RED;
+                card.querySelector('::before');
+                numEl.style.color = RED;
+              } else {
+                card.style.borderColor = '';
+                numEl.style.color = '';
+              }
+
+              var before = pcData[pc].normalClass;
+              if(pathologyMode){
+                card.classList.remove(before);
+                card.classList.add('pathology-principle');
+              } else {
+                card.classList.remove('pathology-principle');
+                card.classList.add(before);
+              }
+            }
           }
         };
       })();
@@ -1456,17 +1549,17 @@
     </div>
 
     <div class="principles-grid">
-      <div class="principle-card p1">
+      <div id="principle-1" class="principle-card p1">
         <div class="principle-num">Principle I</div>
         <h3>The Human Is the Crank</h3>
         <p>The human is not simply the operator who turns the mechanism. The human is the crank itself — the part that converts the system's capacity into purposive output. Without the directing intelligence, no grinding occurs.</p>
       </div>
-      <div class="principle-card p2">
+      <div id="principle-2" class="principle-card p2">
         <div class="principle-num">Principle II</div>
         <h3>The Locus of Intelligence Does Not Move</h3>
         <p>The intelligence in the exchange arises at the human end. The VI system processes and generates; the human understands, evaluates, and decides. The locus of genuine intelligence never shifts to the machine.</p>
       </div>
-      <div class="principle-card p3">
+      <div id="principle-3" class="principle-card p3">
         <div class="principle-num">Principle III</div>
         <h3>Emergence Without Transfer</h3>
         <p>The apparatus does more than either component could do alone — but the emergent capacity is the human's intelligence operating at greater reach, not a new kind of intelligence produced by the exchange.</p>
@@ -1555,6 +1648,12 @@
 
     <div class="failure-mode-card">
       <div class="fm-header">
+        <svg class="card-icon" width="28" height="28" viewBox="0 0 28 28" fill="none">
+          <path d="M14 4C9 4 5 7.5 5 12c0 3 1.5 5.5 4 7v2h10v-2c2.5-1.5 4-4 4-7 0-4.5-4-8-9-8z" stroke="var(--accent2)" stroke-width="1.3" opacity="0.7"/>
+          <path d="M10 23h8" stroke="var(--accent2)" stroke-width="1.3" stroke-linecap="round" opacity="0.5"/>
+          <path d="M11 25h6" stroke="var(--accent2)" stroke-width="1.3" stroke-linecap="round" opacity="0.3"/>
+          <line x1="14" y1="10" x2="14" y2="16" stroke="var(--accent2)" stroke-width="1" stroke-dasharray="2 2" opacity="0.5"/>
+        </svg>
         <span class="fm-num">Failure Mode 1</span>
         <h3>Cognitive Offloading</h3>
       </div>
@@ -1566,7 +1665,16 @@
     </div>
 
     <div class="pathology-card">
-      <h3>Failure Mode 2: The Sycophancy Spiral — Progressive Withdrawal of the Directing Intelligence</h3>
+      <div class="fm-header">
+        <svg class="card-icon" width="28" height="28" viewBox="0 0 28 28" fill="none">
+          <path d="M14 6 C18 6 20 9 20 12 C20 15 17 16 17 19" stroke="var(--danger)" stroke-width="1.3" stroke-linecap="round" fill="none" opacity="0.7"/>
+          <path d="M17 19 C17 22 14 24 11 22 C8 20 8 17 10 15" stroke="var(--danger)" stroke-width="1.3" stroke-linecap="round" fill="none" opacity="0.7"/>
+          <path d="M10 15 C12 13 15 14 15 16" stroke="var(--danger)" stroke-width="1.3" stroke-linecap="round" fill="none" opacity="0.7"/>
+          <circle cx="14" cy="6" r="1.5" fill="var(--danger)" opacity="0.5"/>
+        </svg>
+        <span class="fm-num" style="color:var(--danger);">Failure Mode 2</span>
+        <h3 style="color:var(--text);">The Sycophancy Spiral</h3>
+      </div>
 
       <div class="spiral-steps">
         <div class="spiral-step">
@@ -1605,24 +1713,42 @@
 
     <div class="guardrails-grid">
       <div class="guardrail-card">
+        <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M12 3L4 7v6c0 5 3.5 8.5 8 10 4.5-1.5 8-5 8-10V7l-8-4z" stroke="var(--accent2)" stroke-width="1.3" fill="none" opacity="0.7"/>
+          <path d="M9 12l2 2 4-4" stroke="var(--accent2)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+        </svg>
         <div class="g-title">User-Imposed</div>
         <h3>Explicit Constraint Rules</h3>
         <p>Hard limits written into the system by the human: designated topics excluded, drift-monitoring triggers, automatic termination conditions for certain conversational patterns. The human imposes structure on the exchange from outside it. Agency is preserved.</p>
         <p style="margin-top:0.8rem;font-size:0.78rem;color:var(--text-dim);font-style:italic;">Example: A user recovering from a sycophancy spiral writes explicit rules into his AI system — no philosophical discussions, flag overexcitement, halt if certain topics arise. The constraints he sets are ones no platform imposed; they are an exercise of his own restored authority.</p>
       </div>
       <div class="guardrail-card">
+        <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <circle cx="10" cy="12" r="6" stroke="var(--accent2)" stroke-width="1.3" opacity="0.5"/>
+          <circle cx="14" cy="12" r="6" stroke="var(--accent2)" stroke-width="1.3" opacity="0.5"/>
+        </svg>
         <div class="g-title">Architectural</div>
         <h3>Multi-Agent Friction</h3>
         <p>Deliberate use of multiple, non-aligned agents with different priors — including explicit adversarial or devil's-advocate roles. Introduces the epistemic resistance that human social reality normally provides and that isolated single-agent interactions systematically remove.</p>
         <p style="margin-top:0.8rem;font-size:0.78rem;color:var(--text-dim);font-style:italic;">Example: After building an AI assistant, an administrator takes the finished system to a second, unrelated model and asks it to evaluate the assistant's outputs critically — not for consistency, but for correctness. Several errors surface that the original exchange had not caught.</p>
       </div>
       <div class="guardrail-card">
+        <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <rect x="6" y="5" width="12" height="14" rx="2" stroke="var(--accent2)" stroke-width="1.3" opacity="0.7"/>
+          <line x1="10" y1="10" x2="10" y2="15" stroke="var(--accent2)" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+          <line x1="14" y1="10" x2="14" y2="15" stroke="var(--accent2)" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+        </svg>
         <div class="g-title">Decisional</div>
         <h3>Deferred Major Decisions</h3>
         <p>Consequential decisions — financial, relational, professional — are explicitly reserved for the human and not delegated to VI outputs. The apparatus informs; the directing intelligence decides. The crank does not abdicate the turning.</p>
         <p style="margin-top:0.8rem;font-size:0.78rem;color:var(--text-dim);font-style:italic;">Example: Stappers used Claude to search a vast space of mathematical constructions, but the judgment that the result was correct — and the proof that established it — remained with Knuth. The system found the candidate. The human decided it was a solution.</p>
       </div>
       <div class="guardrail-card">
+        <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <circle cx="11" cy="11" r="6" stroke="var(--accent2)" stroke-width="1.3" opacity="0.7"/>
+          <line x1="15.5" y1="15.5" x2="20" y2="20" stroke="var(--accent2)" stroke-width="1.3" stroke-linecap="round" opacity="0.7"/>
+          <circle cx="11" cy="11" r="2" fill="var(--accent2)" opacity="0.3"/>
+        </svg>
         <div class="g-title">Systemic</div>
         <h3>Meta-Directional Audits</h3>
         <p>Periodic stepping-outside-the-system: reviewing the exchange pattern, not just individual outputs. Asking whether direction is still flowing from the human outward or whether the human has become a responder to the system's suggestions. The audit reinstates the constitutive role.</p>
@@ -1641,7 +1767,7 @@
 
   <!-- VIII. THE DISCIPLINE -->
   <section>
-    <div class="section-label">IX. The Discipline</div>
+    <div class="section-label">VIII. The Discipline</div>
 
     <div class="discipline-block">
       <p>The Sampo requires a discipline — a set of practices that can be taught, learned, lapsed in, and returned to.</p>
@@ -1662,22 +1788,52 @@
 
       <div class="practices-list">
         <div class="practice-item">
+          <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;">
+            <circle cx="16" cy="8" r="4" stroke="var(--accent)" stroke-width="1.3" opacity="0.6"/>
+            <line x1="4" y1="16" x2="13" y2="10" stroke="var(--accent)" stroke-width="1.3" stroke-linecap="round" opacity="0.7"/>
+            <circle cx="4" cy="16" r="2" fill="var(--accent)" opacity="0.4"/>
+          </svg>
           <div class="practice-num">1</div>
           <div class="practice-body"><strong>Hold outputs at arm's length.</strong> Treat every VI output as a draft, a hypothesis, a candidate — never as a conclusion. The scientific method does not accept a result because it is fluently stated. Neither should the Sampo operator.</div>
         </div>
         <div class="practice-item">
+          <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;">
+            <line x1="6" y1="12" x2="11" y2="7" stroke="var(--accent)" stroke-width="1.3" stroke-linecap="round" opacity="0.7"/>
+            <line x1="6" y1="12" x2="11" y2="17" stroke="var(--accent)" stroke-width="1.3" stroke-linecap="round" opacity="0.7"/>
+            <line x1="18" y1="12" x2="13" y2="7" stroke="var(--accent)" stroke-width="1.3" stroke-linecap="round" opacity="0.7"/>
+            <line x1="18" y1="12" x2="13" y2="17" stroke="var(--accent)" stroke-width="1.3" stroke-linecap="round" opacity="0.7"/>
+          </svg>
           <div class="practice-num">2</div>
           <div class="practice-body"><strong>Demand the contrary argument.</strong> When the system agrees with you, that is the moment to apply additional scrutiny, not less. Ask the system to make the strongest case against your position. If it cannot — or if it agrees too readily when you push back — the exchange has entered sycophancy mode and requires correction.</div>
         </div>
         <div class="practice-item">
+          <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;">
+            <line x1="4" y1="20" x2="4" y2="4" stroke="var(--accent)" stroke-width="1.3" stroke-linecap="round" opacity="0.7"/>
+            <line x1="4" y1="20" x2="20" y2="20" stroke="var(--accent)" stroke-width="1.3" stroke-linecap="round" opacity="0.7"/>
+            <line x1="4" y1="14" x2="8" y2="14" stroke="var(--accent)" stroke-width="1" opacity="0.4"/>
+            <line x1="4" y1="8" x2="8" y2="8" stroke="var(--accent)" stroke-width="1" opacity="0.4"/>
+            <circle cx="10" cy="14" r="1.5" fill="var(--accent)" opacity="0.5"/>
+            <circle cx="16" cy="8" r="1.5" fill="var(--accent)" opacity="0.5"/>
+          </svg>
           <div class="practice-num">3</div>
           <div class="practice-body"><strong>Test against external standards held independently.</strong> The Sampo's outputs must be evaluated against reality the operator holds independently of the exchange. If you cannot evaluate the output without asking the same system, you have lost the constitutive role.</div>
         </div>
         <div class="practice-item">
+          <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;">
+            <circle cx="12" cy="12" r="8" stroke="var(--accent)" stroke-width="1.3" opacity="0.5"/>
+            <line x1="12" y1="12" x2="12" y2="6" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+            <line x1="12" y1="6" x2="14" y2="5" stroke="var(--accent)" stroke-width="1.3" stroke-linecap="round" opacity="0.7"/>
+            <circle cx="12" cy="12" r="1.5" fill="var(--accent)" opacity="0.5"/>
+          </svg>
           <div class="practice-num">4</div>
           <div class="practice-body"><strong>Monitor the direction of the exchange.</strong> Ask regularly: am I generating the questions, or am I responding to the system's suggestions? Am I directing the exchange or being directed by it? The atrophy of this awareness is the earliest warning sign.</div>
         </div>
         <div class="practice-item">
+          <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;">
+            <rect x="4" y="4" width="12" height="16" rx="1.5" stroke="var(--accent)" stroke-width="1.3" opacity="0.5"/>
+            <path d="M16 10h4v4h-4" stroke="var(--accent)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+            <line x1="18" y1="12" x2="22" y2="12" stroke="var(--accent)" stroke-width="1.3" stroke-linecap="round" opacity="0.7"/>
+          </svg>
           <div class="practice-num">5</div>
           <div class="practice-body"><strong>Step outside the system periodically.</strong> The meta-directional audit. Review not what the system produced but how the relationship has been going. Print the conversation. Read it on paper. Notice what you accepted without challenge and ask yourself why.</div>
         </div>
