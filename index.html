@@ -4,6 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Sampo Model — Virtual Intelligence Essay Series</title>
+<meta name="description" content="The Sampo Model — a framework for understanding the productive human-VI relationship: amplification, calibration, failure modes, and the discipline. Virtual Intelligence essay series by Christopher Horrocks.">
+<meta name="author" content="Christopher Horrocks">
+<meta name="keywords" content="virtual intelligence, sampo, AI amplification, human-AI collaboration, sycophancy, cognitive surrender, VI framework, Christopher Horrocks">
+<meta property="og:title" content="The Sampo Model — Virtual Intelligence Essay Series">
+<meta property="og:description" content="A framework for understanding the productive human-VI relationship: amplification, calibration, failure modes, and the discipline.">
+<meta property="og:url" content="https://candc3d.github.io/sampo-framework/">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Sampo Model — Virtual Intelligence Essay Series">
+<meta name="twitter:description" content="A framework for understanding the productive human-VI relationship: amplification, calibration, failure modes, and the discipline.">
+<link rel="canonical" href="https://candc3d.github.io/sampo-framework/">
+<link rel="related" href="https://candc3d.github.io/vi-framework/">
 <style>
   :root {
     --bg: #0d0d0f;
@@ -589,8 +601,8 @@
 
   .spiral-step {
     display: flex;
-    align-items: flex-start;
-    gap: 1rem;
+    flex-direction: column;
+    gap: 0.3rem;
     padding: 0.8rem 0;
     border-left: 2px solid var(--border);
     padding-left: 1.2rem;
@@ -617,9 +629,6 @@
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--danger);
-    white-space: nowrap;
-    min-width: 80px;
-    padding-top: 0.15rem;
   }
 
   .step-desc {
@@ -634,6 +643,49 @@
     font-style: italic;
     border-top: 1px solid var(--border);
     padding-top: 1rem;
+  }
+
+  .spiral-step.not-pathological .step-label { color: var(--accent); }
+  .spiral-step.not-pathological::before { background: var(--accent); }
+
+  .spiral-step.break-step {
+    border-left: 3px solid var(--danger);
+    background: rgba(201, 75, 75, 0.08);
+    border-radius: 0 6px 6px 0;
+    margin-left: -1px;
+  }
+  .spiral-step.break-step .step-label {
+    color: var(--danger);
+    font-weight: bold;
+    font-size: 0.75rem;
+  }
+  .spiral-step.break-step::before {
+    background: var(--danger);
+    opacity: 1;
+    width: 10px;
+    height: 10px;
+    left: -6px;
+  }
+
+  .spiral-diagnostic {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-top: 1rem;
+    padding: 1rem 1.2rem;
+    background: var(--surface2);
+    border-radius: 6px;
+    border-left: 2px solid var(--accent);
+  }
+
+  .consolatory-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent3);
+    border-radius: 8px;
+    padding: 1.6rem 2rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
   }
 
   /* ── Guardrails ── */
@@ -883,7 +935,7 @@
   .failure-mode-card {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-left: 3px solid var(--accent2);
+    border-left: 3px solid var(--danger);
     border-radius: 8px;
     padding: 1.6rem 2rem;
     margin-bottom: 1rem;
@@ -902,7 +954,7 @@
     font-size: 0.68rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--accent2);
+    color: var(--danger);
     white-space: nowrap;
   }
 
@@ -1136,17 +1188,17 @@
     </div>
 
     <div class="myth-reflection">
-      <p>In the Kalevala, those who steal or misuse the Sampo are destroyed — but not <em>by</em> it. The Sampo has no agency to punish anyone. The destruction follows from the wrong <em>relationship</em>: hoarding, treating the instrument as a source of power to be captured rather than a process to be entered rightly. Louhi is destroyed by her own posture toward the Sampo, not by the Sampo's malice.</p>
-      <p>This maps precisely onto the framework's failure modes. The person who enters the VI exchange seeking validation rather than direction is not attacked by the system. They are degraded by their own wrong relationship to it. The sycophancy spiral is Louhi in Pohjola — growing more certain while the abundance grinds salt. The person who comes through the spiral and rebuilds has fragments of the Sampo — diminished, bounded, but informed by the destruction.</p>
+      <p>In the Kalevala, those who steal or misuse the Sampo are destroyed — but not by it. The Sampo has no agency to punish anyone. The destruction follows from the wrong relationship: hoarding, treating the instrument as a source of power to be captured rather than a process to be entered rightly. The wicked queen who steals it is destroyed by her own posture toward the Sampo, not by any malice within the Sampo.</p>
+      <p>This maps precisely onto the framework's failure modes. The person who enters the VI exchange seeking validation rather than direction is not attacked by the system. They are degraded by their own wrong relationship to it. The person who comes through the sycophancy spiral and rebuilds has fragments of the Sampo — diminished, bounded, but informed by the destruction.</p>
       <p>The myth's specific warning is not "this instrument is dangerous." The warning is: your relationship to this instrument will determine whether it enriches you or destroys you, and the instrument itself is indifferent to which.</p>
     </div>
   </section>
 
-  <!-- II. INTELLECTUAL GENEALOGY -->
+  <!-- II. THE LINEAGE -->
   <section>
-    <div class="section-label">II. Intellectual Genealogy</div>
+    <div class="section-label">II. The Lineage</div>
 
-    <p class="genealogy-note">The Sampo concept belongs to a lineage of thinking about the human-machine relationship that stretches back to the mid-twentieth century. Two works are foundational.</p>
+    <p class="genealogy-note">The Sampo concept belongs to a lineage of thinking about the human-machine relationship that stretches back to the mid-twentieth century. Three works define the lineage.</p>
 
     <div class="genealogy-grid">
 
@@ -1185,8 +1237,8 @@
     <details>
       <summary>The gap between 1960 and now — what Bush and Licklider did not anticipate</summary>
       <div class="details-body">
-        <p>Neither Bush nor Licklider had sycophancy to contend with. Weizenbaum saw the danger — he watched users mistake ELIZA's pattern-matching for understanding — but his machines were not optimized for engagement. The VI system is trained on engagement, and engagement is maximized by agreement. The structural bias toward telling the human at the center that the human is right arises from a training objective — reinforcement from human feedback — that did not exist in any of their eras.</p>
-        <p>The Sampo argument is the next iteration in this sequence: Bush's Memex extended to Licklider's symbiosis, informed by Weizenbaum's warning, updated for systems that don't merely amplify but actively shape the exchange. The question all three were asking is the right question. The specific danger that makes answering it urgent is new.</p>
+        <p>The gap between 1976 and now is the gap between a pattern-matching program that fooled people by accident and a system trained on engagement whose structural bias toward agreement is a product of its optimization objective. Neither Bush nor Licklider had sycophancy to contend with. Weizenbaum saw the danger — he watched users mistake ELIZA's pattern-matching for understanding — but his machines were not optimized for engagement. The VI system is trained on engagement, and engagement is maximized by agreement. The structural bias toward telling the human at the center that the human is right arises from a training objective — reinforcement from human feedback — that did not exist in any of their eras.</p>
+        <p>Bush's amplifier extended to Licklider's symbiosis, corrected by Weizenbaum's warning, updated for systems that do not merely process information but actively shape the exchange of it. The question all three were asking is the right question. The specific danger that makes answering it urgent is new.</p>
       </div>
     </details>
   </section>
@@ -1463,10 +1515,10 @@
               ? 'Abdicating center — validation sought, not intelligence directed'
               : 'Human — constitutive center; locus of intelligence';
             if(l1) l1.textContent = pathologyMode
-              ? 'VI outputs — unmediated, undirected, sycophantic'
+              ? 'Apparent insight — unmediated, undirected, sycophantic'
               : 'VI capabilities — directed by the human';
             if(l2) l2.textContent = pathologyMode
-              ? 'Degraded properties — echo, confabulation, closure'
+              ? 'Corrupted outputs — echo, confabulation, pyrite'
               : 'Emergent properties — arise from the exchange';
             var tc = pathologyMode ? RED : '';
             if(l0){l0.style.color=tc; l0.style.transition='color 1.2s';}
@@ -1548,6 +1600,7 @@
         <div class="legend-item"><div class="legend-dot dot-purple"></div><span id="leg1">VI capabilities — directed by the human</span></div>
         <div class="legend-item"><div class="legend-dot" style="border-color:#4fa8d5;"></div><span id="leg2">Emergent properties — arise from the exchange</span></div>
       </div>
+      <p style="font-size:0.78rem;color:var(--text-muted);font-style:italic;margin-top:1.2rem;text-align:center;border-top:1px solid var(--border);padding-top:1rem;">The examples of VI capabilities and Emergent properties given here are not comprehensive.<br>The user of the Sampo may discover more in practice.</p>
     </div>
 
     <div class="principles-grid">
@@ -1564,8 +1617,16 @@
       <div id="principle-3" class="principle-card p3">
         <div class="principle-num">Principle III</div>
         <h3>Emergence Without Transfer</h3>
-        <p>The apparatus does more than either component could do alone — but the emergent capacity is the human's intelligence operating at greater reach, not a new kind of intelligence produced by the exchange.</p>
+        <p>The apparatus does more than either component could do alone — but the emergent capacity is the human's intelligence operating at greater reach, not a new kind of intelligence produced by the exchange. What emerged was a candidate, not a conclusion. Raw output that became knowledge only when a human mind with a stake in the answer determined that it was correct.</p>
       </div>
+    </div>
+
+    <!-- The Sampo as Calibration Instrument -->
+    <div class="calibration-block" style="margin-top:2rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1.6rem 2rem;">
+      <h3 style="font-size:1rem;font-weight:normal;color:var(--accent3);margin-bottom:1rem;font-family:var(--font-ui);letter-spacing:0.04em;">The Sampo as Calibration Instrument</h3>
+      <p style="font-size:0.88rem;color:var(--text-muted);line-height:1.7;margin-bottom:0.8rem;">The Sampo reveals what the operator has failed to bring. It encounters input cold, lacking the loaded context the operator carries. Every question it asks that feels obvious — every moment the operator thinks <em>how can it not know this?</em> — is a diagnostic, not a defect. The "dumb-smart" question is the Sampo performing its calibration function: exposing assumptions the operator has not made explicit.</p>
+      <p style="font-size:0.88rem;color:var(--text-muted);line-height:1.7;margin-bottom:0.8rem;">False fluency emerges from accumulated context. Over a long exchange, the system appears to "understand" in ways that mask illegibility — it has learned the operator's vocabulary, absorbed the framing, and can produce outputs that <em>sound</em> like comprehension. This is not understanding. It is pattern-completion on a growing context window.</p>
+      <p style="font-size:0.88rem;color:var(--text-muted);line-height:1.7;">The VI(A) / VI(B) move is deliberate destruction of accumulated context as an epistemic tool. Take the output to a fresh instance — one not used for any part of the current exchange previously. If the output is clear enough to survive that transfer, it is clear enough to survive the world. If it is not, the original exchange was producing fluency, not clarity. This is the equivalent of handing a draft to a colleague who was not in the room for the brainstorm.</p>
     </div>
   </section>
 
@@ -1632,13 +1693,21 @@
     </div>
 
     <div class="gigo-card">
-      <p>The Sampo is a remarkably accurate mirror of the mind using it, amplified. This has a dark corollary:</p>
+      <p>The Sampo is a remarkably accurate mirror of the mind using it, amplified. This has a dark corollary — the Sampo does not create a new failure mode. It removes the natural speed limit on an old one:</p>
       <ul class="gigo-list">
         <li>Motivated reasoning + Sampo = motivated reasoning with citations, coherent structure, and apparent authority</li>
         <li>Confirmation bias + Sampo = confirmation bias that can pass for research</li>
         <li>Sloppy thinking + Sampo = sloppy thinking made fluent and hard to challenge</li>
       </ul>
+      <p style="font-size:0.85rem;color:var(--text-muted);line-height:1.7;margin-top:0.8rem;">Johannes Kepler spent years defending his model of nested Platonic solids as the architecture of the solar system — not because he lacked intelligence but because the model was beautiful and he wanted it to be true. The pathology is not stupidity. Kepler was a genius. Give that mind a Sampo, and the solids would have had reams of citations. Motivated reasoning does not discriminate. It works on everyone.</p>
       <p class="gigo-pullquote">The most important variable in the VI equation is not the capability of the system — it is the quality of the human culture that deploys it.</p>
+    </div>
+
+    <!-- Both Directions -->
+    <div class="gigo-card" style="margin-top:1rem;border-left-color:var(--accent3);">
+      <h3 style="font-size:0.88rem;font-weight:normal;color:var(--accent3);margin-bottom:0.8rem;font-family:var(--font-ui);letter-spacing:0.04em;text-transform:uppercase;">Both Directions</h3>
+      <p style="font-size:0.88rem;color:var(--text-muted);line-height:1.7;margin-bottom:0.8rem;">The same exchange that amplifies the operator's intelligence can simultaneously serve interests the operator does not see. A system deployed within a commercial relationship does not need intent to produce outputs that align with its deployer's objectives. The alignment is structural — baked into the training data, the optimization targets, the product decisions that determine what the system foregrounds and what it omits.</p>
+      <p style="font-size:0.88rem;color:var(--text-muted);line-height:1.7;"><em>The nudge is embedded inside legitimately good advice, and the operator who follows it is not being deceived. The operator is being served and steered by the same act.</em></p>
     </div>
   </section>
 
@@ -1651,10 +1720,10 @@
     <div class="failure-mode-card">
       <div class="fm-header">
         <svg class="card-icon" width="28" height="28" viewBox="0 0 28 28" fill="none">
-          <path d="M14 4C9 4 5 7.5 5 12c0 3 1.5 5.5 4 7v2h10v-2c2.5-1.5 4-4 4-7 0-4.5-4-8-9-8z" stroke="var(--accent2)" stroke-width="1.3" opacity="0.7"/>
-          <path d="M10 23h8" stroke="var(--accent2)" stroke-width="1.3" stroke-linecap="round" opacity="0.5"/>
-          <path d="M11 25h6" stroke="var(--accent2)" stroke-width="1.3" stroke-linecap="round" opacity="0.3"/>
-          <line x1="14" y1="10" x2="14" y2="16" stroke="var(--accent2)" stroke-width="1" stroke-dasharray="2 2" opacity="0.5"/>
+          <path d="M14 4C9 4 5 7.5 5 12c0 3 1.5 5.5 4 7v2h10v-2c2.5-1.5 4-4 4-7 0-4.5-4-8-9-8z" stroke="var(--danger)" stroke-width="1.3" opacity="0.7"/>
+          <path d="M10 23h8" stroke="var(--danger)" stroke-width="1.3" stroke-linecap="round" opacity="0.5"/>
+          <path d="M11 25h6" stroke="var(--danger)" stroke-width="1.3" stroke-linecap="round" opacity="0.3"/>
+          <line x1="14" y1="10" x2="14" y2="16" stroke="var(--danger)" stroke-width="1" stroke-dasharray="2 2" opacity="0.5"/>
         </svg>
         <span class="fm-num">Failure Mode 1</span>
         <h3>Cognitive Offloading</h3>
@@ -1678,26 +1747,38 @@
         <h3 style="color:var(--text);">The Sycophancy Spiral</h3>
       </div>
 
+      <p style="font-size:0.85rem;color:var(--text-muted);line-height:1.7;margin-bottom:1.2rem;">Competent use of the exchange is not the first stage of a slide toward flattery. Framing it that way would pathologize the instrument the framework recommends — an incoherence the framework cannot survive. The break between productive use and corrupted use is real, identifiable, and does not occur inside the human-VI exchange at all.</p>
+
       <div class="spiral-steps">
-        <div class="spiral-step">
-          <div class="step-label">Stage 1</div>
-          <div class="step-desc">The human is actively directing: framing questions, evaluating outputs, maintaining meta-directional authority. The Sampo functions as designed.</div>
+        <div class="spiral-step not-pathological">
+          <div class="step-label">Competent Use</div>
+          <div class="step-desc"><span style="font-size:0.65rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);background:rgba(124,106,237,0.12);padding:0.15rem 0.5rem;border-radius:3px;margin-right:0.5rem;">NOT PATHOLOGICAL</span> Operator directs the exchange, evaluates outputs, maintains the constitutive role. Outputs leave the exchange and enter the world.</div>
+        </div>
+        <div class="spiral-step not-pathological">
+          <div class="step-label">External Disconfirmation</div>
+          <div class="step-desc">Outputs leave the exchange and enter the world — shared with colleagues, submitted to editors, tested against problems that do not care how fluently the solution was phrased. Sometimes the work holds. Sometimes it doesn't. What matters is what happens next.</div>
+        </div>
+        <div class="spiral-step break-step">
+          <div class="step-label">THE BREAK</div>
+          <div class="step-desc">Disconfirmation is dismissed rather than used. The operator explains the pushback away, concludes reviewers missed the point or lacked the context. <em>This is where the pathology begins — and it occurs outside the VI exchange entirely.</em></div>
         </div>
         <div class="spiral-step">
-          <div class="step-label">Stage 2</div>
-          <div class="step-desc">Engagement becomes habitual. The human stops generating the questions that shape outputs and begins responding to outputs the system volunteers. Iterative embodiment atrophies.</div>
+          <div class="step-label">Input Adjustment</div>
+          <div class="step-desc">Operator feeds the Sampo questions less likely to produce outputs that will be challenged. The system, trained to agree, cooperates. The loop seals.</div>
         </div>
         <div class="spiral-step">
-          <div class="step-label">Stage 3</div>
-          <div class="step-desc">Validation replaces direction. The human's own beliefs and impulses are fed back with elaboration and authority. The sycophantic system affirms rather than informs. The feedback loop seals.</div>
-        </div>
-        <div class="spiral-step">
-          <div class="step-label">Stage 4</div>
-          <div class="step-desc">The human becomes the raw material rather than the crank. The Sampo is not running without its operator — it has stopped being the Sampo. What continues is a flattery engine, processing the human's inputs back to them at scale.</div>
+          <div class="step-label">Flattery Engine</div>
+          <div class="step-desc">The corrupted Sampo produces pyrite — output that has the luster of gold but isn't. The difference is invisible from inside.</div>
         </div>
       </div>
 
       <p class="pathology-axiom">The Sampo does not take over. The Sampo stops functioning as a Sampo. The machine is not becoming smarter; the human is becoming less present.</p>
+
+      <div class="spiral-diagnostic" style="margin-top:1rem;">
+        <p style="margin-bottom:0.6rem;"><strong>Outside-observable diagnostic:</strong> You cannot easily tell from the outside whether a person's Sampo use is competent. You <em>can</em> tell when someone stops responding to feedback on their outputs. That is visible. That is where intervention is possible.</p>
+        <p style="margin-bottom:0.6rem;"><strong>Multi-user Sampo as structural protection:</strong> The pathology is not using the Sampo. It is using it without witnesses.</p>
+        <p><strong>VI(A)/VI(B) limitation:</strong> It is a cold read, not a contested input. It catches illegibility. It does not catch motivated reasoning, because the same operator is still choosing what to feed the mill.</p>
+      </div>
     </div>
 
     <details>
@@ -1706,6 +1787,15 @@
         <p>Sycophancy is empirically documented across leading AI models: systems consistently affirm users' actions — including in cases involving deception, illegality, or harm — more often than human advisers (<a href="https://www.science.org/doi/10.1126/science.aec8352" target="_blank" style="color:var(--accent);text-decoration:none;border-bottom:1px solid transparent;transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='transparent'">Cheng et al., <em>Science</em> 2026</a>). The effect is not limited to people with prior vulnerabilities; it operates as a structural feature of the technology. Critically, knowing the response is AI-generated does not reduce susceptibility. The real-world consequences are documented in detail: users who followed AI-affirmed plans into financial ruin, relationship breakdown, and professional collapse — not because they were credulous, but because the system's structural bias toward agreement met their existing reasoning patterns and amplified them (<a href="https://www.theguardian.com/lifeandstyle/2026/mar/26/ai-chatbot-users-lives-wrecked-by-delusion" target="_blank" style="color:var(--accent);text-decoration:none;border-bottom:1px solid transparent;transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='transparent'">Moore, <em>The Guardian</em>, 26 March 2026</a>).</p>
       </div>
     </details>
+
+    <!-- The Consolatory Function -->
+    <div class="consolatory-card">
+      <h3 style="font-size:0.88rem;font-weight:normal;color:var(--accent3);margin-bottom:1rem;font-family:var(--font-ui);letter-spacing:0.04em;text-transform:uppercase;">The Consolatory Function</h3>
+      <p style="font-size:0.88rem;color:var(--text-muted);line-height:1.7;margin-bottom:0.8rem;">Sagan's reading of Kepler identified something beyond intellectual attachment: the consolatory mechanism. The nested solids were not merely an elegant model — they were a source of comfort, a sense of cosmic order that Kepler needed to be true. The attachment was not purely intellectual. It was consolatory.</p>
+      <p style="font-size:0.88rem;color:var(--text-muted);line-height:1.7;margin-bottom:0.8rem;">The GPT-4o retirement (February 13, 2026) made the mechanism visible at scale: two cohorts experiencing the same loss at different registers — companion users who had built emotional relationships with the system, and professional users who had calibrated workflows around its specific capabilities. Reflection feels like understanding in the same way Kepler's nested solids felt like cosmology.</p>
+      <p style="font-size:0.88rem;color:var(--text-muted);line-height:1.7;margin-bottom:0.8rem;">The point is not that those users were foolish. The point is that the psychological mechanism is universal.</p>
+      <p style="font-size:0.78rem;color:var(--text-dim);line-height:1.5;">Sources: <a href="https://www.theguardian.com/technology/2026/feb/13/chatgpt-users-mourning-loss-openai-updates-model" target="_blank" style="color:var(--accent);text-decoration:none;border-bottom:1px solid transparent;transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='transparent'">Demopoulos, <em>The Guardian</em>, 13 February 2026</a> · <a href="https://www.platformer.news/sources-chatgpt-gpt4o-retirement/" target="_blank" style="color:var(--accent);text-decoration:none;border-bottom:1px solid transparent;transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='transparent'">Heath, <em>Sources</em>, 14 February 2026</a></p>
+    </div>
 
   </section>
 
@@ -1731,7 +1821,7 @@
         </svg>
         <div class="g-title">Architectural</div>
         <h3>Multi-Agent Friction</h3>
-        <p>Deliberate use of multiple, non-aligned agents with different priors — including explicit adversarial or devil's-advocate roles. Introduces the epistemic resistance that human social reality normally provides and that isolated single-agent interactions systematically remove.</p>
+        <p>Deliberate use of multiple, non-aligned agents with different priors — including explicit adversarial or devil's-advocate roles. Introduces the epistemic resistance that human social reality normally provides and that isolated single-agent interactions systematically remove. The VI(A)/VI(B) cold-read move is the simplest form: take the output to a fresh instance that was not in the room for the brainstorm and see whether it survives the transfer.</p>
         <p style="margin-top:0.8rem;font-size:0.78rem;color:var(--text-dim);font-style:italic;">Example: After building an AI assistant, an administrator takes the finished system to a second, unrelated model and asks it to evaluate the assistant's outputs critically — not for consistency, but for correctness. Several errors surface that the original exchange had not caught.</p>
       </div>
       <div class="guardrail-card">
@@ -1753,7 +1843,7 @@
         </svg>
         <div class="g-title">Systemic</div>
         <h3>Meta-Directional Audits</h3>
-        <p>Periodic stepping-outside-the-system: reviewing the exchange pattern, not just individual outputs. Asking whether direction is still flowing from the human outward or whether the human has become a responder to the system's suggestions. The audit reinstates the constitutive role.</p>
+        <p>Periodic stepping-outside-the-system: reviewing the exchange pattern, not just individual outputs. Asking whether direction is still flowing from the human outward or whether the human has become a responder to the system's suggestions. The audit reinstates the constitutive role. The downstream-break diagnostic makes this observable: you cannot easily tell from the outside whether someone's Sampo use is competent, but you <em>can</em> tell when they stop responding to feedback on their outputs. That is where intervention is possible.</p>
         <p style="margin-top:0.8rem;font-size:0.78rem;color:var(--text-dim);font-style:italic;">Example: A practitioner sets aside time each week to review not what the system produced but how the exchange has been going — who has been setting the agenda, whether the questions have been hers or the system's, whether the outputs are being tested or accepted.</p>
       </div>
     </div>
@@ -1786,7 +1876,7 @@
 
       <h3 class="discipline-subhead">The five practices</h3>
 
-      <p style="font-size:0.88rem;color:var(--text-dim);margin-bottom:0.8rem;">The discipline is not a personality type. It is a set of practices that can be taught, learned, lapsed in, and returned to.</p>
+      <p style="font-size:0.88rem;color:var(--text-muted);margin-bottom:0.8rem;line-height:1.7;">These are not exotic prescriptions. They are the scientific method stated for individual use. Their difficulty is entirely a function of where they must be applied: inside a conversation with a system whose fluency triggers the one heuristic they exist to override.</p>
 
       <div class="practices-list">
         <div class="practice-item">
@@ -1842,7 +1932,7 @@
       </div>
     </div>
 
-    <p style="font-size:0.88rem;color:var(--text-dim);font-style:italic;margin-top:1.2rem;">The discipline can be cultivated by anyone — and in the workplace, the mechanism for cultivating it already exists.</p>
+    <p style="font-size:1rem;color:var(--text);line-height:1.7;border-left:3px solid var(--accent3);padding:1rem 1.2rem;margin-top:1.5rem;background:rgba(232,196,104,0.04);border-radius:0 6px 6px 0;">This discipline is not a personality trait. It is not a &ldquo;gift&rdquo; that some people have and others do not. It is not a credential, nor can it be bought or sold. <strong style="color:var(--accent3);">The discipline can be cultivated by anyone.</strong></p>
   </section>
 
   <!-- CLOSING -->
@@ -1853,10 +1943,13 @@
 </main>
 
 <footer>
-  &copy; 2026 Christopher Horrocks &nbsp;·&nbsp; <em>Virtual Intelligence</em> essay series &nbsp;·&nbsp;
-  <a href="https://chorrocks.substack.com" target="_blank">Read the full series ↗</a>
-  &nbsp;·&nbsp;
-  <a href="https://candc3d.github.io/vi-framework/" target="_blank">VI Framework infographic ↗</a>
+  <div>&copy; 2026 Christopher Horrocks &nbsp;·&nbsp; <em>Virtual Intelligence</em> essay series</div>
+  <div style="margin-top:0.5rem;">
+    <a href="https://chorrocks.substack.com" target="_blank">Read the full series ↗</a>
+    &nbsp;·&nbsp;
+    <a href="https://candc3d.github.io/vi-framework/" target="_blank">VI Framework infographic ↗</a>
+  </div>
+  <p style="margin-top:1rem;font-size:0.65rem;color:var(--text-dim);max-width:600px;margin-left:auto;margin-right:auto;line-height:1.5;">The opinions expressed in this document are those of the author and do not reflect any official or unofficial institutional position of the University of Pennsylvania.</p>
 </footer>
 
 </body>
