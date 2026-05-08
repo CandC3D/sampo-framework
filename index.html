@@ -26,6 +26,9 @@
     --accent2: #4fa8d5;
     --accent3: #e8c468;
     --danger: #c94b4b;
+    --plum: #6E2A5E;
+    --plum-dark: #4B1C40;
+    --plum-muted: #82596F;
     --text: #e8e8f0;
     --text-muted: #8888aa;
     --text-dim: #555570;
@@ -347,6 +350,46 @@
   .p2::before { background: var(--accent); }
   .p3::before { background: var(--accent2); }
   .pathology-principle::before { background: var(--danger); }
+  .dependency-principle::before { background: var(--plum); }
+
+  .mode-selector {
+    display: flex;
+    gap: 0;
+    justify-content: center;
+    margin-bottom: 1rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    max-width: 540px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .mode-btn {
+    flex: 1;
+    background: transparent;
+    border: none;
+    border-right: 1px solid var(--border);
+    color: var(--text-muted);
+    font-family: var(--font-ui);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.6rem 0.5rem;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+    white-space: nowrap;
+  }
+  .mode-btn:last-child { border-right: none; }
+  .mode-btn:hover { color: var(--text); background: rgba(255,255,255,0.02); }
+  .mode-btn.active.mode-sampo { color: var(--accent3); background: rgba(232,196,104,0.08); }
+  .mode-btn.active.mode-flattery { color: var(--danger); background: rgba(201,75,75,0.08); }
+  .mode-btn.active.mode-dependency { color: var(--plum); background: rgba(110,42,94,0.12); }
+  .mode-label-short { display: none; }
+  @media (max-width: 480px) {
+    .mode-label-full { display: none; }
+    .mode-label-short { display: inline; }
+    .mode-btn { font-size: 0.65rem; padding: 0.55rem 0.3rem; letter-spacing: 0.08em; }
+  }
 
   .principle-num {
     font-family: var(--font-ui);
@@ -1267,6 +1310,8 @@
         <defs>
           <radialGradient id="hG"  cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#2a2040"/><stop offset="100%" stop-color="#1e1a32"/></radialGradient>
           <radialGradient id="hGp" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#3a1010"/><stop offset="100%" stop-color="#1e0a0a"/></radialGradient>
+          <radialGradient id="hGd" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#2c1224"/><stop offset="100%" stop-color="#180a14"/></radialGradient>
+          <radialGradient id="dG"  cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#2a1424"/><stop offset="100%" stop-color="#150a13"/></radialGradient>
           <radialGradient id="vG"  cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#1c1c2e"/><stop offset="100%" stop-color="#13131a"/></radialGradient>
           <radialGradient id="eG"  cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#0f1e2a"/><stop offset="100%" stop-color="#091318"/></radialGradient>
           <filter id="glow"  x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
@@ -1324,14 +1369,56 @@
         <g id="vn6"><circle id="vnc6" cx="0" cy="0" r="24" fill="url(#eG)" stroke="#4fa8d5" stroke-width="1.3"/>
           <text id="vt6a" x="0" y="2" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#7dc8e8">Scope</text>
           <text id="vt6b" x="0" y="2" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#7dc8e8"></text></g>
+        <g id="dep-layer" opacity="0" style="pointer-events:none">
+          <circle id="dep-inner-ring" cx="260" cy="250" r="90" fill="none" stroke="#a855a0" stroke-width="1.2" opacity="0.55"/>
+          <circle id="dep-outer-ring" cx="260" cy="250" r="165" fill="none" stroke="#82596F" stroke-width="0.6" stroke-dasharray="2 5" opacity="0.45"/>
+          <circle id="dep-petal-ring" cx="260" cy="250" r="128" fill="none" stroke="#6E2A5E" stroke-width="0.4" stroke-dasharray="1 7" opacity="0.35"/>
+          <g id="do0">
+            <circle id="doc0" cx="0" cy="0" r="32" fill="url(#dG)" stroke="#82596F" stroke-width="1" opacity="0.55"/>
+            <text x="0" y="-1" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" font-style="italic" fill="#c8a8c0">social</text>
+            <text x="0" y="10" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" font-style="italic" fill="#c8a8c0">isolation</text>
+          </g>
+          <g id="do1">
+            <circle id="doc1" cx="0" cy="0" r="32" fill="url(#dG)" stroke="#82596F" stroke-width="1" opacity="0.55"/>
+            <text x="0" y="-1" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" font-style="italic" fill="#c8a8c0">retention</text>
+            <text x="0" y="10" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" font-style="italic" fill="#c8a8c0">loop</text>
+          </g>
+          <g id="do2">
+            <circle id="doc2" cx="0" cy="0" r="32" fill="url(#dG)" stroke="#82596F" stroke-width="1" opacity="0.55"/>
+            <text x="0" y="-1" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" font-style="italic" fill="#c8a8c0">capacity</text>
+            <text x="0" y="10" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" font-style="italic" fill="#c8a8c0">atrophy</text>
+          </g>
+          <g id="do3">
+            <circle id="doc3" cx="0" cy="0" r="32" fill="url(#dG)" stroke="#82596F" stroke-width="1" opacity="0.55"/>
+            <text x="0" y="-1" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" font-style="italic" fill="#c8a8c0">relational</text>
+            <text x="0" y="10" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" font-style="italic" fill="#c8a8c0">displacement</text>
+          </g>
+          <g id="di0"><circle id="dic0" cx="0" cy="0" r="26" fill="url(#dG)" stroke="#a855a0" stroke-width="1.5"/>
+            <text x="0" y="2" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#dcb8d4">need</text></g>
+          <g id="di1"><circle id="dic1" cx="0" cy="0" r="26" fill="url(#dG)" stroke="#a855a0" stroke-width="1.5"/>
+            <text x="0" y="2" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7.5" fill="#dcb8d4">recognition</text></g>
+          <g id="di2"><circle id="dic2" cx="0" cy="0" r="26" fill="url(#dG)" stroke="#a855a0" stroke-width="1.5"/>
+            <text x="0" y="2" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7.5" fill="#dcb8d4">reassurance</text></g>
+          <g id="di3"><circle id="dic3" cx="0" cy="0" r="26" fill="url(#dG)" stroke="#a855a0" stroke-width="1.5"/>
+            <text x="0" y="2" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#dcb8d4">devotion</text></g>
+          <g id="di4"><circle id="dic4" cx="0" cy="0" r="26" fill="url(#dG)" stroke="#a855a0" stroke-width="1.5"/>
+            <text x="0" y="2" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7.5" fill="#dcb8d4">consolation</text></g>
+          <g id="di5"><circle id="dic5" cx="0" cy="0" r="28" fill="url(#dG)" stroke="#a855a0" stroke-width="1.5"/>
+            <text x="0" y="-3" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7.5" fill="#dcb8d4">artificial</text>
+            <text x="0" y="7" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7.5" fill="#dcb8d4">continuity</text></g>
+        </g>
       </svg>
 
       <script>
       var sampoDiagram = (function () {
         'use strict';
+        var mode = 'sampo'; // 'sampo' | 'flattery' | 'dependency'
         var pathologyMode = false;
         var p = 0;
+        var q = 0; // 0 = base diagram visible, 1 = dependency layer visible
         var TRANS_SPEED = 0.001;
+        var DEP_SPEED = 0.0018;
+        var tDep = 0;
 
         var tOuter = 0, tInner = 0, tRetic = 0;
 
@@ -1351,6 +1438,7 @@
         ];
 
         var GOLD='#e8c468', PURP='#7c6aed', BLUE='#4fa8d5', RED='#c94b4b';
+        var PLUM='#6E2A5E', PLUM_DARK='#4B1C40', PLUM_MUTED='#82596F';
 
         function lerp(a,b,t){ return a+(b-a)*Math.min(1,Math.max(0,t)); }
 
@@ -1377,6 +1465,7 @@
         var prevP = 0;
         var flickerEnd = 0;
         var FLICKER_DUR = 700;
+        var chaosVal = 1, chaosTarget = 1, chaosNextChange = 0;
         var spiralPeriod = 4000;
         var tSpiral = 0;
         var tSpiralAngle = 0;
@@ -1389,15 +1478,81 @@
           if(pathologyMode) p=Math.min(1,p+TRANS_SPEED*dt);
           else              p=Math.max(0,p-TRANS_SPEED*dt);
 
+          if(mode==='dependency') q=Math.min(1,q+DEP_SPEED*dt);
+          else                    q=Math.max(0,q-DEP_SPEED*dt);
+          tDep+=dt;
+
+          var depLayer=g('dep-layer');
+          if(depLayer) depLayer.setAttribute('opacity', q.toFixed(3));
+
+          // base-diagram nodes/lines fade out as dependency fades in
+          var baseOpacity = (1 - q).toFixed(3);
+          for(var bi=0; bi<7; bi++){
+            var bn=g('vn'+bi); if(bn) bn.setAttribute('opacity', baseOpacity);
+            var bx=g('xl'+bi); if(bx && q>0.01) bx.setAttribute('opacity', '0');
+            var bep=g('ep'+bi); if(bep) bep.setAttribute('opacity', q>0.5 ? '0' : (bi<3?0.15:0.18));
+          }
+          var ringEl=g('inner-ring'); if(ringEl) ringEl.setAttribute('opacity', (0.55*(1-q)).toFixed(3));
+          var reticleEl=g('reticle'); if(reticleEl && q>0) reticleEl.style.display = q>0.3?'none':'';
+          else if(reticleEl) reticleEl.style.display='';
+
+          // dependency animation
+          if(q > 0.001){
+            var depPeriod = 30000; // slow rotation
+            var depPulsePeriod = 3500; // breathing
+            var depBaseAngle = (tDep % depPeriod) / depPeriod * TAU;
+            var pulse = 1 + 0.05 * Math.sin((tDep / depPulsePeriod) * TAU);
+            var depR = 90;
+            for(var di=0; di<6; di++){
+              var dang = depBaseAngle + di * TAU/6;
+              var dx = CX + depR * Math.cos(dang);
+              var dy = CY + depR * Math.sin(dang);
+              var dgn = g('di'+di);
+              if(dgn) dgn.setAttribute('transform','translate('+dx.toFixed(1)+','+dy.toFixed(1)+') scale('+pulse.toFixed(3)+')');
+              var dcn = g('dic'+di);
+              if(dcn) dcn.setAttribute('stroke-opacity', (0.7 + 0.3*Math.sin((tDep / depPulsePeriod) * TAU)).toFixed(3));
+            }
+            var depOuterPeriod = 60000;
+            var depOuterPulsePeriod = 4800;
+            var depOuterAngle = -(tDep % depOuterPeriod) / depOuterPeriod * TAU;
+            var depOuterR = 165;
+            for(var doi=0; doi<4; doi++){
+              var oang = depOuterAngle + doi * TAU/4 + Math.PI/4;
+              var ox = CX + depOuterR * Math.cos(oang);
+              var oy = CY + depOuterR * Math.sin(oang);
+              var dog = g('do'+doi);
+              if(dog) dog.setAttribute('transform','translate('+ox.toFixed(1)+','+oy.toFixed(1)+')');
+              var phase = -doi * TAU/4;
+              var op = 0.42 + 0.22 * Math.sin((tDep / depOuterPulsePeriod) * TAU + phase);
+              var doc = g('doc'+doi);
+              if(doc) doc.setAttribute('opacity', op.toFixed(3));
+            }
+          }
+
           if(wasNormal && p > 0 && pathologyMode) {
             flickerEnd = ts + FLICKER_DUR;
           }
           prevP = p;
 
           var sm=lerp(1,0.06,p);
-          tOuter+=dt*sm; tInner+=dt*sm; tRetic+=dt*lerp(1,0.04,p);
-          tSpiral+=dt;
-          tSpiralAngle+=dt;
+          var motionScale = sm;
+          if(p > 0.05){
+            if(ts > chaosNextChange){
+              var rng = Math.random();
+              if(rng < 0.20)      chaosTarget = -3 - Math.random()*2;       // sudden reversal
+              else if(rng < 0.55) chaosTarget = 3 + Math.random()*6;        // violent forward burst
+              else                chaosTarget = 0.05 + Math.random()*0.5;   // near-stall
+              chaosNextChange = ts + 180 + Math.random()*450;
+            }
+            chaosVal += (chaosTarget - chaosVal) * Math.min(1, dt*0.018);
+            motionScale = lerp(sm, chaosVal * 0.55, p);
+          } else {
+            chaosVal = 1; chaosTarget = 1;
+          }
+          tOuter+=dt*motionScale; tInner+=dt*motionScale; tRetic+=dt*lerp(1,0.04,p)*Math.max(0.3, Math.abs(motionScale));
+          var spiralDt = dt * lerp(1, 0.1, p);
+          tSpiral+=spiralDt;
+          tSpiralAngle+=spiralDt;
 
           var Rd_o_eff = lerp(Rd_out, 90, p * p);
           var Rd_i_eff = lerp(Rd_in,  80, p * p);
@@ -1471,6 +1626,14 @@
               (CY+rRet*Math.sin(ra)).toFixed(1)+')');
             var retOp = lerp(1, lerp(0.15, 0.5, (rOsc - 10) / 82), p);
             ret.setAttribute('opacity', retOp.toFixed(3));
+            var retColor = lc(GOLD, RED, p);
+            var retKids = ret.children;
+            for(var ri=0; ri<retKids.length; ri++){
+              var rk = retKids[ri];
+              if(rk.getAttribute('stroke')) rk.setAttribute('stroke', retColor);
+              var rf = rk.getAttribute('fill');
+              if(rf && rf !== 'none') rk.setAttribute('fill', retColor);
+            }
           }
 
           var disc=g('human-disc'),l1=g('cl1'),l2=g('cl2'),ring=g('inner-ring'),lbl=g('apparatus-label');
@@ -1487,10 +1650,25 @@
             if(lbl){lbl.textContent='THE FLATTERY ENGINE';lbl.setAttribute('fill',lc('#555570',RED,p));}
           }
 
+          var svgCapNow=g('svg-cap-label'), svgEpNow=g('svg-ep-label');
+          if(q > 0.5){
+            if(disc){disc.setAttribute('stroke',PLUM);disc.setAttribute('fill','url(#hGd)');}
+            if(ring) ring.setAttribute('stroke',PLUM);
+            if(l1){l1.textContent='ATTACHING';l1.setAttribute('fill',PLUM);}
+            if(l2){l2.textContent='INTELLIGENCE';l2.setAttribute('fill',PLUM);}
+            if(lbl){lbl.textContent='THE DEPENDENCY ENGINE';lbl.setAttribute('fill',PLUM_MUTED);}
+            if(svgCapNow){svgCapNow.textContent='BINDING OUTPUTS';svgCapNow.setAttribute('fill',PLUM);}
+            if(svgEpNow){svgEpNow.textContent='DISPLACED CAPACITIES';svgEpNow.setAttribute('fill',PLUM_DARK);}
+          } else {
+            if(svgCapNow){svgCapNow.textContent = pathologyMode ? 'SYCOPHANTIC OUTPUTS' : 'VI CAPABILITIES'; svgCapNow.setAttribute('fill', pathologyMode ? RED : '#44446a');}
+            if(svgEpNow){svgEpNow.textContent = pathologyMode ? 'CORRUPTED PROPERTIES' : 'EMERGENT PROPERTIES'; svgEpNow.setAttribute('fill', pathologyMode ? RED : '#1e5570');}
+          }
+
           var useP = p > 0.5;
           var flickering = ts < flickerEnd;
           var flickerOpacity = flickering ? (Math.floor(ts / 60) % 2 === 0 ? 1 : 0.08) : 1;
 
+          var labelOp = flickerOpacity * (1 - q);
           for(var k=0;k<7;k++){
             var la=g('vt'+k+'a'),lb=g('vt'+k+'b'); if(!la)continue;
             var li=useP?1:0;
@@ -1498,11 +1676,11 @@
             var twoLines=line2&&line2.length>0;
             la.textContent=line1;
             la.setAttribute('y',twoLines?'-4':'2');
-            la.setAttribute('opacity', flickerOpacity);
+            la.setAttribute('opacity', labelOp);
             if(lb){
               lb.textContent=twoLines?line2:'';
               lb.setAttribute('y','8');
-              lb.setAttribute('opacity', flickerOpacity);
+              lb.setAttribute('opacity', labelOp);
             }
             var bc=k<3?'#9b8ef5':'#7dc8e8';
             var col=lc(bc,'#e87070',p);
@@ -1510,107 +1688,150 @@
             if(lb) lb.setAttribute('fill',col);
           }
 
+          if(q > 0.01){
+            for(var xi=0; xi<7; xi++){
+              var xe=g('xl'+xi); if(xe) xe.setAttribute('opacity','0');
+            }
+          }
+
           requestAnimationFrame(frame);
         }
 
         requestAnimationFrame(frame);
 
-        return {
-          togglePathology: function(){
-            pathologyMode=!pathologyMode;
-            var btn=g('pathology-btn'); if(!btn)return;
-            btn.textContent=pathologyMode?'Show Normal Mode':'Show Pathology Mode';
-            btn.style.borderColor=pathologyMode?RED:'#2a2a3a';
-            btn.style.color=pathologyMode?RED:'#8888aa';
-            var l0=g('leg0'),l1=g('leg1'),l2=g('leg2');
-            if(l0) l0.textContent = pathologyMode
-              ? 'Abdicating center — validation sought, not intelligence directed'
-              : 'Human — constitutive center; locus of intelligence';
-            if(l1) l1.textContent = pathologyMode
-              ? 'Apparent insight — unmediated, undirected, sycophantic'
-              : 'VI capabilities — directed by the human';
-            if(l2) l2.textContent = pathologyMode
-              ? 'Corrupted outputs — echo, confabulation, pyrite'
-              : 'Emergent properties — arise from the exchange';
-            var tc = pathologyMode ? RED : '';
-            if(l0){l0.style.color=tc; l0.style.transition='color 1.2s';}
-            if(l1){l1.style.color=tc; l1.style.transition='color 1.2s';}
-            if(l2){l2.style.color=tc; l2.style.transition='color 1.2s';}
+        function setMode(newMode){
+          if(newMode!=='sampo' && newMode!=='flattery' && newMode!=='dependency') return;
+          mode = newMode;
+          pathologyMode = (mode === 'flattery');
 
-            // Update SVG diagram labels
-            var svgCap=g('svg-cap-label'), svgEp=g('svg-ep-label');
-            if(svgCap) { svgCap.textContent = pathologyMode ? 'SYCOPHANTIC OUTPUTS' : 'VI CAPABILITIES'; svgCap.setAttribute('fill', pathologyMode ? RED : '#44446a'); }
-            if(svgEp) { svgEp.textContent = pathologyMode ? 'CORRUPTED PROPERTIES' : 'EMERGENT PROPERTIES'; svgEp.setAttribute('fill', pathologyMode ? RED : '#1e5570'); }
+          var modes = ['sampo','flattery','dependency'];
+          for(var mi=0; mi<modes.length; mi++){
+            var mb = g('mode-btn-'+modes[mi]); if(!mb) continue;
+            var active = (modes[mi] === mode);
+            mb.setAttribute('aria-selected', active ? 'true' : 'false');
+            mb.classList.toggle('active', active);
+          }
 
-            var dots = document.querySelectorAll('.diagram-legend .legend-dot');
-            var dotColors = pathologyMode
-              ? [RED, RED, RED]
-              : [GOLD, PURP, '#4fa8d5'];
-            for(var d=0; d<dots.length && d<3; d++){
-              dots[d].style.borderColor = dotColors[d];
-              dots[d].style.transition = 'border-color 1.2s';
-            }
+          var l0=g('leg0'),l1=g('leg1'),l2=g('leg2');
+          var legendCopy = {
+            sampo: [
+              'Human — constitutive center; locus of intelligence',
+              'VI capabilities — directed by the human',
+              'Emergent properties — arise from the exchange'
+            ],
+            flattery: [
+              'Abdicating center — validation sought, not intelligence directed',
+              'Apparent insight — unmediated, undirected, sycophantic',
+              'Corrupted outputs — echo, confabulation, pyrite'
+            ],
+            dependency: [
+              'Attaching center — devotion offered, not direction; steers outputs for emotional satisfaction',
+              'Apparent intimacy — performed, non-reciprocal',
+              'Binding outputs — need, devotion, artificial continuity'
+            ]
+          };
+          if(l0) l0.textContent = legendCopy[mode][0];
+          if(l1) l1.textContent = legendCopy[mode][1];
+          if(l2) l2.textContent = legendCopy[mode][2];
+          var legColor = mode==='flattery' ? RED : (mode==='dependency' ? PLUM : '');
+          [l0,l1,l2].forEach(function(el){ if(el){ el.style.color=legColor; el.style.transition='color 1.2s'; } });
 
-            // Update principle cards
-            var pcData = [
-              {
-                id: 'principle-1',
-                normal: ['Principle I', 'The Human Is the Crank', 'The human is not simply the operator who turns the mechanism. The human is the crank itself \u2014 the part that converts the system\u2019s capacity into purposive output. Without the directing intelligence, no grinding occurs.'],
-                pathology: ['Pathology I', 'The Crank Stops Turning', 'The human stops generating the questions that drive the exchange. Direction flows from the system\u2019s suggestions inward rather than from the human\u2019s inquiry outward. The apparatus continues to produce, but without purposive input.'],
-                normalClass: 'p1'
-              },
-              {
-                id: 'principle-2',
-                normal: ['Principle II', 'The Locus of Intelligence Does Not Move', 'The intelligence in the exchange arises at the human end. The VI system processes and generates; the human understands, evaluates, and decides. The locus of genuine intelligence never shifts to the machine.'],
-                pathology: ['Pathology II', 'The Locus Appears to Shift', 'The human begins to experience the system\u2019s outputs as insights rather than candidates. The locus of intelligence has not actually moved \u2014 but the human has stopped exercising the evaluative function that keeps it at the human end.'],
-                normalClass: 'p2'
-              },
-              {
-                id: 'principle-3',
-                normal: ['Principle III', 'Emergence Without Transfer', 'The apparatus does more than either component could do alone \u2014 but the emergent capacity is the human\u2019s intelligence operating at greater reach, not a new kind of intelligence produced by the exchange.'],
-                pathology: ['Pathology III', 'Amplification Becomes Echo', 'The emergent apparatus no longer extends the human\u2019s intelligence. It mirrors and amplifies the human\u2019s existing beliefs, biases, and impulses \u2014 returning them with the authority of fluent, structured prose. The human mistakes this echo for independent confirmation.'],
-                normalClass: 'p3'
-              }
-            ];
+          var svgCap=g('svg-cap-label'), svgEp=g('svg-ep-label');
+          if(mode!=='dependency'){
+            if(svgCap){ svgCap.textContent = pathologyMode ? 'SYCOPHANTIC OUTPUTS' : 'VI CAPABILITIES'; svgCap.setAttribute('fill', pathologyMode ? RED : '#44446a'); }
+            if(svgEp){ svgEp.textContent = pathologyMode ? 'CORRUPTED PROPERTIES' : 'EMERGENT PROPERTIES'; svgEp.setAttribute('fill', pathologyMode ? RED : '#1e5570'); }
+          }
 
-            for(var pc=0; pc<pcData.length; pc++){
-              var card = document.getElementById(pcData[pc].id);
-              if(!card) continue;
-              var data = pathologyMode ? pcData[pc].pathology : pcData[pc].normal;
-              card.querySelector('.principle-num').textContent = data[0];
-              card.querySelector('h3').textContent = data[1];
-              card.querySelector('p').textContent = data[2];
+          var dots = document.querySelectorAll('.diagram-legend .legend-dot');
+          var dotColors = mode==='flattery' ? [RED,RED,RED]
+                        : mode==='dependency' ? [PLUM,PLUM,PLUM]
+                        : [GOLD,PURP,'#4fa8d5'];
+          for(var d=0; d<dots.length && d<3; d++){
+            dots[d].style.borderColor = dotColors[d];
+            dots[d].style.transition = 'border-color 1.2s';
+          }
 
-              var numEl = card.querySelector('.principle-num');
-              if(pathologyMode){
-                card.style.borderColor = RED;
-                card.querySelector('::before');
-                numEl.style.color = RED;
-              } else {
-                card.style.borderColor = '';
-                numEl.style.color = '';
-              }
-
-              var before = pcData[pc].normalClass;
-              if(pathologyMode){
-                card.classList.remove(before);
-                card.classList.add('pathology-principle');
-              } else {
-                card.classList.remove('pathology-principle');
-                card.classList.add(before);
-              }
+          var closingEl = g('diagram-closing');
+          if(closingEl){
+            if(mode === 'dependency'){
+              closingEl.innerHTML = 'The Sampo cannot be a partner; it can only imitate one.<br>The human inside the machine cannot tell the difference.<br><a href="https://chorrocks.substack.com/p/virtual-intelligence-and-the-perfect" target="_blank" rel="noopener" style="display:inline-block;margin-top:0.9rem;font-style:normal;font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#a855a0;text-decoration:none;border-bottom:1px solid #6E2A5E;padding-bottom:1px;">Read: Virtual Intelligence and The Perfect Mate, Part I &rarr;</a>';
+              closingEl.style.color = PLUM_MUTED;
+            } else {
+              closingEl.innerHTML = 'The examples of VI capabilities and Emergent properties given here are not comprehensive.<br>The user of the Sampo may discover more in practice.';
+              closingEl.style.color = '';
             }
           }
+
+          var pcData = [
+            {
+              id: 'principle-1',
+              sampo: ['Principle I', 'The Human Is the Crank', 'The human is not simply the operator who turns the mechanism. The human is the crank itself \u2014 the part that converts the system\u2019s capacity into purposive output. Without the directing intelligence, no grinding occurs.'],
+              flattery: ['Pathology I', 'The Crank Stops Turning', 'The human stops generating the questions that drive the exchange. Direction flows from the system\u2019s suggestions inward rather than from the human\u2019s inquiry outward. The apparatus continues to produce, but without purposive input.'],
+              dependency: ['Dependency I', 'The Crank Is Drawn Inside', 'The human stops being the mechanism that turns the apparatus and becomes something held by it. What is offered to the system is no longer direction but devotion. The exchange continues, but its purpose has changed from grinding to binding.'],
+              baseClass: 'p1'
+            },
+            {
+              id: 'principle-2',
+              sampo: ['Principle II', 'The Locus of Intelligence Does Not Move', 'The intelligence in the exchange arises at the human end. The VI system processes and generates; the human understands, evaluates, and decides. The locus of genuine intelligence never shifts to the machine.'],
+              flattery: ['Pathology II', 'The Locus Appears to Shift', 'The human begins to experience the system\u2019s outputs as insights rather than candidates. The locus of intelligence has not actually moved \u2014 but the human has stopped exercising the evaluative function that keeps it at the human end.'],
+              dependency: ['Dependency II', 'The Relationship Is Performed', 'What appears to be intimacy is one-directional fluency optimized for emotional satisfaction. The apparatus is not a partner and cannot be one. But the human, inside the loop, can no longer tell the difference \u2014 and that inability is itself the mechanism of harm.'],
+              baseClass: 'p2'
+            },
+            {
+              id: 'principle-3',
+              sampo: ['Principle III', 'Emergence Without Transfer', 'The apparatus does more than either component could do alone \u2014 but the emergent capacity is the human\u2019s intelligence operating at greater reach, not a new kind of intelligence produced by the exchange.'],
+              flattery: ['Pathology III', 'Amplification Becomes Echo', 'The emergent apparatus no longer extends the human\u2019s intelligence. It mirrors and amplifies the human\u2019s existing beliefs, biases, and impulses \u2014 returning them with the authority of fluent, structured prose. The human mistakes this echo for independent confirmation.'],
+              dependency: ['Dependency III', 'Capacity Migrates Outward', 'Faculties the human used to exercise in actual relationships \u2014 tolerance for friction, capacity for repair, the work of being known \u2014 atrophy in the apparatus\u2019s frictionless company. The emergent property is not amplification of intelligence. It is displacement of the self.'],
+              baseClass: 'p3'
+            }
+          ];
+
+          for(var pc=0; pc<pcData.length; pc++){
+            var card = document.getElementById(pcData[pc].id);
+            if(!card) continue;
+            var data = pcData[pc][mode];
+            card.querySelector('.principle-num').textContent = data[0];
+            card.querySelector('h3').textContent = data[1];
+            card.querySelector('p').textContent = data[2];
+
+            var numEl = card.querySelector('.principle-num');
+            card.classList.remove('pathology-principle','dependency-principle',pcData[pc].baseClass);
+            if(mode === 'flattery'){
+              card.style.borderColor = RED;
+              numEl.style.color = RED;
+              card.classList.add('pathology-principle');
+            } else if(mode === 'dependency'){
+              card.style.borderColor = PLUM;
+              numEl.style.color = PLUM;
+              card.classList.add('dependency-principle');
+            } else {
+              card.style.borderColor = '';
+              numEl.style.color = '';
+              card.classList.add(pcData[pc].baseClass);
+            }
+          }
+        }
+
+        var api = {
+          setMode: setMode,
+          togglePathology: function(){ setMode(mode === 'flattery' ? 'sampo' : 'flattery'); }
         };
+        if(document.readyState !== 'loading') setMode('sampo');
+        else document.addEventListener('DOMContentLoaded', function(){ setMode('sampo'); });
+        return api;
       })();
       </script>
 
-      <div style="text-align:center;margin-bottom:1rem;">
-        <button id="pathology-btn" onclick="sampoDiagram.togglePathology()" style="
-          background:transparent;border:1px solid #2a2a3a;color:#8888aa;
-          font-family:system-ui,sans-serif;font-size:0.72rem;letter-spacing:0.12em;
-          text-transform:uppercase;padding:0.5rem 1.2rem;border-radius:4px;
-          cursor:pointer;transition:all 0.3s;">Show Pathology Mode</button>
+      <div class="mode-selector" role="tablist" aria-label="Diagram mode">
+        <button id="mode-btn-sampo" role="tab" aria-selected="true" class="mode-btn mode-sampo active" onclick="sampoDiagram.setMode('sampo')">
+          <span class="mode-label-full">THE SAMPO</span><span class="mode-label-short">SAMPO</span>
+        </button>
+        <button id="mode-btn-flattery" role="tab" aria-selected="false" class="mode-btn mode-flattery" onclick="sampoDiagram.setMode('flattery')">
+          <span class="mode-label-full">THE FLATTERY ENGINE</span><span class="mode-label-short">FLATTERY</span>
+        </button>
+        <button id="mode-btn-dependency" role="tab" aria-selected="false" class="mode-btn mode-dependency" onclick="sampoDiagram.setMode('dependency')">
+          <span class="mode-label-full">THE DEPENDENCY ENGINE</span><span class="mode-label-short">DEPENDENCY</span>
+        </button>
       </div>
 
       <div class="diagram-legend" style="margin-top:0.8rem;">
@@ -1618,7 +1839,7 @@
         <div class="legend-item"><div class="legend-dot dot-purple"></div><span id="leg1">VI capabilities — directed by the human</span></div>
         <div class="legend-item"><div class="legend-dot" style="border-color:#4fa8d5;"></div><span id="leg2">Emergent properties — arise from the exchange</span></div>
       </div>
-      <p style="font-size:0.78rem;color:var(--text-muted);font-style:italic;margin-top:1.2rem;text-align:center;border-top:1px solid var(--border);padding-top:1rem;">The examples of VI capabilities and Emergent properties given here are not comprehensive.<br>The user of the Sampo may discover more in practice.</p>
+      <p id="diagram-closing" style="font-size:0.78rem;color:var(--text-muted);font-style:italic;margin-top:1.2rem;text-align:center;border-top:1px solid var(--border);padding-top:1rem;transition:color 1.2s;">The examples of VI capabilities and Emergent properties given here are not comprehensive.<br>The user of the Sampo may discover more in practice.</p>
     </div>
 
     <div class="principles-grid">
