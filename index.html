@@ -31,7 +31,7 @@
     --plum-muted: #82596F;
     --text: #e8e8f0;
     --text-muted: #8888aa;
-    --text-dim: #555570;
+    --text-dim: #8585a9;
     --font-body: 'Georgia', serif;
     --font-ui: 'system-ui', -apple-system, sans-serif;
   }
@@ -110,12 +110,35 @@
   .section-label {
     font-family: var(--font-ui);
     font-size: 0.72rem;
+    font-weight: normal;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--text-dim);
     margin-bottom: 1.4rem;
     padding-bottom: 0.6rem;
     border-bottom: 1px solid var(--border);
+  }
+
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -3rem;
+    z-index: 1000;
+    background: var(--accent);
+    color: #fff;
+    padding: 0.6rem 1rem;
+    border-radius: 4px;
+    font-family: var(--font-ui);
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: top 0.15s ease;
+  }
+  .skip-link:focus { top: 1rem; }
+
+  :focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 2px;
   }
 
   section { margin-bottom: 4rem; }
@@ -1166,6 +1189,8 @@
 </head>
 <body>
 
+<a class="skip-link" href="#main">Skip to main content</a>
+
 <header class="site-header">
   <span>Virtual Intelligence Essay Series — Christopher Horrocks</span>
   <nav>
@@ -1188,11 +1213,11 @@
   <p class="myth-note">Named for the mythological mill of the Kalevala — a device of inexhaustible abundance whose operation requires an operator constitutive of its function.</p>
 </div>
 
-<main>
+<main id="main">
 
   <!-- I. THE MYTH -->
   <section>
-    <div class="section-label">I. The Myth</div>
+    <h2 class="section-label">I. The Myth</h2>
 
     <p style="font-size:0.85rem;color:var(--text-dim);font-style:italic;margin-bottom:1.2rem;line-height:1.6;">The myth material presented here expands on the essay's introductory framing. The essay itself opens with the Knuth–Stappers collaboration and proceeds to the intellectual lineage.</p>
 
@@ -1251,7 +1276,7 @@
 
   <!-- II. THE LINEAGE -->
   <section>
-    <div class="section-label">II. The Lineage</div>
+    <h2 class="section-label">II. The Lineage</h2>
 
     <p class="genealogy-note">The Sampo concept belongs to a lineage of thinking about the human-machine relationship that stretches back to the mid-twentieth century. Three works define the lineage.</p>
 
@@ -1300,7 +1325,7 @@
 
   <!-- III. CONSTITUTIVE MODEL -->
   <section>
-    <div class="section-label">III. The Constitutive Model</div>
+    <h2 class="section-label">III. The Constitutive Model</h2>
 
     <div class="constitutive-diagram">
       <div class="diagram-title">The Human-VI Apparatus</div>
@@ -1871,7 +1896,7 @@
 
   <!-- IV. THE EXCHANGE -->
   <section>
-    <div class="section-label">IV. The Exchange</div>
+    <h2 class="section-label">IV. The Exchange</h2>
 
     <div class="exchange-flow">
       <div class="flow-row">
@@ -1909,7 +1934,7 @@
 
   <!-- V. AMPLIFICATION -->
   <section>
-    <div class="section-label">V. Amplification, Not Synthesis</div>
+    <h2 class="section-label">V. Amplification, Not Synthesis</h2>
 
     <div class="axiom-block">
       <p>The emergent apparatus is greater in capacity than the sum of its parts. It is not greater in kind. The intelligence is the same intelligence, working with more.</p>
@@ -1961,7 +1986,7 @@
 
   <!-- VI. TWO DISTINCT FAILURE MODES -->
   <section>
-    <div class="section-label">VI. Two Distinct Failure Modes</div>
+    <h2 class="section-label">VI. Two Distinct Failure Modes</h2>
 
     <p class="section-intro">The Sampo can fail the human in two ways that are related but distinguishable. Conflating them risks implying that fixing one fixes both. It does not.</p>
 
@@ -2057,7 +2082,7 @@
 
   <!-- VII. STRUCTURAL SAFEGUARDS -->
   <section>
-    <div class="section-label">VII. Structural Safeguards</div>
+    <h2 class="section-label">VII. Structural Safeguards</h2>
 
     <div class="guardrails-grid">
       <div class="guardrail-card">
@@ -2115,7 +2140,7 @@
 
   <!-- VIII. THE ETHIC -->
   <section>
-    <div class="section-label">VIII. The Ethic</div>
+    <h2 class="section-label">VIII. The Ethic</h2>
 
     <div class="discipline-block">
       <p>The Sampo requires a discipline: a set of practices derived from the philosophy of the exchange that is teachable, lapsable, and recoverable. That cycle is the practice. The discipline is not a methodology — a set of steps to follow. It is an ethic: a governing orientation toward the instrument, grounded in understanding of what the instrument is and what the operator contributes that the instrument cannot.</p>
@@ -2195,7 +2220,7 @@
 
   <!-- IX. THE PROOF IN ACTION -->
   <section>
-    <div class="section-label">IX. The Proof in Action</div>
+    <h2 class="section-label">IX. The Proof in Action</h2>
 
     <p class="section-intro">The exchange that produced <a href="https://www-cs-faculty.stanford.edu/~knuth/papers/claude-cycles.pdf" target="_blank" style="color:var(--accent);text-decoration:none;border-bottom:1px solid transparent;transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='transparent'">"Claude's Cycles"</a> exhibits every element the framework describes and none of the failure modes.</p>
 
@@ -2227,7 +2252,7 @@
 
   <!-- X. LOOKING AHEAD -->
   <section>
-    <div class="section-label">X. Looking Ahead</div>
+    <h2 class="section-label">X. Looking Ahead</h2>
 
     <!-- The Near Term -->
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1.6rem 2rem;margin-bottom:1.5rem;">
